@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ExpoWalk — plan the show, record the booth, leave with the minutes</title>
+<meta name="description" content="Free trade-show planner for visitors: shortlist from the full exhibitor list, see booths on the real hall map, record conversations offline, scan visiting cards, and get AI minutes — all on your phone. Now for IMTS 2026, Chicago.">
+<meta property="og:title" content="ExpoWalk — plan the show, record the booth, leave with the minutes">
+<meta property="og:description" content="Free planner for IMTS 2026 visitors: 1,752 exhibitors, real hall maps, offline booth recording, card scanning and AI minutes. Your data stays on your phone.">
+<meta property="og:url" content="https://expowalk.app/">
+<meta name="theme-color" content="#0E1114">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#0E1114;--bg2:#13171B;--card:#171B20;--card2:#1D2228;--line:#262C33;--line2:#323A43;
+  --ink:#F2F0EA;--ink2:#B7BEC6;--ink3:#7F8892;
+  --acc:#FF5A1F;--acc2:#FFB08C;--teal:#3EC1A7;--amber:#F0A03C;--gold:#E5C24A;
+  --paper:#F4F1EA;--paper2:#E9E4D8;--paperink:#15191D;--paperink2:#4B535B;--paperline:#D5CFC2;
+  --disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.28;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 65% 10%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 65% 10%,#000 20%,transparent 75%)}
+body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 78% 8%,rgba(255,90,31,.16),transparent 70%)}
+a{color:var(--acc2)}
+h1,h2,h3,.disp{font-family:var(--disp);font-weight:800;line-height:.95;letter-spacing:.005em;margin:0;text-transform:uppercase}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(14,17,20,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{font-family:var(--disp);font-weight:800;font-size:28px;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px}
+.brand i{width:12px;height:12px;background:var(--acc);display:inline-block;transform:rotate(45deg)}
+nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+nav a{color:var(--ink2);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:6px}
+nav a:hover{color:var(--ink);background:var(--card2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:6px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;line-height:1;transition:background .15s ease,border-color .15s ease,filter .15s ease}
+.btn:hover{border-color:var(--ink3)}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.acc:hover{background:#ff6d38;border-color:#ff6d38}
+.btn.sm{padding:10px 14px;font-size:14px}
+.btn .ar{font-family:var(--disp);font-weight:700;font-size:18px;line-height:0}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center;padding:48px 0 40px;min-height:min(calc(100vh - 64px),820px)}
+.kicker{display:flex;align-items:center;gap:12px;color:var(--acc);margin-bottom:22px}
+.kicker:before{content:"";width:34px;height:2px;background:var(--acc)}
+.hero h1{font-size:clamp(48px,6.3vw,92px)}
+.hero h1 em{font-style:normal}
+.hero h1 span{display:block}
+.hero h1 .o{color:var(--acc)}
+.hero h1 .thin{font-weight:600;color:var(--ink2)}
+.hero h1 .o{color:var(--acc)}
+.lead{font-size:17px;color:var(--ink2);max-width:520px;margin:22px 0 26px}
+.lead b{color:var(--ink);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta .note{flex-basis:100%;font-size:13px;color:var(--ink3);margin-top:4px}
+/* map card */
+.mapcard{position:relative;background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:16px;box-shadow:0 30px 80px -40px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.02) inset}
+.mapcard .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--ink3);padding:2px 4px 12px}
+.mapcard .bar b{color:var(--ink2);font-weight:500}
+.mapcard .tag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border:1px solid var(--line2);border-radius:4px;color:var(--teal)}
+.mapcard .tag:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(62,193,167,.6);animation:ping 2s infinite}
+svg.hall{display:block;width:100%;height:auto;background:var(--bg2);border-radius:8px;border:1px solid var(--line)}
+svg.hall .booths{fill:#1B2026;stroke:#2D343C;stroke-width:1.2}
+svg.hall .hl{fill:var(--c);fill-opacity:.85;stroke:var(--c);stroke-width:2;animation:glow 3s ease-in-out infinite}
+svg.hall .route{fill:none;stroke:var(--teal);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:18 14;animation:march 1.6s linear infinite}
+svg.hall .pinbg{fill:#0E1114;stroke:var(--c);stroke-width:4}
+svg.hall .pint{font-family:var(--mono);font-size:22px;font-weight:600;fill:var(--ink);text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#0E1114;stroke-width:8;stroke-linejoin:round}
+svg.hall .pins{font-size:20px;fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:#0E1114;stroke-width:6}
+svg.hall .you circle{fill:var(--acc)}
+svg.hall .youp{fill:var(--acc)!important;opacity:.28;transform-origin:center;animation:pulse 2.2s ease-out infinite}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:12px 4px 2px;color:var(--ink3);font-size:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+@keyframes march{to{stroke-dashoffset:-32}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(62,193,167,.6)}100%{box-shadow:0 0 0 8px rgba(62,193,167,0)}}
+@keyframes pulse{0%{transform:scale(.4);opacity:.5}100%{transform:scale(1.6);opacity:0}}
+@keyframes glow{0%,100%{fill-opacity:.75}50%{fill-opacity:1}}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:8px 0 0}
+.stat{padding:26px 22px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .n{font-family:var(--disp);font-weight:800;font-size:56px;line-height:1;color:var(--ink)}
+.stat .n small{font-size:26px;color:var(--acc);margin-left:2px}
+.stat .l{color:var(--ink3);margin-top:6px}
+/* sections */
+section{padding:96px 0}
+.shead{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:end;margin-bottom:40px}
+.shead .num{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.14em;color:var(--acc);padding-bottom:8px;border-bottom:2px solid var(--acc);align-self:start;margin-top:10px}
+section h2{font-size:clamp(42px,6vw,84px)}
+section h2 .o{color:var(--acc)}
+.sub{color:var(--ink2);font-size:17px;max-width:640px;margin:14px 0 0}
+/* show card */
+.show{display:grid;grid-template-columns:200px 1fr auto;gap:0;background:var(--card);border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+.show .date{background:var(--acc);color:#fff;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;font-family:var(--disp);font-weight:800;text-transform:uppercase;line-height:1}
+.show .date .m{font-size:20px;letter-spacing:.08em;opacity:.9}
+.show .date .d{font-size:64px;margin:12px 0}
+.show .date .y{font-size:20px;letter-spacing:.08em;opacity:.9}
+.show .body{padding:28px 30px}
+.show h3{font-size:36px}
+.show .meta{color:var(--ink2);margin-top:10px;font-size:15px}
+.halls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.halls span{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:6px 10px;border-radius:4px;border:1px solid var(--line2);color:var(--ink2)}
+.halls span b{color:var(--ink);font-weight:500}
+.halls span i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:8px;vertical-align:0}
+.show .go{display:flex;align-items:center;padding:28px;border-left:1px solid var(--line)}
+.soon{margin-top:22px;color:var(--ink3);font-size:14px}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card)}
+.step{padding:30px 26px 34px;border-right:1px solid var(--line);position:relative}
+.step:last-child{border-right:0}
+.step .big{font-family:var(--disp);font-weight:800;font-size:96px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px var(--line2);margin-bottom:14px;transition:color .3s,-webkit-text-stroke-color .3s}
+.step:hover .big{color:var(--acc);-webkit-text-stroke-color:var(--acc)}
+.step .when{color:var(--acc);margin-bottom:12px}
+.step h3{font-size:30px;margin-bottom:12px}
+.step p{margin:0;color:var(--ink2);font-size:15px}
+/* features bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.cell{background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:24px;grid-column:span 2;position:relative;overflow:hidden;transition:border-color .2s}
+.cell:hover{border-color:var(--ink3)}
+.cell.w3{grid-column:span 3}
+.cell h3{font-size:28px;margin:0 0 10px}
+.cell p{margin:0;color:var(--ink2);font-size:15px}
+.cell .ico{font-family:var(--mono);color:var(--acc);margin-bottom:16px}
+.cell .deco{position:absolute;right:14px;top:14px;font-family:var(--disp);font-weight:800;font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--line2);pointer-events:none;letter-spacing:-.02em;opacity:.9}
+.cell.w3 h3,.cell.w3 p{max-width:calc(100% - 120px)}
+/* privacy */
+.priv{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.zero{font-family:var(--disp);font-weight:800;font-size:clamp(120px,18vw,240px);line-height:.8;color:transparent;-webkit-text-stroke:2px var(--teal);letter-spacing:-.02em;margin:0 0 10px}
+.zero em{font-style:normal;color:var(--teal);-webkit-text-stroke:0}
+.priv .claims{list-style:none;padding:0;margin:26px 0 0}
+.priv .claims li{padding:16px 0;border-top:1px solid var(--line);color:var(--ink2);display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px}
+.priv .claims li b{color:var(--ink);font-weight:500}
+.priv .claims li .chk{color:var(--teal);font-family:var(--mono);font-size:14px;padding-top:2px}
+.ledger{background:var(--card);border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.ledger .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 18px;border-top:1px solid var(--line);font-size:14px}
+.ledger .row:first-child{border-top:0;background:var(--card2);color:var(--ink3);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.ledger .row span:last-child{color:var(--ink2)}
+.ledger .row .dev{color:var(--teal)!important}
+.ledger .row .us{color:var(--amber)!important}
+/* sign-up paper */
+.paper{background:var(--paper);color:var(--paperink);border-radius:16px;padding:0;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden;position:relative}
+.paper:before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:repeating-linear-gradient(180deg,var(--acc) 0 18px,transparent 18px 28px)}
+.paper .fwrap{padding:40px 40px 40px 48px}
+.paper .side{padding:40px 40px 40px 36px;border-left:2px dashed var(--paperline);background:var(--paper2)}
+.paper h2{color:var(--paperink);font-size:clamp(40px,5vw,64px)}
+.paper h2 .o{color:var(--acc)}
+.paper .sub{color:var(--paperink2)}
+.paper .sub b{color:var(--paperink);font-weight:600}
+form{margin-top:28px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label.f{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--paperink2)}
+label.f input{display:block;width:100%;margin-top:6px;font:16px/1.4 var(--body);letter-spacing:0;text-transform:none;padding:12px 12px;border:1px solid var(--paperline);border-radius:6px;background:#fff;color:var(--paperink)}
+label.f input::placeholder{color:#A8A296}
+label.f input:focus{outline:2px solid var(--acc);outline-offset:0;border-color:transparent}
+.consent{display:flex;gap:12px;align-items:flex-start;margin:18px 0;font-size:14px;color:var(--paperink2);line-height:1.5}
+.consent input{width:20px;height:20px;flex:none;accent-color:var(--acc);margin-top:2px}
+.paper .btn{border-color:var(--paperline);color:var(--paperink)}
+.paper .btn.acc{color:#fff;border-color:var(--acc)}
+.or{display:flex;align-items:center;gap:12px;color:#A8A296;font-family:var(--mono);font-size:11px;letter-spacing:.1em;margin:18px 0}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--paperline)}
+.done{display:none;background:#fff;border:1px solid var(--paperline);border-left:4px solid var(--teal);border-radius:8px;padding:16px;margin-top:16px;font-size:15px;color:var(--paperink2)}
+.done b{color:var(--paperink)}
+.done.on{display:block}
+.err{color:#C63C0F;font-size:14px;margin-top:10px;min-height:1.3em}
+.paper .side h3{font-size:30px;color:var(--paperink);margin-bottom:10px}
+.paper .side p{color:var(--paperink2);font-size:15px;margin:0 0 18px}
+.paper .side .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.paper .help{font-size:13px;color:#8C867A;margin:14px 0 0}
+/* footer */
+footer{border-top:1px solid var(--line);padding:36px 0 56px;color:var(--ink3);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer a{color:var(--ink2);text-decoration:none}
+footer a:hover{color:var(--ink)}
+footer .brand{font-size:22px;margin-right:auto}
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.hero .rv{transition-delay:calc(var(--i,0)*.12s)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}svg.hall .route,svg.hall .youp,svg.hall .hl,.mapcard .tag:before{animation:none}}
+/* responsive */
+@media (max-width:1000px){.hero{grid-template-columns:1fr;min-height:0;padding-top:52px}.stats{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}.bento{grid-template-columns:1fr 1fr}.cell,.cell.w3{grid-column:span 1}.priv,.paper{grid-template-columns:1fr}.paper .side{border-left:0;border-top:2px dashed var(--paperline)}.show{grid-template-columns:150px 1fr}.show .go{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}nav .hide{display:none}}
+@media (max-width:600px){section{padding:64px 0}.hero h1{font-size:clamp(48px,14vw,72px)}.stats,.steps,.bento{grid-template-columns:1fr}.stat,.step{border-right:0;border-bottom:1px solid var(--line)}.stat:last-child,.step:last-child{border-bottom:0}.grid{grid-template-columns:1fr}.show{grid-template-columns:1fr}.show .date{flex-direction:row;align-items:center;gap:14px;padding:18px 24px}.show .date .d{font-size:40px;margin:0}.paper .fwrap,.paper .side{padding:28px 22px 28px 28px}.shead{grid-template-columns:1fr;gap:10px}.hero h1{font-size:clamp(54px,17vw,80px)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/"><i></i>ExpoWalk</a>
+  <nav>
+    <a class="hide" href="#how">How it works</a>
+    <a class="hide" href="#privacy">Privacy</a>
+    <a class="hide" href="#free">Free AI allowance</a>
+    <a class="btn acc sm" href="/imts2026" style="white-space:nowrap">Open&nbsp;<span class="hide">IMTS 2026&nbsp;</span>planner <span class="ar">→</span></a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="kicker mono rv" style="--i:0">Trade-show planner · IMTS 2026 · Chicago</div>
+      <h1><span class="rv" style="--i:1">Walk the show <em class="thin">with a plan.</em></span><span class="rv" style="--i:2">Leave with <em class="o">the minutes.</em></span></h1>
+      <p class="lead rv" style="--i:5">Shortlist booths from the <b>complete exhibitor list</b>, see them on the <b>real hall map</b>, record each booth conversation, scan the visiting card — and have transcripts, minutes and follow-ups by the evening. <b>Everything stays on your phone.</b></p>
+      <div class="cta rv" style="--i:6">
+        <a class="btn acc" href="/imts2026">Open the IMTS 2026 planner <span class="ar">→</span></a>
+        <a class="btn" href="#free">Get the free AI allowance</a>
+        <span class="note">No install, no app store. Chrome or Safari on any phone or laptop. The show-floor part works offline.</span>
+      </div>
+    </div>
+    <div class="mapcard rv" style="--i:3">
+      <div class="bar mono"><span><b>South Building · Level 3</b> · McCormick Place</span><span class="tag">Live · GPS</span></div>
+      <svg class="hall" viewBox="0 0 1283 1062" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="booths" d="M56 1011L68 1011L68 1035L56 1035ZM154 1011L154 1047L94 1047L94 1011ZM196 1011L196 1047L154 1047L154 1011ZM256 1011L256 1047L196 1047L196 1011ZM295 1011L295 1029L259 1029L259 1011ZM375 1011L375 1047L303 1047L303 1011ZM508 1011L508 1047L436 1047L436 1011ZM508 1011L544 1011L544 1041L508 1041ZM572 1011L572 1023L548 1023L548 1011ZM572 1011L584 1011L584 1023L572 1023ZM632 1011L632 1047L596 1047L596 1011ZM677 1023L677 1011L653 1011L653 1023ZM677 1011L689 1011L689 1023L677 1023ZM693 1011L717 1011L717 1035L693 1035ZM717 1011L717 1035L765 1035L765 1011ZM766 1011L790 1011L790 1035L766 1035ZM200 867L200 987L56 987L56 867ZM200 867L260 867L260 987L200 987ZM278 867L398 867L398 987L278 987ZM398 867L470 867L470 987L398 987ZM488 927L608 927L608 987L488 987ZM608 927L680 927L680 987L608 987ZM680 927L752 927L752 987L680 987ZM788 987L788 963L764 963L764 987ZM788 963L788 975L800 975L800 963ZM788 975L812 975L812 987L788 987ZM800 963L800 975L824 975L824 963ZM812 975L812 987L836 987L836 975ZM824 963L836 963L836 975L824 975ZM896 951L920 951L920 975L896 975ZM488 867L608 867L608 927L488 927ZM608 867L656 867L656 927L608 927ZM656 867L752 867L752 927L656 927ZM824 867L884 867L884 903L824 903ZM764 867L824 867L824 939L764 939ZM824 903L884 903L884 939L824 939ZM896 867L920 867L920 891L896 891ZM920 891L920 939L944 939L944 867L920 867ZM896 891L920 891L920 915L896 915ZM896 915L920 915L920 939L896 939ZM956 867L956 879L980 879L980 867ZM956 879L968 879L968 891L956 891ZM968 879L980 879L980 891L968 891ZM956 891L968 891L968 903L956 903ZM968 891L980 891L980 903L968 903ZM956 903L956 939L980 939L980 903ZM992 867L1004 867L1004 879L992 879ZM992 879L1004 879L1004 891L992 891ZM992 891L1004 891L1004 903L992 903ZM278 723L278 843L470 843L470 723ZM488 723L584 723L584 843L488 843ZM584 783L680 783L680 843L584 843ZM680 783L740 783L740 843L680 843ZM764 783L824 783L824 843L764 843ZM824 783L884 783L884 843L824 843ZM920 843L944 843L944 807L896 807L896 843ZM956 819L980 819L980 843L956 843ZM980 819L1004 819L1004 843L980 843ZM956 795L980 795L980 819L956 819ZM980 795L1004 795L1004 819L980 819ZM956 771L980 771L980 795L956 795ZM980 771L1004 771L1004 795L980 795ZM1016 843L1028 843L1028 819L1016 819ZM1016 819L1028 819L1028 795L1016 795ZM1028 843L1040 843L1040 819L1028 819ZM1016 783L1028 783L1028 795L1016 795ZM1028 819L1040 819L1040 795L1028 795ZM1028 771L1028 795L1040 795L1040 771ZM1052 771L1076 771L1076 795L1052 795ZM1052 747L1064 747L1064 771L1052 771ZM1064 747L1076 747L1076 771L1064 771ZM584 723L680 723L680 783L584 783ZM680 723L740 723L740 783L680 783ZM764 723L824 723L824 783L764 783ZM824 723L884 723L884 783L824 783ZM896 723L944 723L944 759L896 759ZM896 759L920 759L920 783L896 783ZM896 783L920 783L920 807L896 807ZM920 759L944 759L944 783L920 783ZM920 783L944 783L944 807L920 807ZM980 747L1004 747L1004 723L956 723L956 747ZM956 747L980 747L980 771L956 771ZM980 747L1004 747L1004 771L980 771ZM1016 759L1028 759L1028 723L1016 723ZM1016 783L1028 783L1028 759L1016 759ZM1028 747L1040 747L1040 723L1028 723ZM1028 747L1040 747L1040 759L1028 759ZM1028 759L1040 759L1040 771L1028 771ZM1052 723L1076 723L1076 747L1052 747ZM1148 723L1148 771L1106 771L1106 723ZM1196 675L1220 675L1220 687L1196 687ZM1196 723L1196 747L1148 747L1148 723ZM1220 675L1232 675L1232 687L1220 687ZM1220 687L1244 687L1244 699L1220 699ZM1232 675L1244 675L1244 687L1232 687ZM1268 699L1268 675L1244 675L1244 699ZM260 579L260 699L56 699L56 579ZM398 699L470 699L470 579L398 579ZM488 639L608 639L608 699L488 699ZM746 639L746 699L626 699L626 639ZM848 639L848 699L764 699L764 639ZM920 639L920 699L848 699L848 639ZM944 639L1004 639L1004 699L944 699ZM1004 639L1064 639L1064 699L1004 699ZM1088 639L1148 639L1148 699L1088 699ZM1184 663L1184 651L1160 651L1160 663ZM1196 699L1196 675L1160 675L1160 699ZM1208 663L1208 651L1184 651L1184 663ZM1232 663L1232 651L1208 651L1208 663ZM1232 651L1244 651L1244 663L1232 663ZM1196 687L1220 687L1220 699L1196 699ZM1244 651L1256 651L1256 663L1244 663ZM1184 651L1184 639L1160 639L1160 651ZM1208 651L1208 639L1184 639L1184 651ZM1232 651L1232 639L1208 639L1208 651ZM1268 651L1268 639L1232 639L1232 651ZM15 586L27 586L27 622L15 622ZM488 579L608 579L608 639L488 639ZM746 579L746 639L626 639L626 579ZM848 579L848 639L764 639L764 579ZM920 579L920 639L848 639L848 579ZM944 579L1004 579L1004 639L944 639ZM1004 579L1064 579L1064 639L1004 639ZM1088 603L1112 603L1112 627L1088 627ZM1112 603L1136 603L1136 627L1112 627ZM1136 603L1160 603L1160 627L1136 627ZM1160 603L1184 603L1184 627L1160 627ZM1184 603L1208 603L1208 627L1184 627ZM1088 579L1136 579L1136 603L1088 603ZM1208 603L1232 603L1232 627L1208 627ZM1136 579L1160 579L1160 603L1136 603ZM1160 579L1184 579L1184 603L1160 603ZM1184 579L1208 579L1208 603L1184 603ZM1208 579L1232 579L1232 603L1208 603ZM1232 579L1268 579L1268 627L1232 627ZM1256 651L1268 651L1268 663L1256 663ZM260 435L260 555L56 555L56 435ZM278 495L314 495L314 555L278 555ZM375 541L375 559L345 559L345 541ZM459 541L459 559L429 559L429 541ZM639 483L687 483L687 555L639 555ZM687 483L735 483L735 555L687 555ZM777 541L807 541L807 559L777 559ZM890 541L890 559L860 559L860 541ZM992 507L992 555L944 555L944 507ZM1016 495L1040 495L1040 519L1016 519ZM1016 519L1040 519L1040 555L1016 555ZM1040 495L1064 495L1064 519L1040 519ZM1040 519L1064 519L1064 555L1040 555ZM1088 495L1148 495L1148 555L1088 555ZM1148 495L1208 495L1208 555L1148 555ZM278 435L314 435L314 495L278 495ZM343 425L361 425L361 443L343 443ZM361 425L379 425L379 437L361 437ZM453 431L453 443L429 443L429 431ZM623 435L623 555L503 555L503 435ZM735 435L735 483L639 483L639 435ZM800 429L800 441L788 441L788 429ZM859 425L883 425L883 437L859 437ZM944 471L992 471L992 495L944 495ZM992 435L992 471L944 471L944 435ZM1016 435L1040 435L1040 495L1016 495ZM1040 435L1064 435L1064 495L1040 495ZM1088 435L1088 495L1208 495L1208 435ZM260 291L260 411L56 411L56 291ZM434 291L434 411L278 411L278 291ZM434 291L494 291L494 411L434 411ZM866 351L866 411L782 411L782 351ZM914 351L914 411L866 411L866 351ZM914 351L950 351L950 411L914 411ZM968 351L1004 351L1004 411L968 411ZM1016 363L1040 363L1040 411L1016 411ZM1016 339L1040 339L1040 363L1016 363ZM1040 375L1064 375L1064 411L1040 411ZM1040 351L1064 351L1064 375L1040 375ZM1088 351L1124 351L1124 375L1088 375ZM1088 375L1130 375L1130 411L1088 411ZM1124 351L1160 351L1160 375L1124 375ZM1160 351L1196 351L1196 375L1160 375ZM1130 375L1160 375L1160 411L1130 411ZM512 291L632 291L632 411L512 411ZM782 291L830 291L830 351L782 351ZM830 291L878 291L878 351L830 351ZM914 291L914 351L878 351L878 291ZM914 291L950 291L950 351L914 351ZM968 291L1004 291L1004 351L968 351ZM1016 291L1040 291L1040 339L1016 339ZM1040 291L1064 291L1064 315L1040 315ZM1040 315L1064 315L1064 351L1040 351ZM1088 291L1136 291L1136 315L1088 315ZM1166 291L1202 291L1202 315L1166 315ZM1136 291L1166 291L1166 315L1136 315ZM1088 315L1088 339L1136 339L1136 315ZM1136 315L1166 315L1166 339L1136 339ZM1202 315L1166 315L1166 339L1202 339ZM110 135L260 135L260 267L68 267ZM278 183L383 183L383 267L278 267ZM506 183L506 267L608 267L608 183ZM626 183L686 183L686 267L626 267ZM686 183L746 183L746 267L686 267ZM758 225L800 225L800 267L758 267ZM800 225L842 225L842 267L800 267ZM926 225L926 267L842 267L842 225ZM998 225L998 267L944 267L944 225ZM998 225L1040 225L1040 267L998 267ZM1040 243L1064 243L1064 267L1040 267ZM1088 219L1124 219L1124 267L1088 267ZM1124 219L1160 219L1160 267L1124 267ZM806 183L806 225L758 225L758 183ZM806 183L806 225L866 225L866 183ZM866 183L926 183L926 225L866 225ZM992 183L992 225L944 225L944 183ZM992 183L1040 183L1040 225L992 225ZM1040 183L1040 243L1064 243L1064 183ZM1088 183L1112 183L1112 219L1088 219ZM1112 183L1136 183L1136 219L1112 219ZM1136 183L1160 183L1160 219L1136 219ZM326 135L278 135L278 171L338 171L338 147L326 147ZM548 135L548 171L488 171L488 135ZM608 135L608 171L548 171L548 135ZM632 141L626 141L626 171L722 171L722 135L632 135ZM722 135L746 135L746 171L722 171ZM758 147L770 147L770 171L758 171ZM902 147L926 147L926 171L902 171ZM944 135L980 135L980 171L944 171ZM1016 135L1016 171L980 171L980 135ZM1016 147L1064 147L1064 171L1016 171ZM1016 135L1040 135L1040 147L1016 147ZM1088 135L1118 135L1118 171L1088 171ZM1118 135L1160 135L1160 171L1118 171ZM149 98L149 116L107 116L107 98ZM398 15L398 111L278 111L278 15ZM410 15L476 15L476 111L410 111ZM488 15L548 15L548 111L488 111ZM548 15L596 15L596 111L548 111ZM617 57L665 57L665 111L617 111ZM683 51L743 51L743 111L683 111ZM764 39L812 39L812 111L764 111ZM812 39L860 39L860 111L812 111ZM860 63L896 63L896 111L860 111ZM896 63L932 63L932 111L896 111ZM932 75L968 75L968 111L932 111ZM968 75L1004 75L1004 111L968 111ZM1004 75L1040 75L1040 111L1004 111ZM1076 63L1112 63L1112 111L1076 111ZM1123 94L1147 94L1147 118L1123 118ZM1123 46L1135 46L1135 94L1123 94ZM1135 82L1147 82L1147 94L1135 94ZM1135 70L1147 70L1147 82L1135 82ZM1135 46L1147 46L1147 70L1135 70Z"/><path class="hl" style="--c:#FF5A1F" d="M260 723L260 843L56 843L56 723Z"/><path class="hl" style="--c:#F0A03C" d="M278 579L278 699L398 699L398 579Z"/><path class="hl" style="--c:#E5C24A" d="M650 291L770 291L770 411L650 411Z"/><path class="hl" style="--c:#F0A03C" d="M383 183L488 183L488 267L383 267Z"/><path class="hl" style="--c:#3EC1A7" d="M176 15L260 15L260 111L176 111Z"/><path class="route" d="M1248 1022L218 1022L218 63L435 63L435 225L710 225L710 351L338 351L338 639L158 639L158 783"/><g class="pin" transform="translate(158 783)"><circle r="16" class="pinbg" style="--c:#FF5A1F"/><text class="pint">338300</text><text class="pins" y="30">★★★★★</text></g><g class="pin" transform="translate(338 639)"><circle r="16" class="pinbg" style="--c:#F0A03C"/><text class="pint">338519</text><text class="pins" y="30">★★★★</text></g><g class="pin" transform="translate(710 351)"><circle r="16" class="pinbg" style="--c:#E5C24A"/><text class="pint">338948</text><text class="pins" y="30">★★★</text></g><g class="pin" transform="translate(435 225)"><circle r="16" class="pinbg" style="--c:#F0A03C"/><text class="pint">339121</text><text class="pins" y="30">★★★★</text></g><g class="pin" transform="translate(218 63)"><circle r="16" class="pinbg" style="--c:#3EC1A7"/><text class="pint">339410</text><text class="pins" y="30">★★</text></g><g class="you" transform="translate(1248 1022)"><circle r="30" class="youp"/><circle r="9"/></g></svg>
+      <div class="legend mono"><span><i style="background:var(--acc)"></i>Must see</span><span><i style="background:var(--amber)"></i>High</span><span><i style="background:var(--gold)"></i>Medium</span><span><i style="background:var(--teal)"></i>If time</span><span style="margin-left:auto">Day 2 walk · 5 stops · 0.9 km</span></div>
+    </div>
+  </div>
+
+  <div class="stats rv">
+    <div class="stat"><div class="n">1,752</div><div class="l">exhibitors · every one with a booth on the map</div></div>
+    <div class="stat"><div class="n">5<small>halls</small></div><div class="l">drawn aisle by aisle, with GPS and routing</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">recordings, photos or minutes on our servers</div></div>
+    <div class="stat"><div class="n">25<small>free</small></div><div class="l">AI-processed meetings for the first 100 visitors</div></div>
+  </div>
+
+  <section id="events">
+    <div class="shead rv"><div class="num">01 · Shows</div><div><h2>One show at a time,<br><span class="o">fully loaded</span></h2><p class="sub">Every ExpoWalk edition ships with the complete exhibitor list and the real floor plan before you land — so the app is useful from the taxi, not after an hour of setup.</p></div></div>
+    <div class="show rv">
+      <div class="date"><div class="m">Sep</div><div class="d">14–19</div><div class="y">2026</div></div>
+      <div class="body">
+        <h3>IMTS 2026 · International Manufacturing Technology Show</h3>
+        <div class="meta">McCormick Place, Chicago · 1,752 exhibitors across the East, North, South and West buildings · machine tools, automation, tooling, workholding, metrology, additive, software.</div>
+        <div class="halls"><span><i style="background:#4E6E9E"></i>East L3 <b>529</b></span><span><i style="background:#5E8A4B"></i>North L3 <b>465</b></span><span><i style="background:#5E8A4B"></i>North L1 <b>69</b></span><span><i style="background:#B47A2A"></i>South L3 <b>311</b></span><span><i style="background:#8A5B9C"></i>West L3 <b>410</b></span></div>
+      </div>
+      <div class="go"><a class="btn acc" href="/imts2026">Open planner <span class="ar">→</span></a></div>
+    </div>
+    <p class="soon rv">Want the next show covered — EMO, JIMTOF, IMTEX, Hannover Messe? Write to <a href="mailto:info@expowalk.app">info@expowalk.app</a>. Exhibitors can also ask about offering ExpoWalk to their own visitors.</p>
+  </section>
+
+  <section id="how">
+    <div class="shead rv"><div class="num">02 · How it works</div><div><h2>Four steps.<br><span class="o">Two before you fly.</span></h2><p class="sub">Shortlisting and planning happen on a laptop at your desk. Walking, recording and scanning happen on your phone. The minutes arrive the same evening.</p></div></div>
+    <div class="steps rv">
+      <div class="step"><div class="big">1</div><div class="when mono">Before the show</div><h3>Shortlist</h3><p>Search all 1,752 exhibitors by name, product category, country or hall. Mark each one 1–5 stars, add a note on what to ask, and share the list with colleagues or dealers.</p></div>
+      <div class="step"><div class="big">2</div><div class="when mono">Plan</div><h3>Plan each day</h3><p>Assign booths to days; the planner orders them hall by hall into a walk list with a route. Print an A4 pack of the maps with your booths highlighted as the paper fallback.</p></div>
+      <div class="step"><div class="big">3</div><div class="when mono">At the show</div><h3>Walk, record, scan</h3><p>The hall map shows where you are and the next booth. At each stand, record the conversation (with the exhibitor's consent), photograph the visiting card and your notes. Everything is saved on the phone — no network needed.</p></div>
+      <div class="step"><div class="big">4</div><div class="when mono">Same evening</div><h3>Get the minutes</h3><p>Back at the hotel, press Process: your phone sends each recording straight to Google's Gemini and gets back a transcript, minutes, next actions and the card details — grouped per exhibitor, ready to share or email.</p></div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="shead rv"><div class="num">03 · What you get</div><div><h2>Built by a visitor,<br><span class="o">for visitors</span></h2></div></div>
+    <div class="bento rv">
+      <div class="cell w3"><div class="ico">01 / DIRECTORY</div><h3>The full exhibitor list, filterable in a second</h3><p>Every listed exhibitor with booth, hall, pavilion, categories, country and website. No paging through the official app while standing in an aisle.</p><div class="deco">1752</div></div>
+      <div class="cell w3"><div class="ico">02 / MAPS</div><h3>Hall maps that know where you are</h3><p>Booth outlines for all five halls, your GPS position, aisle-aware routing between stops, toilets and exits marked.</p><div class="deco">GPS</div></div>
+      <div class="cell"><div class="ico">03 / PRIORITY</div><h3>Stars, notes, day plans</h3><p>1–5 star priority, private notes, a day planner and a walk list ordered by hall and aisle.</p></div>
+      <div class="cell"><div class="ico">04 / RECORD</div><h3>Offline booth recording</h3><p>One tap to record, saved to the phone only. Nothing is uploaded until you decide to process it.</p></div>
+      <div class="cell"><div class="ico">05 / SCAN</div><h3>Cards and paper notes</h3><p>Photograph visiting cards and handwritten notes per exhibitor; AI reads them into contacts and text. Export as vCard or CSV.</p></div>
+      <div class="cell w3"><div class="ico">06 / MINUTES</div><h3>Minutes you can actually send</h3><p>Transcript, minutes and next actions per meeting — viewable in the app, shareable by WhatsApp, or emailed to yourself the moment they're ready.</p><div class="deco">MIN</div></div>
+      <div class="cell w3"><div class="ico">07 / PAPER</div><h3>A4 print pack as the fallback</h3><p>Hall maps tiled across A4 sheets with your starred booths coloured and numbered, plus the checklist — for the day the battery or the network gives up.</p><div class="deco">A4</div></div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="priv">
+      <div class="rv">
+        <div class="num mono" style="color:var(--teal);margin-bottom:18px">04 · Privacy</div>
+        <div class="zero">Zero<em>.</em></div>
+        <h2 style="font-size:clamp(30px,3.6vw,44px)">Conversations that never reach us</h2>
+        <p class="sub">ExpoWalk was built by a trade-show visitor who did not want his supplier conversations on someone else's server. So the app has none. This is architecture, not a promise.</p>
+        <ul class="claims">
+          <li><span class="chk">[✓]</span><span><b>Recordings, photos, transcripts and minutes live only on your device.</b> The app has no upload path for them.</span></li>
+          <li><span class="chk">[✓]</span><span><b>Processing goes from your phone directly to Google's Gemini API</b> (paid tier, not used for training). ExpoWalk's server only hands your phone a one-hour permission token and counts how many you used — it never sees the content.</span></li>
+          <li><span class="chk">[✓]</span><span><b>The only things we store</b> are the details you choose to give us when you sign in (name, company, email, phone) and usage counters.</span></li>
+          <li><span class="chk">[✓]</span><span><b>The code is open source</b>, so anyone can verify this: <a href="https://github.com/mittalakhil87/imts-planner">github.com/mittalakhil87/imts-planner</a>.</span></li>
+        </ul>
+        <p style="margin:22px 0 0"><a class="btn sm" href="/privacy">Read the full data-handling page</a></p>
+      </div>
+      <div class="ledger rv">
+        <div class="row"><span>Data</span><span>Where it lives</span></div>
+        <div class="row"><span>Stars, notes, day plans</span><span class="dev">Your device</span></div>
+        <div class="row"><span>Recordings, card &amp; note photos</span><span class="dev">Your device</span></div>
+        <div class="row"><span>Transcripts, minutes, contacts</span><span class="dev">Your device</span></div>
+        <div class="row"><span>Audio / photos while processing</span><span class="dev">Your device → Google Gemini, directly</span></div>
+        <div class="row"><span>Name, company, email, usage count</span><span class="us">ExpoWalk — only if you sign in</span></div>
+        <div class="row"><span>Emailed minutes</span><span class="us">Relayed to your address, not stored</span></div>
+        <div class="row"><span>Analytics, trackers, ads</span><span class="dev">None</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="free">
+    <div class="paper rv">
+      <div class="fwrap">
+        <div class="num mono" style="color:var(--acc);margin-bottom:14px">05 · Free AI allowance</div>
+        <h2>First 100 visitors:<br><span class="o">we pay for the AI</span></h2>
+        <p class="sub">Sign in and ExpoWalk covers <b>25 recordings, 300 card/note scans and 8 hours of audio</b> per person. No card. Beyond that — or if you prefer — paste your own free Gemini key in the app and ExpoWalk's server is not involved at all. The only thing we ask in return: permission to contact you about the app and about precision-manufacturing products.</p>
+        <form id="f" novalidate>
+          <div class="grid">
+            <label class="f">Name<input id="name" autocomplete="name" required></label>
+            <label class="f">Company<input id="company" autocomplete="organization" required></label>
+            <label class="f">Designation<input id="designation" autocomplete="organization-title" placeholder="e.g. Plant Head, Purchasing Manager"></label>
+            <label class="f">Mobile (with country code)<input id="phone" autocomplete="tel" inputmode="tel" placeholder="+1 … / +49 … / +91 …"></label>
+            <label class="f">Country<input id="country" autocomplete="country-name"></label>
+            <label class="f">Work email<input id="email" type="email" autocomplete="email" inputmode="email" required></label>
+          </div>
+          <label class="consent"><input type="checkbox" id="consent"><span>ExpoWalk (Akhil Mittal, India) may contact me by email or phone about this app and about precision-manufacturing products and services. I can withdraw this any time by emailing info@expowalk.app. This is the only thing ExpoWalk asks in return for the free allowance.</span></label>
+          <button class="btn acc" type="submit" id="go">Email me my sign-in link <span class="ar">→</span></button>
+          <div class="err" id="err"></div>
+          <div class="done" id="done"><b>Check your inbox.</b> We've sent a sign-in link to <span id="sentTo"></span>. Open it <b>on the phone you'll carry at the show</b> — it signs you in there, activates the allowance and opens the planner. The link expires in an hour; if it doesn't arrive, check spam or write to info@expowalk.app.</div>
+          <div class="or">or</div>
+          <button class="btn" type="button" id="google" style="width:100%">Continue with Google</button>
+          <p class="help">Google sign-in shares only your name and email with ExpoWalk; you complete the short profile inside the app. <span id="slots"></span></p>
+        </form>
+      </div>
+      <div class="side">
+        <div class="k">Rather not sign in?</div>
+        <h3>Everything except the paid-for AI works without an account.</h3>
+        <p>Directory, maps, stars, day plans, recording and scanning need no sign-in. For the AI, get a free Gemini API key from Google (two minutes) and paste it under Meetings → Settings — then no ExpoWalk server is involved in anything you do.</p>
+        <a class="btn" href="/imts2026">Open the planner without signing in</a>
+        <div class="k" style="margin-top:34px">Recording other people</div>
+        <h3>Ask first. It works.</h3>
+        <p>Illinois, like many places, requires everyone in a private conversation to agree to being recorded. The app reminds you before each recording. Most exhibitors say yes when they hear you'll get accurate minutes of what they promised.</p>
+        <div class="k" style="margin-top:34px">Any phone, any country</div>
+        <p>Runs in the browser you already have — Chrome on Android, Safari on iPhone, anything on a laptop. No app store, no account needed to start, and the exhibitor directory covers companies from more than 30 countries.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <a class="brand" href="/"><i></i>ExpoWalk</a>
+  <span>Run by Akhil Mittal · Ambala, India</span>
+  <a href="mailto:info@expowalk.app">info@expowalk.app</a>
+  <a href="/privacy">Privacy &amp; data handling</a>
+  <a href="/terms">Terms</a>
+  <a href="https://github.com/mittalakhil87/imts-planner">Source code</a>
+</div></footer>
+
+<script>
+(function(){
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px',threshold:.05}); rv.forEach(function(el){ io.observe(el); }); }
+  else rv.forEach(function(el){ el.classList.add('in'); });
+})();
+</script>
+<script>
+(function(){
+  var CFG=null, APP='/imts2026';
+  var $=function(s){return document.querySelector(s)};
+  fetch('/api/config',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(c){ CFG=c; if(c&&c.shared&&c.shared.maxFreeUsers){ var left=Math.max(0,c.shared.maxFreeUsers-(c.shared.freeSlotsTaken||0)); $('#slots').textContent=left?(left+' of '+c.shared.maxFreeUsers+' free places left.'):'The free places are all taken — the planner still works with your own Gemini key.'; } }).catch(function(){});
+  $('#f').addEventListener('submit',function(e){
+    e.preventDefault(); var err=$('#err'); err.textContent='';
+    var d={name:$('#name').value.trim(),company:$('#company').value.trim(),designation:$('#designation').value.trim(),phone:$('#phone').value.trim(),country:$('#country').value.trim()};
+    var email=$('#email').value.trim().toLowerCase();
+    if(!d.name||!d.company){ err.textContent='Name and company are required.'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Please enter a valid email address.'; return; }
+    if(!$('#consent').checked){ err.textContent='Please tick the consent box — it is the only thing we ask for the free allowance.'; return; }
+    if(!CFG||!CFG.supabaseUrl){ err.textContent='Sign-in is not available right now. Open the planner and use your own Gemini key, or try again later.'; return; }
+    var b=$('#go'); b.disabled=true; b.textContent='Sending…';
+    fetch(CFG.supabaseUrl+'/auth/v1/otp',{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,create_user:true,data:{full_name:d.name,ew_company:d.company,ew_designation:d.designation,ew_phone:d.phone,ew_country:d.country,ew_consent:true},options:{email_redirect_to:location.origin+APP}})})
+    .then(function(r){ return r.ok?null:r.json().catch(function(){return {}}).then(function(j){ throw new Error(j.msg||j.error_description||j.message||('HTTP '+r.status)); }); })
+    .then(function(){ $('#sentTo').textContent=email; $('#done').classList.add('on'); b.textContent='Link sent'; })
+    .catch(function(x){ err.textContent='Could not send the link: '+x.message; b.disabled=false; b.textContent='Email me my sign-in link'; });
+  });
+  $('#google').addEventListener('click',function(){
+    if(!CFG||!CFG.supabaseUrl){ $('#err').textContent='Sign-in is not available right now.'; return; }
+    location.href=CFG.supabaseUrl+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(location.origin+APP);
+  });
+})();
+</script>
+
+</body>
+</html>

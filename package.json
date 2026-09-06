@@ -1,0 +1,8 @@
+{
+  "name": "expowalk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ExpoWalk — IMTS 2026 floor planner with on-device booth recordings, cards and notes",
+  "engines": { "node": ">=20" }
+}

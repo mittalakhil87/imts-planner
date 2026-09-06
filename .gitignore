@@ -1,0 +1,8 @@
+# never commit secrets or local files
+*.env
+.env*
+onyx-ivy-*.json
+*-sa-key*.json
+push2github.cmd
+Thumbs.db
+.DS_Store
