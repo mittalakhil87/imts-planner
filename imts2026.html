@@ -103,7 +103,7 @@ aside{border-right:1px solid var(--line);background:var(--panel);padding:12px;po
 .row .name .v{color:var(--ok);font-size:12px;font-weight:600}
 .row .meta{color:var(--ink2);font-size:12px;display:flex;flex-wrap:wrap;gap:3px 9px;margin-top:2px}
 .row .meta .sec{font-weight:600;color:var(--ink)} .row .meta .flag{color:var(--accent);font-weight:500}
-.row .desc{color:var(--ink2);font-size:12.5px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row .desc{color:var(--ink2);font-size:12.5px;margin-top:4px;line-height:1.5}
 .row .ctl{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:8px;flex-wrap:wrap}
 .row .ctl .dn{font-size:11.5px;color:var(--ink3)}
 
@@ -386,8 +386,10 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
       <div class="tb"><div class="cnt">Meetings, cards & notes <span id="meetCnt"></span></div><div class="sp"></div>
         <button class="btn sm primary" id="meetAll">Process all pending</button>
         <button class="btn sm" id="meetCsv" title="All scanned cards as a CSV for Excel / CRM">Export contacts</button>
+        <button class="btn sm" id="exportAll" title="Every exhibitor you starred, visited, recorded, scanned or noted — one row each — as a CSV for Excel">Export everything</button>
+        <button class="btn sm" id="exportDash" title="The same data as a stand-alone HTML page you can open, print or share">Export dashboard</button>
         <button class="btn sm" id="meetSettings">Settings</button></div>
-      <div class="offline-note">Recordings, visiting-card photos and paper-note photos are saved <b>only on this phone</b> — nothing is uploaded while you walk. Back at the hotel on Wi-Fi, tap <b>Process all pending</b>: audio and photos go from this phone straight to Google Gemini (<span id="aiModeNote">using the ExpoWalk free allowance or your own key — see Settings</span>), and the minutes, contact details and note transcriptions come back here, grouped by exhibitor. <b>Keep this screen open while it works.</b> <span id="storageInfo"></span></div>
+      <div class="offline-note">Recordings, visiting-card photos and paper-note photos are saved <b>only on this phone</b> — nothing is uploaded while you walk. Back at the hotel on Wi-Fi, tap <b>Process all pending</b>: audio and photos go from this phone straight to Google Gemini (<span id="aiModeNote">using the ExpoWalk free allowance or your own key — see Settings</span>), and the minutes, contact details and note transcriptions come back here, grouped by exhibitor. <b>Keep this screen open while it works.</b> Once processed, <b>Export everything</b> gives every exhibitor with any activity — stars, visits, contacts, notes and minutes — as one spreadsheet, and <b>Export dashboard</b> gives the same as a single HTML page you can open in any browser or send to a colleague. Both build entirely on this phone from what's already here; nothing is uploaded to make them. <span id="storageInfo"></span></div>
       <div class="setbox" id="settingsBox" hidden>
         <div id="aiModeBox"></div>
         <span class="lbl">Gemini API key (yours — stays in this browser)</span><input id="setKey" type="password" placeholder="AIza…" autocomplete="off"><div class="help">Free at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → Create API key. Free tier covers a full show week (audio included). No card needed.</div>
@@ -425,7 +427,9 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
   <div class="sec"><h3>Sharing</h3><p class="help" style="color:var(--ink2)">If the top-right dot says <b>synced</b>, everyone opening this link sees the same marks live. If it says <b>local only</b>, marks stay on this device — use <b>Copy plan code</b> / <b>Paste plan code</b> in Plan to hand a plan to a colleague (WhatsApp works). Star ratings, notes, days and visits all travel with the code.</p></div>
   <div class="sec"><h3>Recording a booth conversation</h3><p class="help" style="color:var(--ink2)">Open the exhibitor → <b>Record conversation</b> → tick consent → ●. The audio is saved on this phone only (works with no signal). Later, on Wi-Fi, go to <b>Meetings</b> → Settings → paste your own free Gemini API key → <b>Transcribe</b>. You get a transcript and minutes (people met, products, prices & lead times, who promised what, follow-ups, open questions) which you can share, email or download. Nothing is ever sent to ExpoWalk's servers.</p></div>
   <div class="sec"><h3>Visiting cards & paper notes</h3><p class="help" style="color:var(--ink2)">On the exhibitor page, <b>📇 Scan card</b> photographs a visiting card and <b>📝 Photo note</b> photographs anything you wrote on paper. Photos stay on the phone. Later, <b>Meetings → Process all pending</b> reads the cards into contacts (name, title, company, phones, emails — save straight to your phone's contacts or export all as CSV) and transcribes the handwritten notes, so recording, minutes, cards and notes sit together under each exhibitor.</p></div>
+  <div class="sec"><h3>Everything in one table</h3><p class="help" style="color:var(--ink2)"><b>Meetings → Export everything</b> lists every exhibitor you've starred, visited, recorded, scanned or noted — one row each, with contact details, minutes summaries, follow-ups and paper notes — as a single CSV for Excel or Sheets. <b>Export dashboard</b> gives the same table as one stand-alone HTML page you can open in a browser, print, or send on. Both are built on your phone from what's already there; nothing is uploaded to produce them.</p></div>
   <div class="sec"><h3>Paper backup</h3><p class="help" style="color:var(--ink2)"><b>Plan → 🖨 Print pack</b> builds A4 sheets: an overview per hall, then map sheets with your starred booths coloured and numbered, a legend with a tick box per stop, and a checklist of every stop. Print it (or save as PDF) before you fly — if the battery or the network dies, you still won't miss a booth.</p></div>
+  <div class="sec" id="srcSec"><h3>About the exhibitor data</h3><p class="help" style="color:var(--ink2)">Exhibitor names, booth numbers, categories and short descriptions come from the public IMTS 2026 exhibitor directory (© AMT – The Association For Manufacturing Technology), captured on 5 September 2026; hall layouts are redrawn from the official floor plan. Each exhibitor links to its official directory page — check there for late changes. ExpoWalk is an independent visitor tool and is not affiliated with, sponsored by or endorsed by AMT or IMTS. IMTS is a trademark of AMT.</p></div>
   <div class="sec" id="dataSec"><h3>How your data is handled</h3><p class="help" style="color:var(--ink2)"><b>On your phone only:</b> recordings, card and note photos, transcripts, minutes, your stars, notes and visits. They live in this browser's storage; delete them any time from Meetings. <b>At Google, only when you press Process:</b> the audio or photo goes from your phone straight to Google's Gemini API (paid tier — Google states it does not use paid-API data to train its models) and the result comes straight back. This happens with your own key, or with ExpoWalk's short-lived permission token; either way <b>ExpoWalk's server never receives your audio, photos, transcripts or minutes</b>. <b>On ExpoWalk's server, if you sign in:</b> your name, email, company, designation, phone, and a count of how many recordings and scans you have processed — nothing else. Emailing minutes to yourself is opt-in and relayed, not stored. No analytics or tracking scripts. The code is public on GitHub — anyone can check these claims, and you can watch the network panel in your browser while processing.</p></div>
   <div class="sec"><h3>Tips</h3><p class="help" style="color:var(--ink2)">Booth numbers encode the building: 1xxxxx East, 2xxxxx North, 3xxxxx South, 4xxxxx West; the second digit is the level. Indoor GPS is often 20–50 m off — trust the booth you typed over the blue dot. The page works offline once loaded; your marks are kept on the device and re-sync when you're back online.</p></div>
 </div></div>
@@ -874,6 +878,48 @@ function captureText(x){ const d=when(x.createdAt,{dateStyle:'medium',timeStyle:
 $('#meetCsv').onclick=()=>{ const cards=meetings.filter(m=>m.kind==='card'&&m.status==='done'&&m.card); if(!cards.length){ toast('No cards read yet'); return; } const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"';
   const lines=[['Name','Title','Company','Department','Phones','Emails','Website','Address','Country','LinkedIn','Products','Other','Exhibitor','Booth','Hall','Scanned (Chicago)'].join(',')].concat(cards.map(x=>{ const c=x.card; return [c.name,c.title,c.company,c.department,(c.phones||[]).join(' / '),(c.emails||[]).join(' / '),c.website,c.address,c.country,c.linkedin,c.products,c.other,x.exhName,x.booth,x.hall,new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago'})].map(q).join(','); }));
   try{ dlText('imts2026-contacts.csv','﻿'+lines.join('\r\n'),'text/csv'); toast(`${cards.length} contacts exported`); }catch(e){ navigator.clipboard.writeText(lines.join('\n')).then(()=>toast('Download blocked — CSV copied to clipboard')).catch(()=>toast('Export failed')); } };
+
+// ---- consolidated export: one row per exhibitor with any activity (stars, visit, recording, card, note) ----
+function allActivityRows(){
+  const byExh={}; meetings.forEach(m=>{ (byExh[m.exhId]=byExh[m.exhId]||[]).push(m); });
+  const rows=[];
+  R.forEach(r=>{ const m=M(r.i); const items=byExh[r.i]||[];
+    if(!m.s && !m.v && !m.n && !items.length) return;
+    const cards=items.filter(x=>x.kind==='card'&&x.card);
+    const notes=items.filter(x=>x.kind==='note'&&x.note);
+    const recs=items.filter(x=>x.kind==='audio');
+    rows.push({
+      exhibitor:r.n, booth:r.b.map(b=>b[0]).join(' '), hall:r.halls.join('; '), sector:r.secs.join('; '), country:r.k,
+      stars:m.s===-1?'skip':(m.s||''), visited:m.v?'yes':'', day:m.d?DAYS.find(d=>d[0]===m.d)[1]:'', planNote:m.n||'',
+      contacts:cards.map(x=>cardLine(x.card)).join(' | '),
+      contactEmails:cards.flatMap(x=>x.card.emails||[]).join('; '),
+      contactPhones:cards.flatMap(x=>x.card.phones||[]).join('; '),
+      recordings:recs.length,
+      minutesSummary:recs.map(x=>x.minutes&&x.minutes.summary).filter(Boolean).join(' | '),
+      followups:recs.flatMap(x=>(x.minutes&&x.minutes.followups)||[]).map(f=>typeof f==='string'?f:[f.what,f.owner,f.when].filter(Boolean).join(' — ')).join(' | '),
+      paperNotes:notes.map(x=>(x.note&&(x.note.summary||short(x.note.text||'',240)))||'').filter(Boolean).join(' | '),
+    }); });
+  return rows;
+}
+function exportEverythingCsv(){ const rows=allActivityRows(); if(!rows.length){ toast('Nothing captured yet — star, visit, record or scan something first'); return; }
+  const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"';
+  const cols=['Exhibitor','Booth','Hall','Sector','Country','Stars','Visited','Day','Your note','Contacts (from cards)','Contact emails','Contact phones','Recordings','Minutes summary','Follow-ups','Paper notes'];
+  const lines=[cols.join(',')].concat(rows.map(r=>[r.exhibitor,r.booth,r.hall,r.sector,r.country,r.stars,r.visited,r.day,r.planNote,r.contacts,r.contactEmails,r.contactPhones,r.recordings,r.minutesSummary,r.followups,r.paperNotes].map(q).join(',')));
+  try{ dlText('imts2026-full-export.csv','﻿'+lines.join('\r\n'),'text/csv'); toast(`${rows.length} exhibitors exported`); }
+  catch(e){ navigator.clipboard.writeText(lines.join('\n')).then(()=>toast('Download blocked — CSV copied to clipboard')).catch(()=>toast('Export failed')); } }
+function exportDashboardHtml(){ const rows=allActivityRows(); if(!rows.length){ toast('Nothing captured yet — star, visit, record or scan something first'); return; }
+  const cell=s=>esc(s||'')||'<span style="color:#b8bcc2">—</span>';
+  const tr=r=>`<tr><td data-l="Exhibitor">${esc(r.exhibitor)}</td><td data-l="Booth">${esc(r.booth)}</td><td data-l="Hall">${esc(r.hall)}</td><td data-l="Stars">${r.stars?('★'+esc(String(r.stars))):''}</td><td data-l="Visited">${r.visited?'✓':''}</td><td data-l="Day">${esc(r.day)}</td><td data-l="Contacts">${cell(r.contacts)}</td><td data-l="Emails">${cell(r.contactEmails)}</td><td data-l="Phones">${cell(r.contactPhones)}</td><td data-l="Minutes summary">${cell(r.minutesSummary)}</td><td data-l="Follow-ups">${cell(r.followups)}</td><td data-l="Paper notes">${cell(r.paperNotes)}</td><td data-l="Your note">${cell(r.planNote)}</td></tr>`;
+  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`+
+    `<title>ExpoWalk export — ${esc(new Date().toLocaleDateString('en-US',{timeZone:'America/Chicago'}))}</title>`+
+    `<style>body{font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:24px;color:#1b2026;background:#fff}h1{font-size:20px;margin:0 0 4px}table{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:14px}th,td{border:1px solid #d8dbe0;padding:6px 8px;text-align:left;vertical-align:top;white-space:pre-wrap}th{background:#f2f3f1;position:sticky;top:0}tr:nth-child(even){background:#fafafa}.help{color:#697079;font-size:12.5px;margin:4px 0 0}@media(max-width:700px){table,thead,tbody,th,td,tr{display:block}th{display:none}td{border:none;border-bottom:1px solid #e6e8ea;padding:4px 0}tr{padding:10px 0;border-bottom:2px solid #d8dbe0}td:before{content:attr(data-l) ": ";font-weight:600;color:#525963}}</style>`+
+    `</head><body><h1>ExpoWalk — IMTS 2026 export</h1><p class="help">Built on this device from your own data on ${esc(new Date().toLocaleString('en-US',{timeZone:'America/Chicago'}))} (Chicago time). Nothing here was ever sent to ExpoWalk's server. ${rows.length} exhibitor${rows.length===1?'':'s'} with activity.</p>`+
+    `<table><thead><tr><th>Exhibitor</th><th>Booth</th><th>Hall</th><th>Stars</th><th>Visited</th><th>Day</th><th>Contacts</th><th>Emails</th><th>Phones</th><th>Minutes summary</th><th>Follow-ups</th><th>Paper notes</th><th>Your note</th></tr></thead>`+
+    `<tbody>${rows.map(tr).join('')}</tbody></table></body></html>`;
+  try{ dlText('imts2026-dashboard.html',html,'text/html'); toast('Dashboard downloaded — open it in any browser'); }
+  catch(e){ toast('Export failed: '+(e.message||e)); } }
+$('#exportAll').addEventListener('click',exportEverythingCsv);
+$('#exportDash').addEventListener('click',exportDashboardHtml);
 
 // ================= MEETINGS =================
 function itemRowHTML(x,inSheet){ const k=kindOf(x); const st=`<span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span>`; const err=x.error?'<span style="color:var(--accent)">'+esc(x.error)+'</span>':'';
