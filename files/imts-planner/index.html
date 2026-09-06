@@ -1,13 +1,4 @@
-<title>ExpoWalk · IMTS 2026</title>
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ExpoWalk">
-<meta name="theme-color" content="#0E1114">
-
+<title>IMTS 2026 Floor Planner · Standalone</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -103,7 +94,7 @@ aside{border-right:1px solid var(--line);background:var(--panel);padding:12px;po
 .row .name .v{color:var(--ok);font-size:12px;font-weight:600}
 .row .meta{color:var(--ink2);font-size:12px;display:flex;flex-wrap:wrap;gap:3px 9px;margin-top:2px}
 .row .meta .sec{font-weight:600;color:var(--ink)} .row .meta .flag{color:var(--accent);font-weight:500}
-.row .desc{color:var(--ink2);font-size:12.5px;margin-top:4px;line-height:1.5}
+.row .desc{color:var(--ink2);font-size:12.5px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .row .ctl{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:8px;flex-wrap:wrap}
 .row .ctl .dn{font-size:11.5px;color:var(--ink3)}
 
@@ -219,58 +210,14 @@ canvas.campus{width:100%;max-width:700px;height:auto;background:var(--map-bg);bo
 .setbox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px;margin:8px 0}
 .setbox input,.setbox textarea{width:100%;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:6px 8px;margin-top:4px}
 .offline-note{background:var(--accent-soft);border-radius:8px;padding:8px 10px;font-size:12.5px;margin:8px 0}
-/* cards & paper notes */
-.mrow.cap{grid-template-columns:auto 1fr auto}
-.mrow .th{width:60px;height:44px;object-fit:cover;border-radius:4px;border:1px solid var(--line);background:#fff}
-.mgrp{margin-bottom:16px} .mgh{margin:0 0 6px;font-size:14px} .mgh b{cursor:pointer;text-decoration:underline dotted}
-.capgrid{margin:6px 0} .capgrid img{max-width:100%;max-height:55vh;border:1px solid var(--line);border-radius:6px;background:#fff}
-.contact{background:var(--panel2);border-radius:8px;padding:10px 12px;margin:6px 0;font-size:13.5px;line-height:1.5} .contact b{font-size:16px}
-/* print pack (A4 paper fallback) */
-.pp-root{position:fixed;inset:0;z-index:80;background:#6b6f76;overflow:auto;color:#111;-webkit-overflow-scrolling:touch}
-.pp-bar{position:sticky;top:0;z-index:2;background:#fff;color:#111;border-bottom:1px solid #bbb;padding:8px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px}
-.pp-bar .btn{color:#111;background:#f4f4f4;border-color:#bbb} .pp-bar .btn.primary{background:#D9481C;color:#fff;border-color:#D9481C}
-.pp-page{background:#fff;color:#111;width:277mm;margin:10px auto;padding:5mm 6mm;box-sizing:border-box;font:11pt Arial,Helvetica,sans-serif;box-shadow:0 2px 12px rgba(0,0,0,.3);position:relative}
-.pp-h{display:flex;justify-content:space-between;align-items:baseline;gap:6mm;border-bottom:0.4mm solid #222;padding-bottom:1.2mm;margin-bottom:2mm;font-size:9.5pt;color:#333}
-.pp-h b{font-size:14pt;color:#111} .pp-h .mid{flex:1;text-align:center;font-weight:bold;color:#111;font-size:10.5pt}
-.pp-body{display:flex;gap:4mm;align-items:flex-start}
-.pp-map{width:200mm;height:auto;border:0.3mm solid #444;display:block;flex:none}
-.pp-leg{width:61mm;flex:none;font-size:11pt;line-height:1.25}
-.pp-leg.dense{font-size:9pt;line-height:1.15} .pp-leg.dense .pp-name small{font-size:7.5pt}
-.pp-legh{font-weight:bold;font-size:9.5pt;text-transform:uppercase;letter-spacing:.5px;margin:0 0 1.5mm;color:#333}
-.pp-row{display:grid;grid-template-columns:4.5mm 7mm 1fr;gap:1.5mm;align-items:start;padding:0.6mm 0;border-bottom:0.2mm solid #ddd;break-inside:avoid}
-.pp-chk{width:3.6mm;height:3.6mm;border:0.3mm solid #333;border-radius:0.6mm;margin-top:0.8mm}
-.pp-num{font-weight:bold;text-align:right} .pp-name{overflow:hidden;word-break:break-word} .pp-name small{color:#555;font-size:8.5pt;display:block}
-.pp-star{font-size:9pt;letter-spacing:-0.5px;white-space:nowrap}
-.pp-f{margin-top:1.5mm;font-size:8pt;color:#444;display:flex;gap:5mm;flex-wrap:wrap;align-items:center}
-.pp-f i{display:inline-block;width:4mm;height:2.8mm;border:0.2mm solid #333;vertical-align:middle;margin-right:1mm}
-table.pp-t{border-collapse:collapse;width:100%;font-size:10.5pt}
-table.pp-t th,table.pp-t td{border:0.2mm solid #999;padding:0.8mm 1.5mm;text-align:left;vertical-align:top}
-table.pp-t th{background:#eee;font-size:8.5pt;text-transform:uppercase;letter-spacing:.4px}
-table.pp-t td.hh{background:#e6e6e6;font-weight:bold;font-size:11pt}
-table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .bx{width:4mm;height:4mm;border:0.3mm solid #333;display:inline-block;border-radius:0.6mm}
-.pp-list .pp-body{display:block}
-@media (max-width:760px){.pp-page{width:auto;margin:6px;padding:8px}.pp-body{flex-direction:column}.pp-map{width:100%}.pp-leg{width:auto}}
-@media print{
-  @page{size:A4 landscape;margin:8mm}
-  html,body{background:#fff!important;height:auto!important;overflow:visible!important}
-  body>*:not(#printPack){display:none!important}
-  #printPack{display:block!important}
-  .pp-root{position:static;background:#fff;overflow:visible;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .pp-bar{display:none}
-  .pp-page{width:auto;margin:0;padding:0;box-shadow:none;break-after:page;page-break-after:always;height:190mm;overflow:hidden}
-  .pp-page.pp-list{height:auto;overflow:visible}
-  .pp-page:last-child{break-after:auto;page-break-after:auto}
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-}
 </style>
 
 <div class="app">
 <header>
   <div class="hd">
-    <div class="brand"><h1><a href="/" style="color:inherit;text-decoration:none" title="ExpoWalk home">ExpoWalk</a> <span style="font-weight:500;color:var(--ink3)">· IMTS 2026</span></h1><span class="sub">Floor planner · McCormick Place · Chicago · Sep 14–19</span></div>
+    <div class="brand"><h1>IMTS 2026 Floor Planner</h1><span class="sub">McCormick Place · Chicago · Sep 14–19</span></div>
     <div class="sync"><span class="dot" id="syncDot"></span><span id="syncTxt">connecting…</span></div>
     <input class="me" id="meName" placeholder="Your name" title="Your name — shown on visits and assignments">
-    <button class="btn sm" id="acctBtn" hidden>Sign in</button>
     <button class="btn sm" id="helpBtn" title="How to use">?</button>
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="explore">Explore</button>
@@ -300,7 +247,7 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
           <div class="fgroup"><span class="lbl">Product category</span><select class="sel" id="fCat" style="width:100%"><option value="">All categories</option></select></div>
           <div class="fgroup"><span class="lbl">Sort</span><select class="sel" id="sort" style="width:100%"><option value="name">Name A–Z</option><option value="booth">Hall, then booth</option><option value="star">Stars first</option><option value="cats">Most categories</option></select></div>
           <div class="fgroup"><button class="btn sm" id="clearF">Clear all filters</button></div>
-          <p class="help">Tap a row to open details (stars, day, notes, contacts). If the top-right dot says <b>synced</b>, marks sync live to everyone who has this link; if it says <b>local only</b>, they stay on this device — share with Copy/Paste plan code instead. Enter your name top-right so visits show who went.</p>
+          <p class="help">Tap a row to open details (stars, day, notes, contacts). Marks sync to everyone who has this link — enter your name top-right so visits show who went.</p>
         </div>
       </aside>
       <div class="list" id="listwrap">
@@ -365,7 +312,7 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
         <button class="btn sm primary" id="bApply">Apply</button>
         <span class="help" id="bInfo"></span></div>
       <div class="bulk"><span class="lbl" style="margin:0">Team</span><div class="team" id="team"></div><input class="sel" id="teamAdd" placeholder="Add name" style="width:130px"><button class="btn sm" id="teamAddBtn">Add</button>
-        <span class="sp" style="flex:1"></span><button class="btn sm" id="codeOut" title="Copy all marks as a code to send to a colleague">Copy plan code</button><button class="btn sm" id="codeIn" title="Merge a colleague's plan code">Paste plan code</button><button class="btn sm" id="printBtn" title="A4 sheets of the hall maps with your starred booths — paper backup">🖨 Print pack</button></div>
+        <span class="sp" style="flex:1"></span><button class="btn sm" id="codeOut" title="Copy all marks as a code to send to a colleague">Copy plan code</button><button class="btn sm" id="codeIn" title="Merge a colleague's plan code">Paste plan code</button></div>
       <div class="tb"><span class="help">Marked exhibitors (★1+). Set day and person per row; tap the name for details.</span><div class="sp"></div><select class="sel" id="planFilter"><option value="">All days</option><option value="0">Unassigned</option></select></div>
       <div class="ptwrap"><table class="pt"><thead><tr><th>★</th><th>Booth</th><th>Exhibitor</th><th>Hall</th><th>Day</th><th>Person</th><th>Done</th></tr></thead><tbody id="planBody"></tbody></table></div>
     </div>
@@ -383,21 +330,16 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
   <!-- MEETINGS -->
   <section class="view" id="v-meet" hidden>
     <div class="meet">
-      <div class="tb"><div class="cnt">Meetings, cards & notes <span id="meetCnt"></span></div><div class="sp"></div>
-        <button class="btn sm primary" id="meetAll">Process all pending</button>
-        <button class="btn sm" id="meetCsv" title="All scanned cards as a CSV for Excel / CRM">Export contacts</button>
-        <button class="btn sm" id="exportAll" title="Every exhibitor you starred, visited, recorded, scanned or noted — one row each — as a CSV for Excel">Export everything</button>
-        <button class="btn sm" id="exportDash" title="The same data as a stand-alone HTML page you can open, print or share">Export dashboard</button>
+      <div class="tb"><div class="cnt">Booth meetings <span id="meetCnt"></span></div><div class="sp"></div>
+        <button class="btn sm primary" id="meetAll">Transcribe all pending</button>
         <button class="btn sm" id="meetSettings">Settings</button></div>
-      <div class="offline-note">Recordings, visiting-card photos and paper-note photos are saved <b>only on this phone</b> — nothing is uploaded while you walk. Back at the hotel on Wi-Fi, tap <b>Process all pending</b>: audio and photos go from this phone straight to Google Gemini (<span id="aiModeNote">using the ExpoWalk free allowance or your own key — see Settings</span>), and the minutes, contact details and note transcriptions come back here, grouped by exhibitor. <b>Keep this screen open while it works.</b> Once processed, <b>Export everything</b> gives every exhibitor with any activity — stars, visits, contacts, notes and minutes — as one spreadsheet, and <b>Export dashboard</b> gives the same as a single HTML page you can open in any browser or send to a colleague. Both build entirely on this phone from what's already here; nothing is uploaded to make them. <span id="storageInfo"></span></div>
+      <div class="offline-note">Recordings are saved <b>only on this phone</b> — nothing is uploaded while you walk. When you are back at the hotel on Wi-Fi, tap <b>Transcribe</b> on a meeting (or "Transcribe all pending"): the audio goes from this phone straight to Google Gemini under <b>your own</b> API key, and the minutes come back here. Share or email them from the meeting page. <span id="storageInfo"></span></div>
       <div class="setbox" id="settingsBox" hidden>
-        <div id="aiModeBox"></div>
-        <span class="lbl">Gemini API key (yours — stays in this browser)</span><input id="setKey" type="password" placeholder="AIza…" autocomplete="off"><div class="help">Get a key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → Create API key. No card needed — Google's free tier has its own daily rate/quota limits, usually enough for a show week of normal use.</div>
+        <span class="lbl">Gemini API key (yours — stays in this browser)</span><input id="setKey" type="password" placeholder="AIza…" autocomplete="off"><div class="help">Free at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → Create API key. Free tier covers a full show week (audio included). No card needed.</div>
         <span class="lbl" style="margin-top:8px">Model</span><input id="setModel" placeholder="gemini-2.5-flash">
         <span class="lbl" style="margin-top:8px">About my company (helps the minutes judge relevance)</span><textarea id="setCo" placeholder="e.g. We are a precision machining job shop in Pune making aerospace brackets in 6061/7075; interested in 5-axis, workholding, and inspection."></textarea>
         <span class="lbl" style="margin-top:8px">Email minutes to (optional, pre-fills the share/email)</span><input id="setMail" type="email" placeholder="you@company.com">
         <div style="margin-top:8px"><button class="btn sm primary" id="setSave">Save</button> <span class="help" id="setMsg"></span></div>
-        <div style="margin-top:8px"><button class="btn sm" id="wipeAll">Delete everything on this phone</button></div>
       </div>
       <div id="meetList"></div>
     </div>
@@ -416,9 +358,6 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
 <!-- DETAIL SHEET -->
 <div class="sheet" id="sheet"><div class="bg" id="sheetBg"></div><div class="panel" id="sheetPanel"></div></div>
 <div class="toast" id="toast"></div>
-<input type="file" id="capFile" accept="image/*" capture="environment" multiple hidden>
-<input type="file" id="capFileG" accept="image/*" multiple hidden>
-<div id="printPack" class="pp-root" hidden></div>
 <div class="sheet" id="help"><div class="bg" id="helpBg"></div><div class="panel">
   <button class="close" id="helpClose" aria-label="Close">×</button>
   <h2>How to use this planner</h2>
@@ -426,12 +365,7 @@ table.pp-t tr{break-inside:avoid} table.pp-t .c{text-align:center} table.pp-t .b
   <div class="sec"><h3>2 · Plan the days</h3><p class="help" style="color:var(--ink2)">In <b>Plan</b>, set a day for each starred exhibitor (or bulk-assign, e.g. all ★5 in West L3 → Tuesday). Each day card shows stops and estimated hours; it warns when a day is over 8 h. Add team names and assign booths to people.</p></div>
   <div class="sec"><h3>3 · At the show (phone)</h3><p class="help" style="color:var(--ink2)">Open the same link on your phone. <b>Map</b>: pick the hall; starred booths are coloured with the exhibitor name on them; tap a booth for details. Press <b>📍</b> and type the booth you are standing at (or <b>◎</b> for GPS), then <b>Route from here</b> for a nearest-first path along the aisles. <b>Walk</b> lists today's stops per hall — tick each booth as you leave it; the tick shows on the map and to your colleagues. Record who you met and the follow-up in the booth's details; <b>Export CSV</b> in Explore gets everything into Excel.</p></div>
   <div class="sec"><h3>Sharing</h3><p class="help" style="color:var(--ink2)">If the top-right dot says <b>synced</b>, everyone opening this link sees the same marks live. If it says <b>local only</b>, marks stay on this device — use <b>Copy plan code</b> / <b>Paste plan code</b> in Plan to hand a plan to a colleague (WhatsApp works). Star ratings, notes, days and visits all travel with the code.</p></div>
-  <div class="sec"><h3>Recording a booth conversation</h3><p class="help" style="color:var(--ink2)">Open the exhibitor → <b>Record conversation</b> → tick consent → ●. The audio is saved on this phone only (works with no signal). Later, on Wi-Fi, go to <b>Meetings</b> → Settings → paste your own free Gemini API key → <b>Transcribe</b>. You get a transcript and minutes (people met, products, prices & lead times, who promised what, follow-ups, open questions) which you can share, email or download. Nothing is ever sent to ExpoWalk's servers.</p></div>
-  <div class="sec"><h3>Visiting cards & paper notes</h3><p class="help" style="color:var(--ink2)">On the exhibitor page, <b>📇 Scan card</b> photographs a visiting card and <b>📝 Photo note</b> photographs anything you wrote on paper. Photos stay on the phone. Later, <b>Meetings → Process all pending</b> reads the cards into contacts (name, title, company, phones, emails — save straight to your phone's contacts or export all as CSV) and transcribes the handwritten notes, so recording, minutes, cards and notes sit together under each exhibitor.</p></div>
-  <div class="sec"><h3>Everything in one table</h3><p class="help" style="color:var(--ink2)"><b>Meetings → Export everything</b> lists every exhibitor you've starred, visited, recorded, scanned or noted — one row each, with contact details, minutes summaries, follow-ups and paper notes — as a single CSV for Excel or Sheets. <b>Export dashboard</b> gives the same table as one stand-alone HTML page you can open in a browser, print, or send on. Both are built on your phone from what's already there; nothing is uploaded to produce them.</p></div>
-  <div class="sec"><h3>Paper backup</h3><p class="help" style="color:var(--ink2)"><b>Plan → 🖨 Print pack</b> builds A4 sheets: an overview per hall, then map sheets with your starred booths coloured and numbered, a legend with a tick box per stop, and a checklist of every stop. Print it (or save as PDF) before you fly — if the battery or the network dies, you still won't miss a booth.</p></div>
-  <div class="sec" id="srcSec"><h3>About the exhibitor data</h3><p class="help" style="color:var(--ink2)">Exhibitor names, booth numbers, categories and short descriptions come from the public IMTS 2026 exhibitor directory (© AMT – The Association For Manufacturing Technology), captured on 5 September 2026; hall layouts are redrawn from the official floor plan. Each exhibitor links to its official directory page — check there for late changes. ExpoWalk is an independent visitor tool and is not affiliated with, sponsored by or endorsed by AMT or IMTS. IMTS is a trademark of AMT.</p></div>
-  <div class="sec" id="dataSec"><h3>How your data is handled</h3><p class="help" style="color:var(--ink2)"><b>On your phone only:</b> recordings, card and note photos, transcripts, minutes, your stars, notes and visits. They live in this browser's storage; delete them any time from Meetings. <b>At Google, only when you press Process:</b> the audio or photo goes from your phone straight to Google's Gemini API (paid tier — Google states it does not use paid-API data to train its models) and the result comes straight back. This happens with your own key, or with ExpoWalk's short-lived permission token; either way <b>ExpoWalk's server never receives your audio, photos, transcripts or minutes</b>. <b>On ExpoWalk's server, if you sign in:</b> your name, email, company, designation, phone, and a count of how many recordings and scans you have processed — nothing else. Emailing minutes to yourself is opt-in and relayed, not stored. No analytics or tracking scripts. The code is public on GitHub — anyone can check these claims, and you can watch the network panel in your browser while processing.</p></div>
+  <div class="sec"><h3>Recording a booth conversation</h3><p class="help" style="color:var(--ink2)">Open the exhibitor → <b>Record conversation</b> → tick consent → ●. The audio is saved on this phone only (works with no signal). Later, on Wi-Fi, go to <b>Meetings</b> → Settings → paste your own free Gemini API key → <b>Transcribe</b>. You get a transcript and minutes (people met, products, prices & lead times, who promised what, follow-ups, open questions) which you can share, email or download. Nothing is ever sent to Blue Photon.</p></div>
   <div class="sec"><h3>Tips</h3><p class="help" style="color:var(--ink2)">Booth numbers encode the building: 1xxxxx East, 2xxxxx North, 3xxxxx South, 4xxxxx West; the second digit is the level. Indoor GPS is often 20–50 m off — trust the booth you typed over the blue dot. The page works offline once loaded; your marks are kept on the device and re-sync when you're back online.</p></div>
 </div></div>
 
@@ -447,9 +381,6 @@ const MAPS={"13":{"name":"East Building, Level 3","short":"East L 3","k":8.98311
 const R=DATA.recs, CATS=DATA.cats, H=MAPS;
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-// Neutralizes CSV/spreadsheet formula injection (EW-08): a cell starting with = + - @ or a leading tab/CR
-// is prefixed with a quote so Excel/Sheets opens it as inert text instead of evaluating it as a formula.
-const csvSafe=s=>{ s=String(s==null?'':s); return /^[=+\-@\t\r]/.test(s)?"'"+s:s; };
 const HALL_IDS=['13','21','23','33','43'];
 const HALL_NAME={}; HALL_IDS.forEach(h=>HALL_NAME[H[h].name]=h);
 const BLD={'1':'east','2':'north','3':'south','4':'west'};
@@ -484,33 +415,10 @@ $('#meName').value=me; $('#meName').addEventListener('change',e=>{ me=e.target.v
 let db=null, docRef=null, saveTimer=null;
 const setSync=(st,tx)=>{ $('#syncDot').className='dot '+st; $('#syncTxt').textContent=tx; };
 setSync('local','local only');
-const VALID_STAR=new Set([-1,0,1,2,3,4,5]);
-const VALID_DAY=new Set(['',...DAYS.map(d=>d[0])]);
-const cleanStr=(v,max)=>typeof v==='string'?v.slice(0,max||500):'';
-const cleanTs=v=>(typeof v==='number'&&isFinite(v)&&v>=0&&v<=Date.now()+31536000000)?v:0;
-function sanitizeMark(id,m){ if(!Object.prototype.hasOwnProperty.call(byId,id)) return null; if(!m||typeof m!=='object'||Array.isArray(m)) return null;
-  return { s:VALID_STAR.has(m.s)?m.s:0, n:cleanStr(m.n,1000), v:!!m.v, vb:cleanStr(m.vb,200), vt:cleanTs(m.vt),
-    d:VALID_DAY.has(m.d)?m.d:'', a:cleanStr(m.a,200), met:cleanStr(m.met,300), fu:cleanStr(m.fu,300), nx:cleanStr(m.nx,300), t:cleanTs(m.t) }; }
-function sanitizeMeta(rmeta){ if(!rmeta||typeof rmeta!=='object'||Array.isArray(rmeta)) return null;
-  const team=Array.isArray(rmeta.team)?rmeta.team.filter(x=>typeof x==='string').map(x=>cleanStr(x,100)).slice(0,200):meta.team;
-  const rm=rmeta.mins&&typeof rmeta.mins==='object'&&!Array.isArray(rmeta.mins)?rmeta.mins:{};
-  const mn={}; for(const k of ['5','4','3','2','1','w']){ const v=+rm[k]; mn[k]=(isFinite(v)&&v>=0&&v<=600)?v:(meta.mins[k]||0); }
-  return { team, mins:mn, mt:cleanTs(rmeta.mt)||Date.now() }; }
-// Validates every incoming mark/meta object (from the sync doc or a pasted plan code) before it ever
-// touches `marks`/`meta` or gets interpolated into innerHTML — closes the stored-injection path where an
-// out-of-range star value could break out of a CSS class attribute (EW-01).
-function mergeIn(rm, rmeta){ let ch=false; if(!rm||typeof rm!=='object'||Array.isArray(rm)) rm={};
-  for(const id in rm){ const clean=sanitizeMark(id,rm[id]); if(!clean) continue; const a=marks[id]; if(!a||(clean.t||0)>(a.t||0)){ marks[id]=clean; ch=true; } }
-  const cm=sanitizeMeta(rmeta); if(cm&&(cm.mt||0)>(meta.mt||0)){ meta=cm; ch=true; }
-  if(ch) marksVer++; return ch; }
+function mergeIn(rm, rmeta){ let ch=false; for(const id in rm){ const a=marks[id], b=rm[id]; if(!a||(b.t||0)>(a.t||0)){ marks[id]=b; ch=true; } }
+  if(rmeta&&(rmeta.mt||0)>(meta.mt||0)){ meta=Object.assign({},meta,rmeta); ch=true; } if(ch) marksVer++; return ch; }
 function persist(){ try{localStorage.setItem(LS,JSON.stringify({marks,meta}));}catch(e){}
-  if(docRef){ clearTimeout(saveTimer); saveTimer=setTimeout(async()=>{ saveTimer=null; try{ await docRef.set({marks,meta,updated:Date.now()}); setSync('on','synced'); }catch(e){ setSync('local','save failed — kept on this device'); } },800); } }
-// The local (localStorage) write above is always synchronous and safe; this only makes sure the debounced
-// REMOTE save isn't still waiting out its 800ms delay when the tab is closed or backgrounded — otherwise
-// another device could sync in first and this device's last edits would never reach the server (EW-15).
-function flushPendingEdits(){ if(!docRef||saveTimer==null) return; clearTimeout(saveTimer); saveTimer=null; docRef.set({marks,meta,updated:Date.now()}).then(()=>setSync('on','synced')).catch(()=>setSync('local','save failed — kept on this device')); }
-document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') flushPendingEdits(); });
-window.addEventListener('pagehide',flushPendingEdits);
+  if(docRef){ clearTimeout(saveTimer); saveTimer=setTimeout(async()=>{ try{ await docRef.set({marks,meta,updated:Date.now()}); setSync('on','synced'); }catch(e){ setSync('local','save failed — kept on this device'); } },800); } }
 (async()=>{ try{ db=await claude.use('db'); }catch(e){ db=null; }
   if(!db){ setSync('local','local only (this device)'); return; }
   docRef=db.doc('plan/marks');
@@ -579,12 +487,12 @@ $('#moreBtn').addEventListener('click',()=>{ page++; renderList(); });
 document.addEventListener('click',e=>{ const sb=e.target.closest('.stars button'); if(sb){ e.stopPropagation(); const id=sb.closest('.stars').dataset.id; const s=+sb.dataset.s; setM(id,{s:M(id).s===s?0:s}); renderAll(); if($('#sheet').classList.contains('open')&&sheetId===id) openSheet(id); return; } });
 $('#list').addEventListener('click',e=>{ const row=e.target.closest('.row'); if(row&&!e.target.closest('.stars')) openSheet(row.dataset.id); });
 $('#exportCsv').addEventListener('click',async()=>{ const lines=[['Stars','Visited','Visited by','Visited at','Day','Person','Exhibitor','Booth','Hall','Sector','Country','Website','Phone','Note','Met','Follow-up','Next step'].join(',')];
-  const q=s=>'"'+csvSafe(s).replace(/"/g,'""')+'"'; R.forEach(r=>{ const m=M(r.i); if(!m.s&&!m.n&&!m.v&&!m.d&&!m.a&&!m.met&&!m.fu&&!m.nx) return; lines.push([m.s===-1?'skip':m.s,m.v?'yes':'',m.vb,m.vt?new Date(m.vt).toISOString():'',m.d?DAYS.find(d=>d[0]===m.d)[1]:'',m.a,r.n,r.b.map(b=>b[0]).join(' '),r.halls.join('; '),r.secs.join('; '),r.k,r.w,r.p,m.n,m.met,m.fu,m.nx].map(q).join(',')); });
+  const q=s=>'"'+String(s||'').replace(/"/g,'""')+'"'; R.forEach(r=>{ const m=M(r.i); if(!m.s&&!m.n&&!m.v) return; lines.push([m.s===-1?'skip':m.s,m.v?'yes':'',m.vb,m.vt?new Date(m.vt).toISOString():'',m.d?DAYS.find(d=>d[0]===m.d)[1]:'',m.a,r.n,r.b.map(b=>b[0]).join(' '),r.halls.join('; '),r.secs.join('; '),r.k,r.w,r.p,m.n,m.met,m.fu,m.nx].map(q).join(',')); });
   try{ await navigator.clipboard.writeText(lines.join('\n')); toast(`Copied ${lines.length-1} rows as CSV — paste into Excel`); }catch(e){ console.log(lines.join('\n')); toast('Clipboard blocked — CSV printed to console'); } });
 
 // ================= DETAIL SHEET =================
-let sheetId=null; let sheetBooth=null;
-function openSheet(id,boothHint){ const r=byId[id]; if(!r) return; sheetId=id; sheetBooth=(boothHint&&r.b.some(b=>b[0]===boothHint))?boothHint:(r.b[0]?r.b[0][0]:null); const m=M(id);
+let sheetId=null;
+function openSheet(id){ const r=byId[id]; if(!r) return; sheetId=id; const m=M(id);
   const site=r.w?`<a href="${esc(r.w)}" target="_blank" rel="noopener">${esc(r.w.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,''))}</a>`:'';
   const dayOpts=`<option value="">— no day —</option>`+DAYS.map(d=>`<option value="${d[0]}" ${m.d===d[0]?'selected':''}>${d[1]}</option>`).join('');
   const whoOpts=`<option value="">— nobody —</option>`+meta.team.map(t=>`<option ${m.a===t?'selected':''}>${esc(t)}</option>`).join('');
@@ -594,7 +502,7 @@ function openSheet(id,boothHint){ const r=byId[id]; if(!r) return; sheetId=id; s
     <div class="help">${esc(r.k)}${r.c?' · '+esc(r.c):''}${r.s?' '+esc(r.s):''} ${site?' · '+site:''}${r.p?' · '+esc(r.p):''} · <a href="https://directory.imts.com/8_0/exhibitor/${r.i}/" target="_blank" rel="noopener">IMTS listing ↗</a></div>
     <div class="sec"><h3>Priority</h3><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">${starsHTML(id)}<span class="help">★5 must · ★3 can see · ★1 if time</span></div></div>
     <div class="grid"><div><span class="lbl">Day</span><select class="sel" id="shDay">${dayOpts}</select></div><div><span class="lbl">Person</span><select class="sel" id="shWho">${whoOpts}</select></div></div>
-    <div class="sec"><h3>Visit</h3><div class="actions"><button class="vbtn ${m.v?'on':''}" id="shVisit">${m.v?'✓ Visited'+(m.vb?' by '+esc(m.vb):''):'Mark visited'}</button><button class="btn" id="shHere">I'm at this booth</button><button class="btn primary" id="shRec">● Record conversation</button><button class="btn" id="shCard">📇 Scan card</button><button class="btn" id="shPhoto">📝 Photo note</button><button class="btn sm" id="shGal" title="Add card or note photos already in the gallery">from gallery…</button></div>
+    <div class="sec"><h3>Visit</h3><div class="actions"><button class="vbtn ${m.v?'on':''}" id="shVisit">${m.v?'✓ Visited'+(m.vb?' by '+esc(m.vb):''):'Mark visited'}</button><button class="btn" id="shHere">I'm at this booth</button><button class="btn primary" id="shRec">● Record conversation</button></div>
       <div id="shMeet">${meetListHTML(meetings.filter(x=>x.exhId===id))}</div>
       <span class="lbl" style="margin-top:8px">Note (what to ask / look for)</span><textarea id="shNote" placeholder="e.g. ask about vacuum chuck pricing for 6061 plates">${esc(m.n)}</textarea></div>
     <div class="sec"><h3>Contact & follow-up</h3>
@@ -609,21 +517,13 @@ function openSheet(id,boothHint){ const r=byId[id]; if(!r) return; sheetId=id; s
   $('#shDay').onchange=e=>{ setM(id,{d:e.target.value}); renderAll(); };
   $('#shWho').onchange=e=>{ setM(id,{a:e.target.value}); renderAll(); };
   $('#shVisit').onclick=()=>{ const mm=M(id); setM(id,{v:!mm.v,vb:!mm.v?me:'',vt:!mm.v?Date.now():0}); openSheet(id); renderAll(); };
-  $('#shRec').onclick=()=>startRecorder(r,sheetBooth);
-  $('#shCard').onclick=()=>captureImage(r,'card',false,sheetBooth); $('#shPhoto').onclick=()=>captureImage(r,'note',false,sheetBooth);
-  $('#shGal').onclick=()=>{ const k=confirm('OK = visiting cards, Cancel = paper notes')?'card':'note'; captureImage(r,k,true,sheetBooth); };
+  $('#shRec').onclick=()=>startRecorder(r);
   $('#shMeet').addEventListener('click',e=>{ const d=e.target.closest('[data-rec]'); if(d) openMeeting(d.dataset.rec); });
-  $('#shHere').onclick=()=>{ let bn=sheetBooth; if(r.b.length>1&&!boothHint){ const names=r.b.map(b=>b[0]).join(' / '); const pick=prompt(`This exhibitor has ${r.b.length} booths (${names}). Which one are you at?`,bn||r.b[0][0]); if(pick===null) return; if(r.b.some(b=>b[0]===pick.trim())) bn=pick.trim(); }
-    if(bn&&BOOTH[bn]){ setPosBooth(bn); closeSheet(); showTab('map'); toast('Position set at booth '+bn); } else toast('Booth not recognised — use one of: '+r.b.map(b=>b[0]).join(', ')); };
+  $('#shHere').onclick=()=>{ const b=r.b[0]; if(b&&BOOTH[b[0]]){ setPosBooth(b[0]); closeSheet(); showTab('map'); toast('Position set at booth '+b[0]); } };
   const deb=(el,key)=>{ el.addEventListener('input',()=>{ clearTimeout(el._t); el._t=setTimeout(()=>{ setM(id,{[key]:el.value.trim()}); renderList(); },500); }); };
   deb($('#shNote'),'n'); deb($('#shMet'),'met'); deb($('#shFu'),'fu'); deb($('#shNx'),'nx');
   $$('#sheetPanel [data-goto]').forEach(b=>b.onclick=()=>{ closeSheet(); gotoBooth(b.dataset.goto); }); }
-let curObjUrl=null;
-// Tracks the ONE object: URL currently shown in the sheet's <img>/<audio> and revokes the previous one
-// before creating the next, and on close — otherwise every capture/recording viewed this session leaks
-// its blob URL for the life of the tab (EW-30).
-function setObjUrl(el,blob){ if(curObjUrl){ URL.revokeObjectURL(curObjUrl); curObjUrl=null; } if(blob){ curObjUrl=URL.createObjectURL(blob); el.src=curObjUrl; } return curObjUrl; }
-function closeSheet(){ $('#sheet').classList.remove('open'); sheetId=null; if(curObjUrl){ URL.revokeObjectURL(curObjUrl); curObjUrl=null; } }
+function closeSheet(){ $('#sheet').classList.remove('open'); sheetId=null; }
 $('#sheetBg').addEventListener('click',closeSheet);
 
 // ================= MAP ENGINE =================
@@ -734,12 +634,12 @@ cv.addEventListener('pointerup',e=>{ ptrs.delete(e.pointerId); if(ptrs.size<2) l
 cv.addEventListener('pointercancel',e=>{ ptrs.delete(e.pointerId); });
 cv.addEventListener('wheel',e=>{ e.preventDefault(); const rect=cv.getBoundingClientRect(); const mx=e.clientX-rect.left, my=e.clientY-rect.top; const f=e.deltaY<0?1.15:1/1.15; const wx=(mx-cv.width/dpr()/2)/view.scale+view.cx, wy=-(my-cv.height/dpr()/2)/view.scale+view.cy; view.scale*=f; view.cx=wx-(mx-cv.width/dpr()/2)/view.scale; view.cy=wy+(my-cv.height/dpr()/2)/view.scale; zoomTick(); draw(); },{passive:false});
 function tapMap(e){ const rect=cv.getBoundingClientRect(); const mx=e.clientX-rect.left, my=e.clientY-rect.top; const wx=(mx-cv.width/dpr()/2)/view.scale+view.cx, wy=-(my-cv.height/dpr()/2)/view.scale+view.cy;
-  for(const b of H[hall].booths){ if(pip(wx,wy,b[2])){ const bo=BOOTH[b[0]]; if(bo.ids.length) openSheet(bo.ids[0],b[0]); else toast(`Booth ${b[0]} · ${b[3]||'unassigned'}`); return; } } }
+  for(const b of H[hall].booths){ if(pip(wx,wy,b[2])){ const bo=BOOTH[b[0]]; if(bo.ids.length) openSheet(bo.ids[0]); else toast(`Booth ${b[0]} · ${b[3]||'unassigned'}`); return; } } }
 function gotoBooth(booth){ const bo=BOOTH[booth]; if(!bo){ toast('Booth '+booth+' is not on the hall maps'); return; } showTab('map'); setHall(bo.h); view.cx=bo.cx; view.cy=bo.cy; view.scale=Math.max(view.scale,0.25); draw(); }
 // find on map
 let mqT; $('#mapq').addEventListener('input',e=>{ clearTimeout(mqT); mqT=setTimeout(()=>{ const q=e.target.value.trim().toLowerCase(); const pl=$('#poplist'); if(!q){ pl.classList.remove('show'); return; }
-  const hits=R.filter(r=>r.n.toLowerCase().includes(q)||r.b.some(b=>b[0].startsWith(q))).slice(0,12); pl.innerHTML=hits.map(r=>{ const mb=r.b.find(b=>b[0].startsWith(q))||r.b[0]||['','']; return `<div data-id="${r.i}" data-b="${esc(mb[0]||'')}"><b>${esc(mb[0]||'')}</b>${esc(r.n)} <span class="help">${esc(mb[1]?mb[1].replace(' Building, Level',' L'):'')}</span></div>`; }).join('')||'<div>No match</div>'; pl.classList.add('show'); },150); });
-$('#poplist').addEventListener('click',e=>{ const d=e.target.closest('[data-id]'); if(!d) return; $('#poplist').classList.remove('show'); $('#mapq').value=''; if(d.dataset.b) gotoBooth(d.dataset.b); openSheet(d.dataset.id,d.dataset.b); });
+  const hits=R.filter(r=>r.n.toLowerCase().includes(q)||r.b.some(b=>b[0].startsWith(q))).slice(0,12); pl.innerHTML=hits.map(r=>`<div data-id="${r.i}" data-b="${esc(r.b[0]?r.b[0][0]:'')}"><b>${esc(r.b[0]?r.b[0][0]:'')}</b>${esc(r.n)} <span class="help">${esc(r.b[0]?r.b[0][1].replace(' Building, Level',' L'):'')}</span></div>`).join('')||'<div>No match</div>'; pl.classList.add('show'); },150); });
+$('#poplist').addEventListener('click',e=>{ const d=e.target.closest('[data-id]'); if(!d) return; $('#poplist').classList.remove('show'); $('#mapq').value=''; if(d.dataset.b) gotoBooth(d.dataset.b); openSheet(d.dataset.id); });
 // position
 function setPosBooth(booth){ const bo=BOOTH[booth]; if(!bo) return; const i=nearestWalkable(bo.h,bo.cx,bo.cy,20); const [x,y]=i>=0?cellXY(bo.h,i):[bo.cx,bo.cy]; pos={h:bo.h,x,y,acc:0,src:'manual',booth}; if(gpsWatch){ navigator.geolocation.clearWatch(gpsWatch); gpsWatch=null; $('#gpsBtn').classList.remove('on'); } setHall(bo.h); draw(); }
 $('#hereBtn').onclick=()=>{ const b=prompt('Which booth are you standing at? (booth number)'); if(!b) return; const bn=b.trim(); if(BOOTH[bn]){ setPosBooth(bn); view.cx=BOOTH[bn].cx; view.cy=BOOTH[bn].cy; draw(); toast('Position set at booth '+bn); } else toast('Booth '+bn+' not found'); };
@@ -756,7 +656,7 @@ function nearestFirst(h,startCell,targets){ const order=[]; let path=[]; let cel
 $('#routeBtn').onclick=()=>{ if(!pos||pos.h!==hall){ toast('Set your position first: tap ◎ for GPS or 📍 to enter the booth you are at'); return; } const t=targetsInHall(hall,+$('#mapMin').value,$('#mapDay').value,''); if(!t.length){ toast('No unvisited stops in this hall at the current star/day filter'); return; }
   const start=nearestWalkable(hall,pos.x,pos.y,30); if(start<0){ toast('Position is outside the walkable area'); return; } const r=nearestFirst(hall,start,t); route=Object.assign({h:hall},r); draw(); $('#clearRoute').hidden=false; const strip=$('#routestrip'); strip.hidden=false; const cs=H[hall].grid.cs;
   strip.innerHTML=r.stops.map((s,i)=>`<div class="st" data-id="${s.id}" data-b="${s.booth}"><b>${i+1}</b>${esc(s.booth)} <span>${esc(short(s.name,22))}</span><span class="sbadge s${s.star}">★${s.star}</span>${s.dist>=0?`<span class="help">${Math.round(s.dist*cs*0.0254)} m</span>`:''}</div>`).join(''); toast(`Route: ${r.stops.length} stops, ≈${Math.round(r.stops.reduce((a,s)=>a+Math.max(0,s.dist),0)*cs*0.0254)} m walking`); };
-$('#routestrip').addEventListener('click',e=>{ const d=e.target.closest('.st'); if(!d) return; gotoBooth(d.dataset.b); openSheet(d.dataset.id,d.dataset.b); });
+$('#routestrip').addEventListener('click',e=>{ const d=e.target.closest('.st'); if(!d) return; gotoBooth(d.dataset.b); openSheet(d.dataset.id); });
 $('#clearRoute').onclick=()=>{ route=null; $('#routestrip').hidden=true; $('#clearRoute').hidden=true; draw(); };
 window.addEventListener('resize',()=>{ if(cur==='map'){ resizeMap(); draw(); } });
 if(window.matchMedia){ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ if(cur==='map') draw(); }); }
@@ -832,48 +732,29 @@ const IDB={ db:null,
   put(store,v){ return this.tx(store,'readwrite',s=>s.put(v)); }, del(store,k){ return this.tx(store,'readwrite',s=>s.delete(k)); },
   all(store){ return this.tx(store,'readonly',s=>s.getAll()); }, get(store,k){ return this.tx(store,'readonly',s=>s.get(k)); } };
 let meetings=[]; // metadata + blobs kept in IDB; in memory we keep everything except blob for lists
-const processing=new Set(); // ids currently being sent to Gemini — blocks a duplicate concurrent call from this tab (EW-14)
-async function loadMeetings(){ try{ const all=await IDB.all('meetings'); for(const m of all){ if(m.status==='working'){ m.status='error'; m.error='Processing was interrupted (screen closed or page reloaded). Tap Try again.'; await IDB.put('meetings',m); } } meetings=all.map(m=>{ const {blob,...rest}=m; return rest; }).sort((a,b)=>b.createdAt-a.createdAt); }catch(e){ meetings=[]; }
+async function loadMeetings(){ try{ const all=await IDB.all('meetings'); meetings=all.map(m=>{ const {blob,...rest}=m; return rest; }).sort((a,b)=>b.createdAt-a.createdAt); }catch(e){ meetings=[]; }
   // recover orphaned chunks from a crashed recording
-  try{ const ch=await IDB.all('chunks'); const byRec={}; ch.forEach(c=>{ (byRec[c.rec]=byRec[c.rec]||[]).push(c); }); for(const rec in byRec){ if(meetings.find(m=>m.id===rec)) { for(const c of byRec[rec]) await IDB.del('chunks',c.k); continue; } const parts=byRec[rec].sort((x,y)=>x.seq-y.seq); const blob=new Blob(parts.map(p=>p.data),{type:parts[0].mime}); const m={id:rec,kind:'audio',exhId:parts[0].exhId,exhName:parts[0].exhName,booth:parts[0].booth,createdAt:parts[0].t,duration:Math.round(parts.length*10),mime:parts[0].mime,size:blob.size,status:'saved',recovered:true,blob}; await IDB.put('meetings',m); for(const c of parts) await IDB.del('chunks',c.k); const {blob:_b,...rest}=m; meetings.unshift(rest); toast('Recovered an interrupted recording for '+m.exhName,4000); } }catch(e){}
+  try{ const ch=await IDB.all('chunks'); const byRec={}; ch.forEach(c=>{ (byRec[c.rec]=byRec[c.rec]||[]).push(c); }); for(const rec in byRec){ if(meetings.find(m=>m.id===rec)) { for(const c of byRec[rec]) await IDB.del('chunks',c.k); continue; } const parts=byRec[rec].sort((x,y)=>x.seq-y.seq); const blob=new Blob(parts.map(p=>p.data),{type:parts[0].mime}); const m={id:rec,exhId:parts[0].exhId,exhName:parts[0].exhName,booth:parts[0].booth,createdAt:parts[0].t,duration:Math.round(parts.length*10),mime:parts[0].mime,size:blob.size,status:'saved',recovered:true,blob}; await IDB.put('meetings',m); for(const c of parts) await IDB.del('chunks',c.k); const {blob:_b,...rest}=m; meetings.unshift(rest); toast('Recovered an interrupted recording for '+m.exhName,4000); } }catch(e){}
   updateStorageInfo(); }
 async function updateStorageInfo(){ try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); const used=(e.usage||0)/1e6, quota=(e.quota||0)/1e6; $('#storageInfo').textContent=`Using ${used.toFixed(0)} MB of ${quota>1e3?(quota/1e3).toFixed(1)+' GB':quota.toFixed(0)+' MB'} available on this device.`; } }catch(e){} }
 const SET={ get(){ try{ return JSON.parse(localStorage.getItem('imts26-settings')||'{}'); }catch(e){ return {}; } }, set(v){ try{ localStorage.setItem('imts26-settings',JSON.stringify(v)); }catch(e){} } };
-// Deletes recordings, photos, minutes, stars and notes from this device. Stops any in-flight recording
-// first and clears BOTH the meetings and chunks IDB stores (the old version only cleared meetings,
-// leaving orphaned chunks that startup would misread as an interrupted recording and resurrect — EW-05).
-// Reachable from Meetings → Settings even when signed out, since guests can record too (EW-05).
-async function wipeEverything(){ let ok=true;
-  try{ if(recState){ try{ recState.cancelled=true; if(recState.mr&&recState.mr.state!=='inactive'){ recState.discard=true; recState.mr.stop(); } }catch(e){} try{ stopTracks(); }catch(e){} recState=null; $('#rec').classList.remove('open'); } }catch(e){}
-  try{ processing.clear(); }catch(e){}
-  try{ const allM=await IDB.all('meetings'); for(const m of allM) await IDB.del('meetings',m.id); }catch(e){ ok=false; }
-  try{ const allC=await IDB.all('chunks'); for(const c of allC) await IDB.del('chunks',c.k); }catch(e){ ok=false; }
-  try{ localStorage.removeItem(LS); localStorage.removeItem('imts26-settings'); }catch(e){ ok=false; }
-  return ok; }
-$('#wipeAll').onclick=async()=>{ if(!confirm('Delete ALL recordings, photos, minutes, stars and notes stored on this phone? This cannot be undone.')) return; const ok=await wipeEverything(); if(!ok){ toast('Some data could not be deleted — try again before relying on this phone being clean.',6000); return; } location.reload(); };
 
 // ================= RECORDER (offline, on-device) =================
 let recState=null;
 const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');
 function pickMime(){ const c=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/mpeg']; for(const m of c){ if(window.MediaRecorder&&MediaRecorder.isTypeSupported(m)) return m; } return ''; }
-function startRecorder(r,boothOverride){ if(!window.MediaRecorder||!navigator.mediaDevices){ toast('This browser cannot record audio. Use Chrome (Android) or Safari (iPhone).',4000); return; }
-  closeSheet(); const id='m'+Date.now().toString(36); const booth=boothOverride||(r.b[0]?r.b[0][0]:''); const bInfo=r.b.find(b=>b[0]===booth)||r.b[0]||['','']; recState={r,id,seq:0,paused:false,pausedMs:0,chunks:[],cancelled:false,starting:false,booth}; $('#recTitle').textContent=r.n; $('#recSub').textContent='Booth '+(booth||'')+' · '+(bInfo[1]||'')+' · saved on this phone only'; $('#consentChk').checked=false; $('#consentBox').style.display=''; $('#recMain').disabled=true; $('#recMain').textContent='●'; $('#recMain').classList.remove('pulse'); $('#recMain').onclick=recMainClick; $('#recPause').disabled=true; $('#recPause').textContent='⏸'; $('#recTimer').textContent='00:00'; $('#recStatus').textContent=''; $('#recLvl').style.width='0'; $('#rec').classList.add('open');
+function startRecorder(r){ if(!window.MediaRecorder||!navigator.mediaDevices){ toast('This browser cannot record audio. Use Chrome (Android) or Safari (iPhone).',4000); return; }
+  closeSheet(); const id='m'+Date.now().toString(36); recState={r,id,seq:0,paused:false,pausedMs:0,chunks:[]}; $('#recTitle').textContent=r.n; $('#recSub').textContent='Booth '+(r.b[0]?r.b[0][0]:'')+' · '+(r.b[0]?r.b[0][1]:'')+' · saved on this phone only'; $('#consentChk').checked=false; $('#consentBox').style.display=''; $('#recMain').disabled=true; $('#recMain').textContent='●'; $('#recMain').classList.remove('pulse'); $('#recMain').onclick=recMainClick; $('#recPause').disabled=true; $('#recPause').textContent='⏸'; $('#recTimer').textContent='00:00'; $('#recStatus').textContent=''; $('#recLvl').style.width='0'; $('#rec').classList.add('open');
   try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(e){} }
 $('#consentChk').addEventListener('change',e=>{ $('#recMain').disabled=!e.target.checked; });
-$('#recCancel').onclick=async()=>{ const st=recState; if(!st) return; st.cancelled=true;
-  if(st.mr&&st.mr.state!=='inactive'){ if(!confirm('Discard this recording?')){ st.cancelled=false; return; } st.discard=true; st.mr.stop(); }
-  stopTracks(); try{ const ch=await IDB.all('chunks'); for(const c of ch){ if(c.rec===st.id) await IDB.del('chunks',c.k); } }catch(e){} $('#rec').classList.remove('open'); recState=null; };
+$('#recCancel').onclick=async()=>{ if(recState&&recState.mr&&recState.mr.state!=='inactive'){ if(!confirm('Discard this recording?')) return; recState.discard=true; recState.mr.stop(); } stopTracks(); if(recState){ try{ const ch=await IDB.all('chunks'); for(const c of ch){ if(c.rec===recState.id) await IDB.del('chunks',c.k); } }catch(e){} } $('#rec').classList.remove('open'); recState=null; };
 function stopTracks(){ if(!recState) return; try{ recState.stream&&recState.stream.getTracks().forEach(t=>t.stop()); }catch(e){} try{ recState.wake&&recState.wake.release(); }catch(e){} cancelAnimationFrame(recState.raf); clearInterval(recState.timer); try{ recState.ctx&&recState.ctx.close(); }catch(e){} }
-async function recMainClick(){ const st=recState; if(!st||st.starting) return;
-  if(!st.mr){ st.starting=true;
-    try{ st.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}}); }
-    catch(e){ st.starting=false; if(!st.cancelled) $('#recStatus').textContent='Microphone blocked: '+e.message; return; }
-    if(st.cancelled){ try{ st.stream.getTracks().forEach(t=>t.stop()); }catch(e){} return; } // cancelled while permission was pending (EW-04) — never start a recorder for a dismissed dialog
+async function recMainClick(){ const st=recState; if(!st) return;
+  if(!st.mr){ try{ st.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}}); }catch(e){ $('#recStatus').textContent='Microphone blocked: '+e.message; return; }
     const mime=pickMime(); st.mime=(mime||'audio/webm'); st.mr=new MediaRecorder(st.stream, mime?{mimeType:mime,audioBitsPerSecond:48000}:undefined);
-    st.mr.ondataavailable=e=>{ if(e.data&&e.data.size){ st.chunks.push(e.data); const seq=st.seq++; IDB.put('chunks',{k:st.id+':'+String(seq).padStart(5,'0'),rec:st.id,seq,data:e.data,mime:st.mime.split(';')[0],exhId:st.r.i,exhName:st.r.n,booth:st.booth,t:st.start}).catch(()=>{}); } };
+    st.mr.ondataavailable=e=>{ if(e.data&&e.data.size){ st.chunks.push(e.data); const seq=st.seq++; IDB.put('chunks',{k:st.id+':'+String(seq).padStart(5,'0'),rec:st.id,seq,data:e.data,mime:st.mime.split(';')[0],exhId:st.r.i,exhName:st.r.n,booth:st.r.b[0]?st.r.b[0][0]:'',t:st.start}).catch(()=>{}); } };
     st.mr.onstop=()=>{ if(st.discard) return; finishRecording(st); };
-    try{ st.mr.start(10000); }catch(e){ st.starting=false; try{ st.stream.getTracks().forEach(t=>t.stop()); }catch(_e){} $('#recStatus').textContent='Could not start recording: '+e.message; return; }
-    st.start=Date.now(); st.starting=false; $('#consentBox').style.display='none'; $('#recMain').textContent='■'; $('#recMain').classList.add('pulse'); $('#recPause').disabled=false; $('#recStatus').textContent='Recording on this phone… keep the screen on. Every 10 s is saved, so nothing is lost if the phone locks.';
+    st.mr.start(10000); st.start=Date.now(); $('#consentBox').style.display='none'; $('#recMain').textContent='■'; $('#recMain').classList.add('pulse'); $('#recPause').disabled=false; $('#recStatus').textContent='Recording on this phone… keep the screen on. Every 10 s is saved, so nothing is lost if the phone locks.';
     try{ st.wake=await navigator.wakeLock.request('screen'); }catch(e){}
     try{ st.ctx=new (window.AudioContext||window.webkitAudioContext)(); const src=st.ctx.createMediaStreamSource(st.stream); st.analyser=st.ctx.createAnalyser(); st.analyser.fftSize=512; src.connect(st.analyser); const buf=new Uint8Array(st.analyser.frequencyBinCount); const tick=()=>{ st.analyser.getByteTimeDomainData(buf); let s=0; for(const v of buf){ const d=(v-128)/128; s+=d*d; } $('#recLvl').style.width=Math.min(100,Math.sqrt(s/buf.length)*300)+'%'; st.raf=requestAnimationFrame(tick); }; tick(); }catch(e){}
     st.timer=setInterval(()=>{ if(!st.paused) $('#recTimer').textContent=fmt((Date.now()-st.start-st.pausedMs)/1000); },500);
@@ -881,142 +762,20 @@ async function recMainClick(){ const st=recState; if(!st||st.starting) return;
 $('#recPause').onclick=()=>{ const st=recState; if(!st||!st.mr) return; if(st.mr.state==='recording'){ st.mr.pause(); st.paused=true; st.pauseAt=Date.now(); $('#recPause').textContent='▶'; $('#recStatus').textContent='Paused'; } else if(st.mr.state==='paused'){ st.mr.resume(); st.paused=false; st.pausedMs+=Date.now()-st.pauseAt; $('#recPause').textContent='⏸'; $('#recStatus').textContent='Recording…'; } };
 async function finishRecording(st){ stopTracks(); const dur=Math.round((Date.now()-st.start-st.pausedMs)/1000); const blob=new Blob(st.chunks,{type:st.mime.split(';')[0]}); const r=st.r;
   if(blob.size<2000){ $('#recStatus').textContent='Nothing was recorded.'; setTimeout(()=>$('#rec').classList.remove('open'),1500); return; }
-  const m={id:st.id,kind:'audio',exhId:r.i,exhName:r.n,booth:st.booth||(r.b[0]?r.b[0][0]:''),hall:r.b[0]?r.b[0][1]:'',createdAt:st.start,duration:dur,mime:st.mime.split(';')[0],size:blob.size,status:'saved',consent:true,blob};
+  const m={id:st.id,exhId:r.i,exhName:r.n,booth:r.b[0]?r.b[0][0]:'',hall:r.b[0]?r.b[0][1]:'',createdAt:st.start,duration:dur,mime:st.mime.split(';')[0],size:blob.size,status:'saved',consent:true,blob};
   try{ await IDB.put('meetings',m); try{ const ch=await IDB.all('chunks'); for(const c of ch){ if(c.rec===st.id) await IDB.del('chunks',c.k); } }catch(e){} const {blob:_b,...rest}=m; meetings.unshift(rest); setM(r.i,{v:true,vb:me,vt:Date.now()}); $('#recStatus').textContent=`Saved on this phone (${(blob.size/1e6).toFixed(1)} MB, ${fmt(dur)}). Transcribe it later from Meetings when you are on Wi-Fi.`; setTimeout(()=>{ $('#rec').classList.remove('open'); recState=null; renderAll(); },2200); updateStorageInfo(); }
   catch(e){ $('#recStatus').textContent='Could not save: '+e.message+' — use "Download audio" now.'; const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u; a.download=(r.n+'-'+m.booth).replace(/[^\w-]+/g,'_')+'.'+(m.mime.includes('mp4')?'m4a':'webm'); a.textContent='Download audio'; a.className='btn'; $('#recStatus').appendChild(a); } }
 
-// ================= CARDS & PAPER NOTES (photos, kept on the phone) =================
-const kindOf=x=>x.kind||'audio';
-const KLBL={audio:'Recording',card:'Visiting card',note:'Paper note'};
-const when=(t,o)=>new Date(t).toLocaleString('en-US',Object.assign({timeZone:'America/Chicago',weekday:'short',hour:'2-digit',minute:'2-digit'},o||{}));
-let capCtx=null;
-function captureImage(r,kind,gallery,boothOverride){ capCtx={r,kind,booth:boothOverride||(r.b[0]?r.b[0][0]:'')}; const inp=gallery?$('#capFileG'):$('#capFile'); inp.value=''; inp.click(); }
-async function onCapFile(e){ const files=[...(e.target.files||[])]; if(!files.length||!capCtx) return; const {r,kind,booth}=capCtx; const boothNo=booth||(r.b[0]?r.b[0][0]:''); const bInfo=r.b.find(b=>b[0]===boothNo)||r.b[0]||['','']; let n=0;
-  for(const f of files){ try{ const {blob,thumb,w,h}=await shrinkImage(f,1800,0.85); const id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); const m={id,kind,exhId:r.i,exhName:r.n,booth:boothNo,hall:bInfo[1]||'',createdAt:Date.now(),mime:'image/jpeg',size:blob.size,w,h,status:'saved',thumb,blob}; await IDB.put('meetings',m); const {blob:_b,...rest}=m; meetings.unshift(rest); n++; }catch(err){ toast('Could not save photo: '+(err.message||err),4000); } }
-  if(n){ setM(r.i,{v:true,vb:me,vt:Date.now()}); toast(`${n} ${kind==='card'?'card':'note'} photo${n>1?'s':''} saved on this phone — read later from Meetings`,3500); if($('#sheet').classList.contains('open')&&sheetId===r.i) openSheet(r.i); renderAll(); updateStorageInfo(); } }
-async function shrinkImage(file,max,q){ const bmp=await loadImg(file); const sc=Math.min(1,max/Math.max(bmp.width,bmp.height)); const w=Math.round(bmp.width*sc),h=Math.round(bmp.height*sc); const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(bmp,0,0,w,h); if(bmp.close) bmp.close(); const blob=await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('encode failed')),'image/jpeg',q)); const t=document.createElement('canvas'); const ts=Math.min(1,240/Math.max(w,h)); t.width=Math.round(w*ts); t.height=Math.round(h*ts); t.getContext('2d').drawImage(c,0,0,t.width,t.height); return {blob,thumb:t.toDataURL('image/jpeg',0.7),w,h}; }
-function loadImg(file){ if(window.createImageBitmap){ return createImageBitmap(file,{imageOrientation:'from-image'}).catch(()=>createImageBitmap(file)); } return new Promise((res,rej)=>{ const u=URL.createObjectURL(file); const im=new Image(); im.onload=()=>{ URL.revokeObjectURL(u); res(im); }; im.onerror=()=>{ URL.revokeObjectURL(u); rej(new Error('not an image')); }; im.src=u; }); }
-$('#capFile').addEventListener('change',onCapFile); $('#capFileG').addEventListener('change',onCapFile);
-const CARD_SCHEMA={type:'object',properties:{name:{type:'string'},title:{type:'string'},company:{type:'string'},department:{type:'string'},phones:{type:'array',items:{type:'string'}},emails:{type:'array',items:{type:'string'}},website:{type:'string'},address:{type:'string'},country:{type:'string'},linkedin:{type:'string'},products:{type:'string'},other:{type:'string'},is_card:{type:'boolean'}},required:['name','company','phones','emails','is_card']};
-const NOTE_SCHEMA={type:'object',properties:{text:{type:'string'},summary:{type:'string'},action_items:{type:'array',items:{type:'string'}},people:{type:'array',items:{type:'string'}},numbers:{type:'array',items:{type:'string'}},legibility:{type:'string'}},required:['text','summary','action_items']};
-// ---- AI gateway: own Gemini key (phone → Google) or, when an account layer is present, ExpoWalk's allowance (phone → Google with a short-lived token). Never via our server. ----
-const AI={ shared:null }; // account module registers {ready(), generate(parts,schema,opts), maxInline}
-function aiReady(){ const s=SET.get(); if(s.mode==='shared'&&AI.shared) return AI.shared.ready(); if(!s.key){ $('#settingsBox').hidden=false; return 'Paste your Gemini API key first (Meetings → Settings)'; } return null; }
-async function parseGen(r){ if(r.status===429) return {retry:true}; const j=await r.json().catch(()=>({})); if(!r.ok||j.error) throw new Error((j.error&&j.error.message)||('HTTP '+r.status)); const txt=j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts.map(p=>p.text||'').join(''); try{ return {json:JSON.parse(txt)}; }catch(e){ return {bad:true}; } }
-// fetch with retries on network drops (mobile radios, tab backgrounding). Only retries when no response came back at all.
-async function fetchRetry(url,init,tries){ let last; for(let i=0;i<(tries||3);i++){ try{ return await fetch(url,init); }catch(e){ last=e; await new Promise(r=>setTimeout(r,2500*(i+1))); } } throw last; }
-function netMsg(e){ const msg=String(e&&e.message||e); if(/Failed to fetch|NetworkError|Load failed/i.test(msg)){ return /claude\.ai$/.test(location.hostname)?'Network blocked the request to Gemini. On the claude.ai preview this is expected — use expowalk.app instead.':'Connection dropped while sending to Google. Stay on this screen with Wi-Fi or mobile data on and tap Try again.'; } return msg; }
-async function ownKeyGenerate(parts,schema,opts){ const s=SET.get(); const model=s.model||'gemini-2.5-flash'; let lastErr=null;
-  for(let attempt=0;attempt<3;attempt++){ const r=await fetchRetry(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(s.key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts}],generationConfig:{responseMimeType:'application/json',responseSchema:schema,temperature:opts&&opts.temp!=null?opts.temp:0.1}})});
-    const o=await parseGen(r); if(o.retry){ lastErr=new Error('Rate limit'); toast('Gemini free-tier rate limit, waiting 20 s…'); await new Promise(rs=>setTimeout(rs,20000*(attempt+1))); continue; } if(o.bad){ lastErr=new Error('Model returned invalid JSON'); continue; } return o.json; }
-  throw lastErr||new Error('Failed'); }
-async function aiGenerate(parts,schema,opts){ const s=SET.get(); if(s.mode==='shared'&&AI.shared) return AI.shared.generate(parts,schema,opts||{}); return ownKeyGenerate(parts,schema,opts||{}); }
-async function geminiJSON(s,parts,schema){ return ownKeyGenerate(parts,schema,{}); }
-async function processImage(id){ if(processing.has(id)){ toast('Already processing this item'); return; } const why=aiReady(); if(why){ toast(why,4000); return; } if(!navigator.onLine){ toast('You are offline — connect to Wi-Fi first'); return; }
-  const x=await IDB.get('meetings',id); if(!x||!x.blob){ toast('Photo not found on this device'); return; } processing.add(id);
-  x.status='working'; x.error=null; await IDB.put('meetings',x); syncMeta(x); renderMeet();
-  try{ const part={inline_data:{mime_type:x.mime||'image/jpeg',data:await blobToB64(x.blob)}}; const co=SET.get().company;
-    if(x.kind==='card'){ x.card=await aiGenerate([part,{text:`This photo was taken at IMTS 2026 at the booth of "${x.exhName}" (booth ${x.booth}). Extract the visiting card exactly as printed: person's name, job title, company, department, every phone number (with country code as printed), every email, website, postal address, country, LinkedIn/other handles, and any products or tag-line printed ("products"). Anything else goes in "other". Do not guess — leave a field empty if it is not on the card. If this is not a business card, set is_card=false and describe the photo in "other".`}],CARD_SCHEMA,{kind:'card',item:x.id}); }
-    else { x.note=await aiGenerate([part,{text:`This is a photo of handwritten (or printed) notes taken by a visitor at IMTS 2026 at the booth of "${x.exhName}" (booth ${x.booth}).${co?` The visitor's company: ${co}.`:''}
-1) "text": transcribe everything legible, keeping the structure (lines, bullets, arrows as "->"), and every number, unit, model name exactly; mark unreadable words as [?]. Text may mix English and Hindi — transliterate Hindi and add an English translation in brackets where it carries meaning.
-2) "summary": one to three sentences. 3) "action_items": concrete follow-ups written on the note. 4) "people" and "numbers" (prices, lead times, specs) as lists. 5) "legibility": good / partial / poor.`}],NOTE_SCHEMA,{kind:'note',item:x.id}); }
-    if(!(await IDB.get('meetings',id))){ processing.delete(id); return; } // deleted while the AI call was in flight — do not resurrect it (EW-14)
-    x.status='done'; x.processedAt=Date.now(); await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast(x.kind==='card'?'Card read: '+((x.card&&(x.card.name||x.card.company))||'no text found'):'Note read: '+x.exhName,3000); }
-  catch(e){ if(!(await IDB.get('meetings',id))){ processing.delete(id); return; } const msg=String(e.message||e); x.status='error'; x.error=netMsg(e); await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast('Failed: '+x.error,6000); }
-  processing.delete(id); }
-function processItem(id){ const x=meetings.find(m=>m.id===id); if(!x) return Promise.resolve(); return kindOf(x)==='audio'?transcribe(id):processImage(id); }
-function cardLine(c){ return [c.name,c.title,c.company,(c.phones||[]).join(' / '),(c.emails||[]).join(' / '),c.website].filter(Boolean).join(' · '); }
-function vcard(c,x){ const V=s=>String(s||'').replace(/[\\;,]/g,m=>'\\'+m).replace(/\n/g,'\\n'); const parts=(c.name||'').trim().split(/\s+/); const L=['BEGIN:VCARD','VERSION:3.0',`FN:${V(c.name)}`,`N:${V(parts.slice(-1)[0])};${V(parts.slice(0,-1).join(' '))};;;`,c.company?`ORG:${V(c.company)}${c.department?';'+V(c.department):''}`:'',c.title?`TITLE:${V(c.title)}`:'',...(c.phones||[]).map(p=>`TEL;TYPE=WORK,VOICE:${V(p)}`),...(c.emails||[]).map(e=>`EMAIL;TYPE=WORK:${V(e)}`),c.website?`URL:${V(c.website)}`:'',c.address?`ADR;TYPE=WORK:;;${V(c.address.replace(/\n/g,', '))};;;;${V(c.country)}`:'',c.linkedin?`X-SOCIALPROFILE;TYPE=linkedin:${V(c.linkedin)}`:'',`NOTE:${V('Met at IMTS 2026, booth '+x.booth+' ('+x.exhName+'), '+new Date(x.createdAt).toLocaleDateString('en-US',{timeZone:'America/Chicago',dateStyle:'medium'})+(c.products?'. '+c.products:''))}`,'END:VCARD']; return L.filter(Boolean).join('\r\n'); }
-function dlText(name,text,mime){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:mime||'text/plain'})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },2000); }
-function captureText(x){ const d=when(x.createdAt,{dateStyle:'medium',timeStyle:'short',weekday:undefined,hour:undefined,minute:undefined}); if(x.kind==='card'){ const c=x.card||{}; return `IMTS 2026 · visiting card · ${x.exhName} · booth ${x.booth} · ${d}\n${[c.name,c.title,c.company&&(c.company+(c.department?' · '+c.department:'')),...(c.phones||[]).map(p=>'Tel: '+p),...(c.emails||[]).map(e=>'Email: '+e),c.website&&('Web: '+c.website),c.address&&('Address: '+c.address+(c.country?', '+c.country:'')),c.linkedin&&('LinkedIn: '+c.linkedin),c.products,c.other].filter(Boolean).join('\n')}`; }
-  const n=x.note||{}; const L=(t,arr)=>arr&&arr.length?`\n${t}\n`+arr.map(v=>'• '+v).join('\n')+'\n':''; return `IMTS 2026 · paper note · ${x.exhName} · booth ${x.booth} · ${d}\n\nSUMMARY\n${n.summary||''}\n`+L('ACTION ITEMS',n.action_items)+L('NUMBERS / SPECS',n.numbers)+L('PEOPLE',n.people)+`\nTRANSCRIPTION\n${n.text||''}`; }
-$('#meetCsv').onclick=()=>{ const cards=meetings.filter(m=>m.kind==='card'&&m.status==='done'&&m.card); if(!cards.length){ toast('No cards read yet'); return; } const q=s=>'"'+csvSafe(s).replace(/"/g,'""')+'"';
-  const lines=[['Name','Title','Company','Department','Phones','Emails','Website','Address','Country','LinkedIn','Products','Other','Exhibitor','Booth','Hall','Scanned (Chicago)'].join(',')].concat(cards.map(x=>{ const c=x.card; return [c.name,c.title,c.company,c.department,(c.phones||[]).join(' / '),(c.emails||[]).join(' / '),c.website,c.address,c.country,c.linkedin,c.products,c.other,x.exhName,x.booth,x.hall,new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago'})].map(q).join(','); }));
-  try{ dlText('imts2026-contacts.csv','﻿'+lines.join('\r\n'),'text/csv'); toast(`${cards.length} contacts exported`); }catch(e){ navigator.clipboard.writeText(lines.join('\n')).then(()=>toast('Download blocked — CSV copied to clipboard')).catch(()=>toast('Export failed')); } };
-
-// ---- consolidated export: one row per exhibitor with any activity (stars, visit, recording, card, note) ----
-function allActivityRows(){
-  const byExh={}; meetings.forEach(m=>{ (byExh[m.exhId]=byExh[m.exhId]||[]).push(m); });
-  const rows=[];
-  R.forEach(r=>{ const m=M(r.i); const items=byExh[r.i]||[];
-    // any activity at all — including day/person/follow-up-only marks, not just star/visit/note (EW-12)
-    if(!m.s && !m.v && !m.n && !m.d && !m.a && !m.met && !m.fu && !m.nx && !items.length) return;
-    const cards=items.filter(x=>kindOf(x)==='card'&&x.card);
-    const notes=items.filter(x=>kindOf(x)==='note'&&x.note);
-    const recs=items.filter(x=>kindOf(x)==='audio'); // kindOf treats a missing kind as audio — matches legacy/recovered records (EW-11)
-    rows.push({
-      exhibitor:r.n, booth:r.b.map(b=>b[0]).join(' '), hall:r.halls.join('; '), sector:r.secs.join('; '), country:r.k,
-      stars:m.s===-1?'skip':(m.s||''), visited:m.v?'yes':'', day:m.d?DAYS.find(d=>d[0]===m.d)[1]:'', person:m.a||'',
-      planNote:m.n||'', met:m.met||'', followupPromised:m.fu||'', nextStep:m.nx||'',
-      contacts:cards.map(x=>cardLine(x.card)).join(' | '),
-      contactEmails:cards.flatMap(x=>x.card.emails||[]).join('; '),
-      contactPhones:cards.flatMap(x=>x.card.phones||[]).join('; '),
-      recordings:recs.length,
-      minutesSummary:recs.map(x=>x.minutes&&x.minutes.summary).filter(Boolean).join(' | '),
-      followups:recs.flatMap(x=>(x.minutes&&x.minutes.followups)||[]).map(f=>typeof f==='string'?f:[f.what,f.owner,f.when].filter(Boolean).join(' — ')).join(' | '),
-      paperNotes:notes.map(x=>(x.note&&(x.note.summary||short(x.note.text||'',240)))||'').filter(Boolean).join(' | '),
-    }); });
-  return rows;
-}
-function exportEverythingCsv(){ const rows=allActivityRows(); if(!rows.length){ toast('Nothing captured yet — star, visit, record or scan something first'); return; }
-  const q=s=>'"'+csvSafe(s).replace(/"/g,'""')+'"';
-  const cols=['Exhibitor','Booth','Hall','Sector','Country','Stars','Visited','Day','Person','Your note','Met (name, role)','Follow-up promised','Next step','Contacts (from cards)','Contact emails','Contact phones','Recordings','Minutes summary','Follow-ups','Paper notes'];
-  const lines=[cols.join(',')].concat(rows.map(r=>[r.exhibitor,r.booth,r.hall,r.sector,r.country,r.stars,r.visited,r.day,r.person,r.planNote,r.met,r.followupPromised,r.nextStep,r.contacts,r.contactEmails,r.contactPhones,r.recordings,r.minutesSummary,r.followups,r.paperNotes].map(q).join(',')));
-  try{ dlText('imts2026-full-export.csv','﻿'+lines.join('\r\n'),'text/csv'); toast(`${rows.length} exhibitors exported`); }
-  catch(e){ navigator.clipboard.writeText(lines.join('\n')).then(()=>toast('Download blocked — CSV copied to clipboard')).catch(()=>toast('Export failed')); } }
-function exportDashboardHtml(){ const rows=allActivityRows(); if(!rows.length){ toast('Nothing captured yet — star, visit, record or scan something first'); return; }
-  const cell=s=>esc(s||'')||'<span style="color:#b8bcc2">—</span>';
-  const tr=r=>`<tr><td data-l="Exhibitor">${esc(r.exhibitor)}</td><td data-l="Booth">${esc(r.booth)}</td><td data-l="Hall">${esc(r.hall)}</td><td data-l="Stars">${r.stars?('★'+esc(String(r.stars))):''}</td><td data-l="Visited">${r.visited?'✓':''}</td><td data-l="Day">${esc(r.day)}</td><td data-l="Person">${cell(r.person)}</td><td data-l="Met">${cell(r.met)}</td><td data-l="Follow-up promised">${cell(r.followupPromised)}</td><td data-l="Next step">${cell(r.nextStep)}</td><td data-l="Contacts">${cell(r.contacts)}</td><td data-l="Emails">${cell(r.contactEmails)}</td><td data-l="Phones">${cell(r.contactPhones)}</td><td data-l="Minutes summary">${cell(r.minutesSummary)}</td><td data-l="Follow-ups">${cell(r.followups)}</td><td data-l="Paper notes">${cell(r.paperNotes)}</td><td data-l="Your note">${cell(r.planNote)}</td></tr>`;
-  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`+
-    `<title>ExpoWalk export — ${esc(new Date().toLocaleDateString('en-US',{timeZone:'America/Chicago'}))}</title>`+
-    `<style>body{font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:24px;color:#1b2026;background:#fff}h1{font-size:20px;margin:0 0 4px}table{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:14px}th,td{border:1px solid #d8dbe0;padding:6px 8px;text-align:left;vertical-align:top;white-space:pre-wrap}th{background:#f2f3f1;position:sticky;top:0}tr:nth-child(even){background:#fafafa}.help{color:#697079;font-size:12.5px;margin:4px 0 0}@media(max-width:700px){table,thead,tbody,th,td,tr{display:block}th{display:none}td{border:none;border-bottom:1px solid #e6e8ea;padding:4px 0}tr{padding:10px 0;border-bottom:2px solid #d8dbe0}td:before{content:attr(data-l) ": ";font-weight:600;color:#525963}}</style>`+
-    `</head><body><h1>ExpoWalk — IMTS 2026 export</h1><p class="help">Built on this device from your own data on ${esc(new Date().toLocaleString('en-US',{timeZone:'America/Chicago'}))} (Chicago time). Nothing here was ever sent to ExpoWalk's server. ${rows.length} exhibitor${rows.length===1?'':'s'} with activity.</p>`+
-    `<table><thead><tr><th>Exhibitor</th><th>Booth</th><th>Hall</th><th>Stars</th><th>Visited</th><th>Day</th><th>Person</th><th>Met</th><th>Follow-up promised</th><th>Next step</th><th>Contacts</th><th>Emails</th><th>Phones</th><th>Minutes summary</th><th>Follow-ups</th><th>Paper notes</th><th>Your note</th></tr></thead>`+
-    `<tbody>${rows.map(tr).join('')}</tbody></table></body></html>`;
-  try{ dlText('imts2026-dashboard.html',html,'text/html'); toast('Dashboard downloaded — open it in any browser'); }
-  catch(e){ toast('Export failed: '+(e.message||e)); } }
-$('#exportAll').addEventListener('click',exportEverythingCsv);
-$('#exportDash').addEventListener('click',exportDashboardHtml);
-
 // ================= MEETINGS =================
-function itemRowHTML(x,inSheet){ const k=kindOf(x); const st=`<span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span>`; const err=x.error?'<span style="color:var(--accent)">'+esc(x.error)+'</span>':'';
-  if(k==='audio') return `<div class="mrow" data-rec="${x.id}"><div><div class="mt">🎙 ${inSheet?'':esc(x.exhName||'')+' '}<span class="help">Recording · ${fmt(x.duration||0)} · ${((x.size||0)/1e6).toFixed(1)} MB${x.recovered?' · recovered':''}</span></div><div class="ms">${when(x.createdAt)}${x.minutes&&x.minutes.summary?' · '+esc(short(x.minutes.summary,160)):(err?' · '+err:'')}</div></div>${st}</div>`;
-  const desc=k==='card'?(x.card?(esc([x.card.name,x.card.title,x.card.company].filter(Boolean).join(' · '))||'no text found'):'not read yet'):(x.note?esc(short(x.note.summary||x.note.text||'',160)):'not read yet');
-  return `<div class="mrow cap" data-rec="${x.id}"><img class="th" src="${x.thumb||''}" alt=""><div><div class="mt">${k==='card'?'📇':'📝'} ${inSheet?'':esc(x.exhName||'')+' '}<span class="help">${KLBL[k]}</span></div><div class="ms">${when(x.createdAt)} · ${err||desc}</div></div>${st}</div>`; }
-function meetListHTML(list){ if(!list.length) return ''; return `<div style="margin-top:8px"><span class="lbl">Saved here (on this phone)</span>`+list.map(x=>itemRowHTML(x,true)).join('')+'</div>'; }
-function renderMeet(){ const s=SET.get(); $('#setKey').value=s.key||''; $('#setModel').value=s.model||'gemini-2.5-flash'; $('#setCo').value=s.company||''; $('#setMail').value=s.mail||''; if(!s.key&&!(s.mode==='shared'&&AI.shared)) $('#settingsBox').hidden=false; if(AI.shared&&AI.shared.renderSettings) AI.shared.renderSettings();
-  const pend=meetings.filter(m=>m.status!=='done').length; const cnt=k=>meetings.filter(m=>kindOf(m)===k).length; const na=cnt('audio'),nc=cnt('card'),nn=cnt('note');
-  $('#meetCnt').textContent=meetings.length?`· ${na} recording${na!==1?'s':''}, ${nc} card${nc!==1?'s':''}, ${nn} note${nn!==1?'s':''}${pend?` · ${pend} to process`:''}`:''; $('#meetAll').disabled=!pend; $('#meetCsv').disabled=!meetings.some(m=>m.kind==='card'&&m.status==='done');
-  const groups=[], gi={}; meetings.forEach(x=>{ let g=gi[x.exhId]; if(!g){ g=gi[x.exhId]={exhId:x.exhId,name:x.exhName,booth:x.booth,hall:x.hall,items:[],last:0}; groups.push(g); } g.items.push(x); g.last=Math.max(g.last,x.createdAt||0); }); groups.sort((a,b)=>b.last-a.last);
-  $('#meetList').innerHTML=groups.map(g=>`<div class="mgrp"><div class="mgh"><b data-exh="${esc(g.exhId)}">${esc(g.name||'')}</b> <span class="help">booth ${esc(g.booth||'')} · ${esc((g.hall||'').replace(' Building, Level',' L'))} · ${g.items.length} item${g.items.length>1?'s':''}</span></div>${g.items.map(x=>itemRowHTML(x,true)).join('')}</div>`).join('')||'<div class="empty">Nothing saved yet. Open an exhibitor and use Record conversation, Scan card or Photo note.</div>'; updateStorageInfo(); }
+function meetListHTML(list){ if(!list.length) return ''; return `<div style="margin-top:8px"><span class="lbl">Meetings recorded here (on this phone)</span>`+list.map(x=>`<div class="mrow" data-rec="${x.id}"><div><div class="mt">${new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})} · ${fmt(x.duration||0)}</div><div class="ms">${x.minutes&&x.minutes.summary?esc(x.minutes.summary.slice(0,140))+(x.minutes.summary.length>140?'…':''):(x.error?esc(x.error):'Not transcribed yet')}</div></div><span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span></div>`).join('')+'</div>'; }
+function renderMeet(){ const s=SET.get(); $('#setKey').value=s.key||''; $('#setModel').value=s.model||'gemini-2.5-flash'; $('#setCo').value=s.company||''; $('#setMail').value=s.mail||''; if(!s.key) $('#settingsBox').hidden=false;
+  const pend=meetings.filter(m=>m.status!=='done').length; $('#meetCnt').textContent=meetings.length?`· ${meetings.length} recorded, ${pend} to transcribe`:''; $('#meetAll').disabled=!pend;
+  $('#meetList').innerHTML=meetings.map(x=>`<div class="mrow" data-rec="${x.id}"><div><div class="mt">${esc(x.exhName||'')} <span class="help">· booth ${esc(x.booth||'')}</span></div><div class="ms">${new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago',weekday:'short',hour:'2-digit',minute:'2-digit'})} · ${fmt(x.duration||0)} · ${((x.size||0)/1e6).toFixed(1)} MB${x.recovered?' · recovered':''}</div><div class="ms">${x.minutes&&x.minutes.summary?esc(x.minutes.summary.slice(0,180))+(x.minutes.summary.length>180?'…':''):(x.error?'<span style="color:var(--accent)">'+esc(x.error)+'</span>':'')}</div></div><span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span></div>`).join('')||'<div class="empty">No meetings recorded yet. Open an exhibitor and press "Record conversation".</div>'; updateStorageInfo(); }
 $('#meetSettings').onclick=()=>{ $('#settingsBox').hidden=!$('#settingsBox').hidden; };
-$('#setSave').onclick=()=>{ SET.set(Object.assign(SET.get(),{key:$('#setKey').value.trim(),model:$('#setModel').value.trim()||'gemini-2.5-flash',company:$('#setCo').value.trim(),mail:$('#setMail').value.trim()})); $('#setMsg').textContent='Saved on this device.'; setTimeout(()=>$('#setMsg').textContent='',2000); renderMeet(); };
-$('#meetList').addEventListener('click',e=>{ const ex=e.target.closest('[data-exh]'); if(ex){ openSheet(ex.dataset.exh); return; } const d=e.target.closest('[data-rec]'); if(d) openMeeting(d.dataset.rec); });
-$('#meetAll').onclick=async()=>{ const pend=meetings.filter(m=>m.status!=='done'); const why=aiReady(); if(why){ toast(why,4000); return; } if(!navigator.onLine){ toast('You are offline — connect to Wi-Fi first'); return; } if(!confirm(`Process ${pend.length} item${pend.length>1?'s':''} now? Audio and photos go from this phone straight to Google Gemini — never through ExpoWalk.`)) return; let wl=null; try{ if(navigator.wakeLock) wl=await navigator.wakeLock.request('screen'); }catch(e){}
-  let okN=0, failN=0;
-  try{ for(const m of pend){ await processItem(m.id); await new Promise(r=>setTimeout(r,kindOf(m)==='audio'?7000:2500));
-      const cur=meetings.find(y=>y.id===m.id); if(cur&&cur.status==='done') okN++; else failN++; }
-    // Report what actually happened rather than a blanket 'All done' regardless of outcome — a failed item
-    // (offline mid-batch, a Google quota error, invalid model JSON) previously reported success alongside
-    // real successes with no way to tell which items still need a retry (EW-23).
-    toast(failN?`${okN} processed, ${failN} failed — open Meetings to retry the failed item${failN>1?'s':''}`:`All ${okN} processed`,failN?6000:3000);
-  } finally{ if(wl) wl.release().catch(()=>{}); } };
-function openCapture(x){ const k=x.kind, c=x.card||{}, n=x.note||{}; const list=(arr,f)=>(arr&&arr.length)?'<ul>'+arr.map(v=>`<li>${f?f(v):esc(v)}</li>`).join('')+'</ul>':'<p class="help">—</p>';
-  const body=x.status==='done'?(k==='card'?`<div class="contact">${c.is_card===false?'<p class="help">Not recognised as a visiting card. '+esc(c.other||'')+'</p>':''}<b>${esc(c.name||'')}</b>${c.title?'<br>'+esc(c.title):''}${c.company?'<br>'+esc(c.company)+(c.department?' · '+esc(c.department):''):''}${(c.phones||[]).map(p=>`<br>📞 <a href="tel:${esc(String(p).replace(/[^+\d]/g,''))}">${esc(p)}</a>`).join('')}${(c.emails||[]).map(p=>`<br>✉ <a href="mailto:${esc(p)}">${esc(p)}</a>`).join('')}${c.website?'<br>🌐 '+esc(c.website):''}${c.address?'<br>📍 '+esc(c.address)+(c.country?', '+esc(c.country):''):''}${c.linkedin?'<br>in: '+esc(c.linkedin):''}${c.products?'<br><span class="help">'+esc(c.products)+'</span>':''}${c.other&&c.is_card!==false?'<br><span class="help">'+esc(c.other)+'</span>':''}</div>`
-    :`<div class="minutes"><h2>Summary</h2><p>${esc(n.summary||'')}</p><h2>Action items</h2>${list(n.action_items)}${n.numbers&&n.numbers.length?'<h2>Numbers / specs</h2>'+list(n.numbers):''}${n.people&&n.people.length?'<h2>People</h2>'+list(n.people):''}<h2>Transcription${n.legibility?' · '+esc(n.legibility):''}</h2><div class="tx" style="white-space:pre-wrap">${esc(n.text||'')}</div></div>`)
-    :x.status==='error'?`<p style="color:var(--accent)">${esc(x.error||'Failed')}</p>`:x.status==='working'?`<p class="help">Reading… a few seconds.</p>`:`<p class="help">Saved on this phone. Read it when you are on Wi-Fi — it needs your Gemini key (Meetings → Settings).</p>`;
-  $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose" aria-label="Close">×</button><h2>${esc(x.exhName||'')}</h2><div class="help">${KLBL[k]} · booth ${esc(x.booth||'')} · ${when(x.createdAt,{dateStyle:'medium',timeStyle:'short',weekday:undefined,hour:undefined,minute:undefined})} Chicago · ${((x.size||0)/1e6).toFixed(1)} MB · <span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span></div>
-    <div class="actions" style="margin:10px 0"><button class="btn sm" id="mOpenExh">Open exhibitor</button>${x.status!=='done'?`<button class="btn sm primary" id="mTx">${x.status==='error'?'↻ Try again':'Read with AI now'}</button>`:`${k==='card'?'<button class="btn sm primary" id="mVcf">Save to contacts</button>':''}<button class="btn sm" id="mShare">Share</button><button class="btn sm" id="mCopy">Copy text</button><button class="btn sm" id="mTx">↻ Read again</button>`}<button class="btn sm" id="mImg">Download photo</button><button class="btn sm" id="mDel">Delete</button></div>
-    <div class="capgrid"><img id="capImg" alt=""></div>${body}`;
-  $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet; if(x.blob) setObjUrl($('#capImg'),x.blob);
-  $('#mOpenExh').onclick=()=>openSheet(x.exhId);
-  $('#mImg').onclick=()=>{ if(x.blob){ const dlUrl=URL.createObjectURL(x.blob); const a=document.createElement('a'); a.href=dlUrl; a.download=(x.exhName+'-'+x.booth+'-'+k+'-'+new Date(x.createdAt).toISOString().slice(0,16)).replace(/[^\w-]+/g,'_')+'.jpg'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(dlUrl),2000); } };
-  $('#mDel').onclick=async()=>{ if(!confirm('Delete this photo and its text from this phone?')) return; await IDB.del('meetings',x.id); meetings=meetings.filter(y=>y.id!==x.id); closeSheet(); renderAll(); if(cur==='meet') renderMeet(); updateStorageInfo(); };
-  const tx=$('#mTx'); if(tx) tx.onclick=async()=>{ tx.disabled=true; await processImage(x.id); openMeeting(x.id); };
-  const vc=$('#mVcf'); if(vc) vc.onclick=()=>dlText(((c.name||c.company||'contact')+'').replace(/[^\w-]+/g,'_')+'.vcf',vcard(c,x),'text/vcard');
-  const sh=$('#mShare'); if(sh) sh.onclick=async()=>{ const text=captureText(x); if(navigator.share){ try{ await navigator.share({title:`IMTS · ${x.exhName} · ${KLBL[k]}`,text}); return; }catch(e){ if(e.name==='AbortError') return; } } location.href=`mailto:${encodeURIComponent(SET.get().mail||'')}?subject=${encodeURIComponent('IMTS · '+x.exhName+' · '+KLBL[k])}&body=${encodeURIComponent(text)}`; };
-  const cp=$('#mCopy'); if(cp) cp.onclick=async()=>{ try{ await navigator.clipboard.writeText(captureText(x)); toast('Copied'); }catch(e){ toast('Clipboard blocked'); } }; }
-async function openMeeting(id){ const x=await IDB.get('meetings',id); if(!x){ toast('Recording not found on this device'); return; } if(kindOf(x)!=='audio') return openCapture(x); const m=x.minutes||{}; const list=(arr,f)=>(arr&&arr.length)?'<ul>'+arr.map(v=>`<li>${f?f(v):esc(v)}</li>`).join('')+'</ul>':'<p class="help">—</p>';
+$('#setSave').onclick=()=>{ SET.set({key:$('#setKey').value.trim(),model:$('#setModel').value.trim()||'gemini-2.5-flash',company:$('#setCo').value.trim(),mail:$('#setMail').value.trim()}); $('#setMsg').textContent='Saved on this device.'; setTimeout(()=>$('#setMsg').textContent='',2000); renderMeet(); };
+$('#meetList').addEventListener('click',e=>{ const d=e.target.closest('[data-rec]'); if(d) openMeeting(d.dataset.rec); });
+$('#meetAll').onclick=async()=>{ const pend=meetings.filter(m=>m.status!=='done'); if(!SET.get().key){ $('#settingsBox').hidden=false; toast('Paste your Gemini API key first (Settings)'); return; } if(!navigator.onLine){ toast('You are offline — connect to Wi-Fi first'); return; } if(!confirm(`Transcribe ${pend.length} recording${pend.length>1?'s':''} now? Audio is sent from this phone to Google Gemini under your key.`)) return; for(const m of pend){ await transcribe(m.id); await new Promise(r=>setTimeout(r,7000)); } toast('All done'); };
+async function openMeeting(id){ const x=await IDB.get('meetings',id); if(!x){ toast('Recording not found on this device'); return; } const m=x.minutes||{}; const list=(arr,f)=>(arr&&arr.length)?'<ul>'+arr.map(v=>`<li>${f?f(v):esc(v)}</li>`).join('')+'</ul>':'<p class="help">—</p>';
   const ext=x.mime&&x.mime.includes('mp4')?'m4a':x.mime&&x.mime.includes('ogg')?'ogg':x.mime&&x.mime.includes('mpeg')?'mp3':'webm';
   $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose" aria-label="Close">×</button><h2>${esc(x.exhName||'')}</h2><div class="help">Booth ${esc(x.booth||'')} · ${new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago',dateStyle:'medium',timeStyle:'short'})} Chicago · ${fmt(x.duration||0)} · ${((x.size||0)/1e6).toFixed(1)} MB · <span class="st ${x.status}">${x.status==='saved'?'on phone':x.status}</span></div>
     <div class="actions" style="margin:10px 0"><button class="btn sm" id="mOpenExh">Open exhibitor</button>${x.status!=='done'?`<button class="btn sm primary" id="mTx">${x.status==='error'?'↻ Try again':'Transcribe now'}</button>`:`<button class="btn sm primary" id="mShare">Share / email minutes</button><button class="btn sm" id="mCopy">Copy minutes</button><button class="btn sm" id="mTx">↻ Re-transcribe</button>`}<button class="btn sm" id="mAudio">Download audio</button><button class="btn sm" id="mDel">Delete</button></div>
@@ -1024,15 +783,14 @@ async function openMeeting(id){ const x=await IDB.get('meetings',id); if(!x){ to
     ${x.status==='done'?`<div class="minutes"><h2>Summary</h2><p>${esc(m.summary||'')}</p><h2>People met</h2>${list(m.participants,p=>esc(typeof p==='string'?p:[p.name,p.role,p.company].filter(Boolean).join(' — ')))}<h2>Products / technology</h2>${list(m.products)}<h2>Commercial points</h2>${list(m.commercial)}<h2>They committed to</h2>${list(m.commitments_theirs)}<h2>We committed to</h2>${list(m.commitments_ours)}<h2>Follow-ups</h2>${list(m.followups,f=>esc(typeof f==='string'?f:`${f.what}${f.owner?' — '+f.owner:''}${f.when?' ('+f.when+')':''}`))}<h2>Open questions</h2>${list(m.questions_next)}${m.fit?`<h2>Relevance to us</h2><p>${esc(m.fit)}</p>`:''}<h2>Transcript${m.language?' · '+esc(m.language):''}</h2><div class="tx">${(x.transcript||[]).map(l=>`<div><span class="help">${esc(l.t)}</span> <b>${esc(l.speaker)}:</b> ${esc(l.text)}</div>`).join('')||'—'}</div></div>`
       :x.status==='error'?`<p style="color:var(--accent)">${esc(x.error||'Failed')}</p>`:x.status==='working'?`<p class="help">Transcribing… usually under a minute per 10 minutes of audio.</p>`:`<p class="help">Saved on this phone. Transcribe when you are on Wi-Fi — it needs your Gemini key (Meetings → Settings).</p>`}`;
   $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet;
-  if(x.blob) setObjUrl($('#mPlayer'),x.blob);
+  if(x.blob){ const u=URL.createObjectURL(x.blob); $('#mPlayer').src=u; }
   $('#mOpenExh').onclick=()=>openSheet(x.exhId);
-  $('#mAudio').onclick=()=>{ if(!x.blob) return; const dlUrl=URL.createObjectURL(x.blob); const a=document.createElement('a'); a.href=dlUrl; a.download=(x.exhName+'-'+x.booth+'-'+new Date(x.createdAt).toISOString().slice(0,16)).replace(/[^\w-]+/g,'_')+'.'+ext; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(dlUrl),2000); };
-  $('#mDel').onclick=async()=>{ if(!confirm('Delete this recording and its minutes from this phone?')) return; await IDB.del('meetings',x.id); meetings=meetings.filter(y=>y.id!==x.id); closeSheet(); renderAll(); if(cur==='meet') renderMeet(); updateStorageInfo(); };
+  $('#mAudio').onclick=()=>{ if(!x.blob) return; const u=URL.createObjectURL(x.blob); const a=document.createElement('a'); a.href=u; a.download=(x.exhName+'-'+x.booth+'-'+new Date(x.createdAt).toISOString().slice(0,16)).replace(/[^\w-]+/g,'_')+'.'+ext; document.body.appendChild(a); a.click(); a.remove(); };
+  $('#mDel').onclick=async()=>{ if(!confirm('Delete this recording and its minutes from this phone?')) return; await IDB.del('meetings',x.id); meetings=meetings.filter(y=>y.id!==x.id); closeSheet(); renderAll(); updateStorageInfo(); };
   const tx=$('#mTx'); if(tx) tx.onclick=async()=>{ tx.disabled=true; await transcribe(x.id); openMeeting(x.id); };
   const sh=$('#mShare'); if(sh) sh.onclick=()=>shareMinutes(x);
   const cp=$('#mCopy'); if(cp) cp.onclick=async()=>{ try{ await navigator.clipboard.writeText(minutesText(x)); toast('Minutes copied'); }catch(e){ toast('Clipboard blocked'); } }; }
-function minutesText(x){ const m=x.minutes||{}; const L=(t,arr,f)=>arr&&arr.length?`\n${t}\n`+arr.map(v=>'• '+(f?f(v):v)).join('\n')+'\n':''; return `IMTS 2026 · ${x.exhName} · booth ${x.booth}\n${new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago'})} Chicago · ${fmt(x.duration||0)}\n\nSUMMARY\n${m.summary||''}\n`+L('PEOPLE MET',m.participants,p=>typeof p==='string'?p:[p.name,p.role,p.company].filter(Boolean).join(' — '))+L('PRODUCTS / TECHNOLOGY',m.products)+L('COMMERCIAL POINTS',m.commercial)+L('THEY COMMITTED TO',m.commitments_theirs)+L('WE COMMITTED TO',m.commitments_ours)+L('FOLLOW-UPS',m.followups,f=>typeof f==='string'?f:`${f.what}${f.owner?' — '+f.owner:''}${f.when?' ('+f.when+')':''}`)+L('OPEN QUESTIONS',m.questions_next)+(m.fit?`\nRELEVANCE\n${m.fit}\n`:'')+relatedText(x)+`\nTRANSCRIPT\n`+(x.transcript||[]).map(l=>`[${l.t}] ${l.speaker}: ${l.text}`).join('\n'); }
-function relatedText(x){ const cards=meetings.filter(y=>y.exhId===x.exhId&&y.kind==='card'&&y.status==='done'&&y.card), notes=meetings.filter(y=>y.exhId===x.exhId&&y.kind==='note'&&y.status==='done'&&y.note); let t=''; if(cards.length) t+='\nCONTACTS (scanned cards)\n'+cards.map(y=>'• '+cardLine(y.card)).join('\n')+'\n'; if(notes.length) t+='\nPAPER NOTES\n'+notes.map(y=>'• '+(y.note.summary||'')+(y.note.action_items&&y.note.action_items.length?' — actions: '+y.note.action_items.join('; '):'')).join('\n')+'\n'; return t; }
+function minutesText(x){ const m=x.minutes||{}; const L=(t,arr,f)=>arr&&arr.length?`\n${t}\n`+arr.map(v=>'• '+(f?f(v):v)).join('\n')+'\n':''; return `IMTS 2026 · ${x.exhName} · booth ${x.booth}\n${new Date(x.createdAt).toLocaleString('en-US',{timeZone:'America/Chicago'})} Chicago · ${fmt(x.duration||0)}\n\nSUMMARY\n${m.summary||''}\n`+L('PEOPLE MET',m.participants,p=>typeof p==='string'?p:[p.name,p.role,p.company].filter(Boolean).join(' — '))+L('PRODUCTS / TECHNOLOGY',m.products)+L('COMMERCIAL POINTS',m.commercial)+L('THEY COMMITTED TO',m.commitments_theirs)+L('WE COMMITTED TO',m.commitments_ours)+L('FOLLOW-UPS',m.followups,f=>typeof f==='string'?f:`${f.what}${f.owner?' — '+f.owner:''}${f.when?' ('+f.when+')':''}`)+L('OPEN QUESTIONS',m.questions_next)+(m.fit?`\nRELEVANCE\n${m.fit}\n`:'')+`\nTRANSCRIPT\n`+(x.transcript||[]).map(l=>`[${l.t}] ${l.speaker}: ${l.text}`).join('\n'); }
 async function shareMinutes(x){ const text=minutesText(x); const subject=`IMTS minutes · ${x.exhName} · booth ${x.booth}`; const mail=SET.get().mail||'';
   if(navigator.share){ try{ await navigator.share({title:subject,text}); return; }catch(e){ if(e.name==='AbortError') return; } }
   const body=text.length>1800?text.slice(0,1800)+'\n\n(Transcript truncated for email — use Copy minutes for the full text.)':text; location.href=`mailto:${encodeURIComponent(mail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }
@@ -1051,204 +809,22 @@ async function geminiUploadFile(key,blob,mime){ // Files API resumable upload (f
   const up=await fetch(url,{method:'POST',headers:{'X-Goog-Upload-Offset':'0','X-Goog-Upload-Command':'upload, finalize','Content-Type':mime},body:blob}); if(!up.ok) throw new Error('Upload failed: '+up.status); let f=(await up.json()).file;
   const t0=Date.now(); while(f.state==='PROCESSING'&&Date.now()-t0<240000){ await new Promise(r=>setTimeout(r,2500)); f=await (await fetch(`https://generativelanguage.googleapis.com/v1beta/${f.name}?key=${encodeURIComponent(key)}`)).json(); }
   if(f.state!=='ACTIVE') throw new Error('Gemini could not process the audio'); return f; }
-// Files uploaded via the Files API above sit on Google's servers (default ~48h TTL) until deleted or expired.
-// Best-effort delete right after use so a recording doesn't linger there longer than the single request needs (EW-22).
-async function geminiDeleteFile(key,name){ try{ await fetch(`https://generativelanguage.googleapis.com/v1beta/${name}?key=${encodeURIComponent(key)}`,{method:'DELETE'}); }catch(e){} }
-async function transcribe(id){ if(processing.has(id)){ toast('Already processing this item'); return; } const why=aiReady(); if(why){ toast(why,4000); return; } if(!navigator.onLine){ toast('You are offline — connect to Wi-Fi first'); return; } const s=SET.get();
-  const x=await IDB.get('meetings',id); if(!x||!x.blob){ toast('Audio not found on this device'); return; } processing.add(id);
-  x.status='working'; x.error=null; await IDB.put('meetings',x); syncMeta(x); renderMeet();
-  let uploadedFile=null;
-  try{ const mime=x.mime||'audio/webm'; let part; const shared=s.mode==='shared'&&AI.shared; const maxInline=shared?(AI.shared.maxInline||19e6):15e6;
-    if(x.blob.size<maxInline){ part={inline_data:{mime_type:mime,data:await blobToB64(x.blob)}}; }
-    else if(shared){ throw new Error(`This recording (${(x.blob.size/1e6).toFixed(0)} MB) is too long for the free allowance — switch Settings to your own Gemini key for this one.`); }
-    else { const f=await geminiUploadFile(s.key,x.blob,mime); uploadedFile=f; part={file_data:{mime_type:f.mimeType||mime,file_uri:f.uri}}; }
-    const json=await aiGenerate([part,{text:txPrompt(x)}],SCHEMA,{kind:'audio',item:x.id,seconds:x.duration||0,temp:0.2});
-    if(!(await IDB.get('meetings',id))){ processing.delete(id); return; } // deleted while the AI call was in flight — do not resurrect it (EW-14)
-    x.transcript=json.transcript||[]; x.minutes=Object.assign({language:json.language||''},json.minutes||{}); x.status='done'; x.processedAt=Date.now(); await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast('Minutes ready: '+x.exhName,3500); if(AI.shared&&AI.shared.onDone) AI.shared.onDone(x).catch(()=>{}); }
-  catch(e){ if(!(await IDB.get('meetings',id))){ processing.delete(id); return; } const msg=String(e.message||e); x.status='error'; x.error=netMsg(e); await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast('Transcription failed: '+x.error,6000); }
-  finally{ if(uploadedFile) geminiDeleteFile(s.key,uploadedFile.name).catch(()=>{}); }
-  processing.delete(id); }
+async function transcribe(id){ const s=SET.get(); if(!s.key){ $('#settingsBox').hidden=false; toast('Paste your Gemini API key first (Meetings → Settings)'); return; } if(!navigator.onLine){ toast('You are offline — connect to Wi-Fi first'); return; }
+  const x=await IDB.get('meetings',id); if(!x||!x.blob){ toast('Audio not found on this device'); return; } x.status='working'; x.error=null; await IDB.put('meetings',x); syncMeta(x); renderMeet();
+  try{ const model=s.model||'gemini-2.5-flash'; const mime=x.mime||'audio/webm'; let part;
+    if(x.blob.size<15e6){ part={inline_data:{mime_type:mime,data:await blobToB64(x.blob)}}; } else { const f=await geminiUploadFile(s.key,x.blob,mime); part={file_data:{mime_type:f.mimeType||mime,file_uri:f.uri}}; }
+    let json=null, lastErr=null;
+    for(let attempt=0;attempt<3&&!json;attempt++){ const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(s.key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[part,{text:txPrompt(x)}]}],generationConfig:{responseMimeType:'application/json',responseSchema:SCHEMA,temperature:0.2}})});
+      if(r.status===429){ lastErr=new Error('Rate limit — waiting'); toast('Gemini free-tier rate limit, waiting 20 s…'); await new Promise(rs=>setTimeout(rs,20000*(attempt+1))); continue; }
+      const j=await r.json(); if(!r.ok||j.error){ throw new Error((j.error&&j.error.message)||('HTTP '+r.status)); }
+      const txt=j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts.map(p=>p.text||'').join(''); try{ json=JSON.parse(txt); }catch(e){ lastErr=new Error('Model returned invalid JSON'); } }
+    if(!json) throw lastErr||new Error('Transcription failed');
+    x.transcript=json.transcript||[]; x.minutes=Object.assign({language:json.language||''},json.minutes||{}); x.status='done'; x.processedAt=Date.now(); await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast('Minutes ready: '+x.exhName,3500); }
+  catch(e){ const msg=String(e.message||e); x.status='error'; x.error=/Failed to fetch|NetworkError|blocked/i.test(msg)?'Network blocked the request to Gemini. On the claude.ai preview this is expected — use the hosted version, or download the audio.':msg; await IDB.put('meetings',x); syncMeta(x); renderMeet(); toast('Transcription failed: '+x.error,6000); } }
 function syncMeta(x){ const {blob,...rest}=x; const i=meetings.findIndex(m=>m.id===x.id); if(i>=0) meetings[i]=rest; else meetings.unshift(rest); }
-
-// ================= PRINT PACK (A4 paper fallback) =================
-const PP={mapW:200,mapH:174,dpi:240}; // mm, mm, dots per inch
-const PCOL={5:'#D9481C',4:'#E8892B',3:'#D4A72C',2:'#2E9E8F',1:'#4E7FC9'};
-function openPrintOptions(){ const n=R.filter(r=>M(r.i).s>=1).length; const dayOpts='<option value="">All days</option>'+DAYS.map(d=>`<option value="${d[0]}">${d[1]}</option>`).join('');
-  $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose" aria-label="Close">×</button><h2>Print pack (A4)</h2>
-    <p class="help" style="color:var(--ink2)">Paper backup for when the battery or the network dies: a checklist of every stop, then per hall an overview sheet and A4 map sheets with your starred booths coloured and numbered, each with a legend (11 pt) and a tick box per stop. Builds in the browser; then Print or Save as PDF. <b>${n}</b> exhibitor${n!==1?'s':''} starred so far.</p>
-    <div class="grid"><div><span class="lbl">Include</span><select class="sel" id="ppMin"><option value="1">★1 and up (all starred)</option><option value="2">★2 and up</option><option value="3">★3 and up</option><option value="4">★4 and up</option><option value="5">★5 only</option></select></div>
-      <div><span class="lbl">Day</span><select class="sel" id="ppDay">${dayOpts}</select></div>
-      <div><span class="lbl">Map detail</span><select class="sel" id="ppScale"><option value="0.7">Normal · 0.7 mm per ft (fewer sheets)</option><option value="1">Large · 1 mm per ft (more booth numbers)</option></select></div>
-      <div><span class="lbl">Other booth numbers</span><select class="sel" id="ppNums"><option value="1">Show where they fit</option><option value="0">Hide (cleaner)</option></select></div></div>
-    <div class="actions"><button class="btn primary" id="ppBuild" ${n?'':'disabled'}>Build sheets</button></div><p class="help" id="ppInfo" style="margin-top:8px">${n?'':'Star some exhibitors first (Explore → ★).'}</p>`;
-  $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet;
-  $('#ppBuild').onclick=()=>{ const o={min:+$('#ppMin').value,day:$('#ppDay').value,mmft:+$('#ppScale').value,nums:$('#ppNums').value==='1'}; closeSheet(); buildPrintPack(o).catch(e=>toast('Print pack failed: '+(e.message||e),5000)); }; }
-$('#printBtn').onclick=openPrintOptions;
-function ppTargets(o){ const byHall={}; R.forEach(r=>{ const m=M(r.i); if(!(m.s>=1&&m.s>=o.min)) return; if(o.day&&m.d!==o.day) return; r.b.forEach(b=>{ const bo=BOOTH[b[0]]; if(!bo) return; const hb=byHall[bo.h]=byHall[bo.h]||{}; const e=hb[b[0]]=hb[b[0]]||{booth:b[0],bo,recs:[],s:0}; e.recs.push({r,m}); e.s=Math.max(e.s,m.s); }); }); return byHall; }
-function ppTiles(items,mmft){ const u=mmft/12; const tw=PP.mapW/u, th=PP.mapH/u; let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9; items.forEach(it=>it.bo.ring.forEach(p=>{ if(p[0]<minx)minx=p[0]; if(p[0]>maxx)maxx=p[0]; if(p[1]<miny)miny=p[1]; if(p[1]>maxy)maxy=p[1]; }));
-  const pad=150; minx-=pad; maxx+=pad; miny-=pad; maxy+=pad;
-  // try a few grid offsets and keep the one that needs the fewest sheets
-  let best=null; for(let fx=0;fx<4;fx++) for(let fy=0;fy<4;fy++){ const ox=minx-fx*tw/4, oy=miny-fy*th/4; const cols=Math.max(1,Math.ceil((maxx-ox)/tw)), rows=Math.max(1,Math.ceil((maxy-oy)/th)); const tiles=[];
-    for(let r=rows-1;r>=0;r--) for(let c=0;c<cols;c++){ const x0=ox+c*tw,y0=oy+r*th,x1=x0+tw,y1=y0+th; const inside=items.filter(it=>it.bo.cx>=x0&&it.bo.cx<x1&&it.bo.cy>=y0&&it.bo.cy<y1); if(!inside.length) continue; inside.sort((a,b)=>(Math.floor((y1-a.bo.cy)/300)-Math.floor((y1-b.bo.cy)/300))||(a.bo.cx-b.bo.cx)); tiles.push({x0,y0,x1,y1,items:inside}); }
-    if(!best||tiles.length<best.length) best=tiles; }
-  return best; }
-function ppCanvas(wmm,hmm){ const px=PP.dpi/25.4; const c=document.createElement('canvas'); c.width=Math.round(wmm*px); c.height=Math.round(hmm*px); const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); return [c,x,px]; }
-function ppNorth(x,h,X,Y,px){ const A=H[h].A; const ang=Math.atan2(A[4],A[3]); const mm=v=>v*px; x.save(); x.translate(X,Y); x.rotate(-ang+Math.PI/2); x.fillStyle='#fff'; x.beginPath(); x.arc(0,0,mm(5),0,Math.PI*2); x.fill(); x.strokeStyle='#333'; x.lineWidth=mm(0.2); x.stroke(); x.fillStyle='#111'; x.beginPath(); x.moveTo(0,-mm(4)); x.lineTo(mm(1.8),mm(2)); x.lineTo(0,mm(0.8)); x.lineTo(-mm(1.8),mm(2)); x.closePath(); x.fill(); x.restore(); x.fillStyle='#111'; x.font=`bold ${mm(2.6)}px Arial`; x.textAlign='center'; x.textBaseline='middle'; x.fillText('N',X,Y+mm(7.5)); }
-function ppScaleBar(x,px,s,X,Y){ const mm=v=>v*px; const L=50*12*s; x.fillStyle='#fff'; x.fillRect(X-mm(1),Y-mm(4.5),L+mm(2),mm(7)); x.fillStyle='#111'; x.fillRect(X,Y,L,mm(1)); x.fillRect(X,Y-mm(1),mm(0.4),mm(2)); x.fillRect(X+L-mm(0.4),Y-mm(1),mm(0.4),mm(2)); x.font=`${mm(2.4)}px Arial`; x.textAlign='center'; x.textBaseline='bottom'; x.fillText('50 ft',X+L/2,Y-mm(0.8)); x.textBaseline='middle'; }
-function ppDrawHall(x,h,SX,SY,s,px,items,o,clip){ const hd=H[h]; const mm=v=>v*px; const numMap={}; items.forEach(it=>numMap[it.booth]=it); x.lineJoin='round'; x.textAlign='center'; x.textBaseline='middle';
-  for(const b of hd.booths){ const bo=BOOTH[b[0]]; let bx0=1e9,bx1=-1e9,by0=1e9,by1=-1e9; for(const p of bo.ring){ if(p[0]<bx0)bx0=p[0]; if(p[0]>bx1)bx1=p[0]; if(p[1]<by0)by0=p[1]; if(p[1]>by1)by1=p[1]; } if(clip&&(bx1<clip[0]||bx0>clip[2]||by1<clip[1]||by0>clip[3])) continue;
-    const it=numMap[b[0]]; const skip=!it&&bo.ids.some(id=>M(id).s===-1); x.beginPath(); bo.ring.forEach((p,i)=>{ const X=SX(p[0]),Y=SY(p[1]); i?x.lineTo(X,Y):x.moveTo(X,Y); }); x.closePath();
-    x.fillStyle=it?PCOL[it.s]:(skip?'#f5f5f5':'#e3e3e3'); x.fill(); x.lineWidth=it?mm(0.35):mm(0.12); x.strokeStyle=it?'#111':'#8c8c8c'; x.stroke();
-    const wmm=(bx1-bx0)*s/px, hmm=(by1-by0)*s/px; if(o.nums&&!it&&wmm>=9.5&&hmm>=3.5){ x.fillStyle='#444'; x.font=`${mm(1.9)}px Arial`; x.fillText(b[0],SX(bo.cx),SY(bo.cy)); } }
-  x.fillStyle='#6a6a6a'; for(const l of hd.labels){ if(clip&&(l[1]<clip[0]||l[1]>clip[2]||l[2]<clip[1]||l[2]>clip[3])) continue; const fs=Math.max(mm(2.4),Math.min(mm(5),l[3]*s*0.12)); x.font=`bold ${fs}px Arial`; x.save(); x.translate(SX(l[1]),SY(l[2])); x.rotate(-(l[4]||0)*Math.PI/180); x.fillText(String(l[0]).toUpperCase(),0,0); x.restore(); }
-  const G={wc:'WC',food:'FOOD',cafe:'CAFE',esc:'ESC',elev:'LIFT',stairs:'STAIRS'}; for(const p of hd.pois){ if(clip&&(p[1]<clip[0]||p[1]>clip[2]||p[2]<clip[1]||p[2]>clip[3])) continue; const X=SX(p[1]),Y=SY(p[2]); const t=G[p[0]]||'•'; x.font=`bold ${mm(2)}px Arial`; const w=x.measureText(t).width+mm(1.6); x.fillStyle='#fff'; x.strokeStyle='#555'; x.lineWidth=mm(0.2); x.fillRect(X-w/2,Y-mm(1.5),w,mm(3)); x.strokeRect(X-w/2,Y-mm(1.5),w,mm(3)); x.fillStyle='#333'; x.fillText(t,X,Y); }
-  for(const it of items){ const X=SX(it.bo.cx),Y=SY(it.bo.cy); const r=mm(3.3); x.fillStyle='#fff'; x.strokeStyle='#111'; x.lineWidth=mm(0.35); x.beginPath(); x.arc(X,Y,r,0,Math.PI*2); x.fill(); x.stroke(); x.fillStyle='#111'; x.font=`bold ${mm(it.n>=100?2.9:3.6)}px Arial`; x.fillText(String(it.n),X,Y);
-    const st='★'.repeat(it.s); x.font=`bold ${mm(2.5)}px Arial`; x.lineWidth=mm(0.6); x.strokeStyle='#111'; x.lineJoin='round'; x.strokeText(st,X,Y+r+mm(1.9)); x.fillStyle='#fff'; x.fillText(st,X,Y+r+mm(1.9)); } }
-function ppTileCanvas(h,t,o){ const u=o.mmft/12; const [c,x,px]=ppCanvas(PP.mapW,PP.mapH); const s=u*px; const SX=v=>(v-t.x0)*s, SY=v=>(t.y1-v)*s; ppDrawHall(x,h,SX,SY,s,px,t.items,o,[t.x0,t.y0,t.x1,t.y1]); ppScaleBar(x,px,s,px*6,c.height-px*5); ppNorth(x,h,c.width-px*9,px*9,px); return c; }
-function ppOverviewCanvas(h,tiles,items){ const hd=H[h], e=hd.ext; const [c,x,px]=ppCanvas(PP.mapW,PP.mapH); const mm=v=>v*px; const s=Math.min((c.width-mm(8))/(e[2]-e[0]),(c.height-mm(8))/(e[3]-e[1])); const offx=(c.width-(e[2]-e[0])*s)/2, offy=(c.height-(e[3]-e[1])*s)/2; const SX=v=>offx+(v-e[0])*s, SY=v=>offy+(e[3]-v)*s; const numMap={}; items.forEach(it=>numMap[it.booth]=it); x.textAlign='center'; x.textBaseline='middle';
-  for(const b of hd.booths){ const bo=BOOTH[b[0]]; const it=numMap[b[0]]; x.beginPath(); bo.ring.forEach((p,i)=>{ const X=SX(p[0]),Y=SY(p[1]); i?x.lineTo(X,Y):x.moveTo(X,Y); }); x.closePath(); x.fillStyle=it?PCOL[it.s]:'#e8e8e8'; x.fill(); x.strokeStyle=it?'#111':'#b8b8b8'; x.lineWidth=it?mm(0.25):mm(0.08); x.stroke(); }
-  x.fillStyle='#777'; for(const l of hd.labels){ x.font=`bold ${mm(2.6)}px Arial`; x.save(); x.translate(SX(l[1]),SY(l[2])); x.rotate(-(l[4]||0)*Math.PI/180); x.fillText(String(l[0]).toUpperCase(),0,0); x.restore(); }
-  for(const it of items){ const X=SX(it.bo.cx),Y=SY(it.bo.cy); x.fillStyle=PCOL[it.s]; x.strokeStyle='#111'; x.lineWidth=mm(0.2); x.beginPath(); x.arc(X,Y,mm(1.7),0,Math.PI*2); x.fill(); x.stroke(); }
-  tiles.forEach((t,i)=>{ const X0=SX(t.x0),Y0=SY(t.y1),W=(t.x1-t.x0)*s,Hh=(t.y1-t.y0)*s; x.setLineDash([mm(1.5),mm(1)]); x.strokeStyle='#1a1a1a'; x.lineWidth=mm(0.4); x.strokeRect(X0,Y0,W,Hh); x.setLineDash([]); const lab='SHEET '+(i+1); x.font=`bold ${mm(3.4)}px Arial`; const w=x.measureText(lab).width+mm(2.4); x.fillStyle='#1a1a1a'; x.fillRect(X0,Y0,w,mm(5.2)); x.fillStyle='#fff'; x.fillText(lab,X0+w/2,Y0+mm(2.6)); });
-  ppScaleBar(x,px,s,px*6,c.height-px*5); ppNorth(x,h,c.width-px*9,px*9,px); return c; }
-function ppLegendRows(items){ return items.map(it=>it.recs.map((rr,k)=>`<div class="pp-row"><span class="pp-chk"></span><span class="pp-num">${k?'':it.n}</span><span class="pp-name"><span class="pp-star" style="color:${PCOL[rr.m.s]}">${'★'.repeat(rr.m.s)}</span> ${esc(rr.r.n)}<small>${esc(it.booth)}${rr.m.d?' · '+DAYS.find(d=>d[0]===rr.m.d)[1]:''}${rr.m.a?' · '+esc(rr.m.a):''}${rr.m.n?' · '+esc(short(rr.m.n,60)):''}</small></span></div>`).join('')).join(''); }
-const ppFooter=()=>`<span>${[5,4,3,2,1].map(s=>`<i style="background:${PCOL[s]}"></i>★${s}`).join(' ')}</span><span><i style="background:#e3e3e3"></i>other booth</span><span>◯ number = stop in the legend · ★ under it = priority</span><span>N = true north</span>`;
-function ppPage(title,mid,right,img,legend,cls){ return `<section class="pp-page ${cls||''}"><header class="pp-h"><b>${esc(title)}</b><span class="mid">${mid}</span><span>${right}</span></header><div class="pp-body">${img?`<img class="pp-map" src="${img}" alt="">`:''}${legend}</div><footer class="pp-f">${ppFooter()}</footer></section>`; }
-async function buildPrintPack(o){ const byHall=ppTargets(o); const halls=HALL_IDS.filter(h=>byHall[h]); if(!halls.length){ toast('No starred exhibitors match that filter'); return; }
-  const root=$('#printPack'); root.hidden=false; root.innerHTML=`<div class="pp-bar"><b>Building sheets…</b><span id="ppProg"></span></div>`; const prog=t=>{ const p=$('#ppProg'); if(p) p.textContent=t; }; const tick=()=>new Promise(r=>setTimeout(r,0));
-  const dayLbl=o.day?DAYS.find(d=>d[0]===o.day)[1]:'all days'; const stamp=new Date().toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}); const right=`★${o.min}+ · ${dayLbl} · ${esc(me||'')} · ${stamp}`;
-  const pages=[]; const listRows=[]; let totalStops=0;
-  for(const h of halls){ const items=Object.values(byHall[h]).filter(it=>it.bo.h===h); const tiles=ppTiles(items,o.mmft); let n=0; tiles.forEach(t=>t.items.forEach(it=>{ it.n=++n; })); items.sort((a,b)=>a.n-b.n); totalStops+=items.length;
-    prog(`${H[h].short}: overview`); await tick();
-    const ov=ppOverviewCanvas(h,tiles,items); const cnt={}; items.forEach(it=>cnt[it.s]=(cnt[it.s]||0)+1);
-    const ovLeg=`<div class="pp-legh">${esc(H[h].name)} · ${items.length} stop${items.length!==1?'s':''} on ${tiles.length} sheet${tiles.length!==1?'s':''}</div>`+tiles.map((t,i)=>`<div class="pp-row"><span></span><span class="pp-num">S${i+1}</span><span class="pp-name">Sheet ${i+1}: ${t.items.length>1?`stops ${t.items[0].n}–${t.items[t.items.length-1].n} (${t.items.length})`:`stop ${t.items[0].n}`}<small>${esc(t.items.slice(0,4).map(it=>it.recs[0].r.n).join(', '))}${t.items.length>4?', …':''}</small></span></div>`).join('')+`<div style="margin-top:3mm;font-size:9.5pt;color:#333">${[5,4,3,2,1].filter(s=>cnt[s]).map(s=>`<span class="pp-star" style="color:${PCOL[s]}">${'★'.repeat(s)}</span> ${cnt[s]}`).join(' &nbsp; ')}</div><div style="margin-top:3mm;font-size:9pt;color:#555">Dashed boxes show what each sheet covers. Coloured dots are your stops. Booth numbers: 1xxxxx East · 2xxxxx North · 3xxxxx South · 4xxxxx West; second digit = level.</div>`;
-    pages.push(ppPage('IMTS 2026 · '+H[h].name,'Overview',right,ov.toDataURL('image/png'),`<div class="pp-leg">${ovLeg}</div>`));
-    for(let i=0;i<tiles.length;i++){ const t=tiles[i]; prog(`${H[h].short}: sheet ${i+1} of ${tiles.length}`); await tick(); const c=ppTileCanvas(h,t,o); const dense=t.items.reduce((a,it)=>a+it.recs.length,0)>26;
-      pages.push(ppPage('IMTS 2026 · '+H[h].name,`Sheet ${i+1} of ${tiles.length}`,right,c.toDataURL('image/png'),`<div class="pp-leg ${dense?'dense':''}"><div class="pp-legh">Stops on this sheet (${t.items.length})</div>${ppLegendRows(t.items)}</div>`));
-      t.items.forEach(it=>it.recs.forEach(rr=>listRows.push({h,sheet:i+1,it,rr}))); } }
-  // checklist (first pages)
-  const q=v=>esc(v||''); let lastH=null; const rows=listRows.map(({h,sheet,it,rr})=>{ let pre=''; if(h!==lastH){ lastH=h; pre=`<tr><td class="hh" colspan="9">${q(H[h].name)}</td></tr>`; } return pre+`<tr><td class="c"><span class="bx"></span></td><td class="c">S${sheet} · ${it.n}</td><td class="c"><span class="pp-star" style="color:${PCOL[rr.m.s]}">${'★'.repeat(rr.m.s)}</span></td><td><b>${q(rr.r.n)}</b>${rr.r.secs.length?` <span style="color:#666;font-size:9pt">${q(rr.r.secs[0])}</span>`:''}</td><td>${q(it.booth)}</td><td>${rr.m.d?DAYS.find(d=>d[0]===rr.m.d)[1]:''}</td><td>${q(rr.m.a)}</td><td style="font-size:9.5pt">${q(short(rr.m.n||'',90))}</td><td style="width:32mm"></td></tr>`; }).join('');
-  const list=`<div class="pp-leg" style="width:auto"><div class="pp-legh">Checklist · ${totalStops} stop${totalStops!==1?'s':''} in ${halls.length} hall${halls.length!==1?'s':''} · tick as you go</div><div style="overflow:visible"><table class="pp-t"><thead><tr><th></th><th>Sheet · №</th><th>★</th><th>Exhibitor</th><th>Booth</th><th>Day</th><th>Person</th><th>Ask / look for</th><th>Met / outcome</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
-  pages.unshift(ppPage('IMTS 2026 · Visit checklist','McCormick Place, Chicago · Sep 14–19, 2026',right,null,list,'pp-list'));
-  root.innerHTML=`<div class="pp-bar"><b>Print pack</b><span>${pages.length} A4 landscape page${pages.length!==1?'s':''} · ${totalStops} stops</span><span style="flex:1"></span><button class="btn primary" id="ppPrint">🖨 Print / Save as PDF</button><button class="btn" id="ppClose">Close</button></div>`+pages.join('');
-  $('#ppPrint').onclick=()=>window.print(); $('#ppClose').onclick=()=>{ root.hidden=true; root.innerHTML=''; };
-  toast(`${pages.length} pages ready — press Print / Save as PDF`,3000); }
-
-// ================= EXPOWALK ACCOUNT LAYER (hosted build only) =================
-// Sign-in + profile (Supabase, REST only), free allowance via short-lived Google tokens (phone → Google directly),
-// opt-in email relay of minutes, "how your data is handled", owner admin. Injected inside the app's scope.
-(function(){
-  const SS='ew-session'; let CFG=null, sess=null, user=null, profile=null, remaining=null, openAfterLogin=false, owner=false;
-  const loadSess=()=>{ try{ sess=JSON.parse(localStorage.getItem(SS)||'null'); }catch(e){ sess=null; } };
-  const saveSess=()=>{ try{ if(sess) localStorage.setItem(SS,JSON.stringify(sess)); else localStorage.removeItem(SS); }catch(e){} };
-  const PENDING_KEY='imts26-pending-signin';
-  function markPendingSignIn(){ try{ localStorage.setItem(PENDING_KEY,String(Date.now())); }catch(e){} }
-  // A same-device sign-in this tab actually started (Google redirect, or a magic-link email requested from
-  // here) leaves this flag for a short window. An access_token fragment that shows up WITHOUT it — e.g. an
-  // unsolicited link someone was sent, or a stale bookmarked/forwarded URL carrying leftover tokens — is
-  // refused instead of silently signing the browser in as whoever the fragment belongs to (EW-06). This is a
-  // same-device heuristic, not full PKCE, chosen so the existing, already-verified magic-link flow (opened in
-  // a fresh tab, which doesn't share sessionStorage) isn't put at risk of a regression.
-  function consumePendingSignIn(){ let ok=false; try{ const t=+localStorage.getItem(PENDING_KEY); ok=!!t&&(Date.now()-t<20*60*1000); localStorage.removeItem(PENDING_KEY); }catch(e){} return ok; }
-  function handleHash(){ const h=location.hash||''; if(h.includes('access_token=')){ const p=new URLSearchParams(h.slice(1)); history.replaceState(null,'',location.pathname+location.search);
-      if(!consumePendingSignIn()){ toast('Ignored an unexpected sign-in link — start sign-in again from this app if that was you.',6000); return; }
-      sess={access_token:p.get('access_token'),refresh_token:p.get('refresh_token'),expires_at:Date.now()+((+p.get('expires_in')||3600)*1000)}; saveSess(); openAfterLogin=true; }
-    else if(h.includes('error=')){ const p=new URLSearchParams(h.slice(1)); toast('Sign-in failed: '+(p.get('error_description')||p.get('error')||''),6000); history.replaceState(null,'',location.pathname+location.search); } }
-  async function refreshSession(){ if(!sess||!sess.refresh_token) return false; try{ const r=await fetch(CFG.supabaseUrl+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:sess.refresh_token})}); if(!r.ok){ sess=null; saveSess(); return false; } const j=await r.json(); sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+((j.expires_in||3600)*1000)}; saveSess(); return true; }catch(e){ return false; } }
-  async function token(){ if(!sess) return null; if(sess.expires_at-Date.now()<90000){ if(!await refreshSession()) return null; } return sess.access_token; }
-  async function sb(path,init,retried){ const t=await token(); if(!t) throw new Error('Sign in first'); const r=await fetch(CFG.supabaseUrl+path,Object.assign({},init||{},{headers:Object.assign({apikey:CFG.anonKey,Authorization:'Bearer '+t,'Content-Type':'application/json'},(init&&init.headers)||{})})); if(r.status===401&&!retried&&await refreshSession()) return sb(path,init,true); return r; }
-  async function api(path,body){ const t=await token(); if(!t) throw new Error('Sign in first'); const r=await fetch(path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined}); const j=await r.json().catch(()=>({})); if(!r.ok) throw Object.assign(new Error(j.error||('HTTP '+r.status)),{status:r.status,reason:j.reason}); return j; }
-  const LAST_UID_KEY='imts26-last-uid';
-  async function refreshUser(){ user=null; profile=null; if(!sess) return; try{ const r=await sb('/auth/v1/user'); if(!r.ok){ sess=null; saveSess(); return; } user=await r.json(); const p=await sb(`/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=*`); if(p.ok) profile=(await p.json())[0]||null; }catch(e){ user=null; }
-    owner=false; if(user){ try{ const a=await fetch('/api/admin?probe=1',{headers:{Authorization:'Bearer '+sess.access_token}}); owner=a.ok; }catch(e){} }
-    // This phone's settings (like 'auto-email minutes') are stored device-wide, not per-account. If a
-    // DIFFERENT account has just signed in here than last time (a shared/borrowed device), that toggle is
-    // reset to off rather than silently carrying over — a new account should opt in for itself (EW-07,
-    // partial: recordings/photos already on this device are a separate, larger fix — see privacy notice).
-    try{ const last=localStorage.getItem(LAST_UID_KEY); const uid=user?user.id:null;
-      if(uid && last && last!==uid){ const st=SET.get(); if(st.emailAuto){ st.emailAuto=false; SET.set(st); } }
-      if(uid) localStorage.setItem(LAST_UID_KEY,uid); }catch(e){} }
-  const signInGoogle=()=>{ markPendingSignIn(); location.href=CFG.supabaseUrl+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(location.origin+location.pathname); };
-  async function signInEmail(email){ const r=await fetch(CFG.supabaseUrl+'/auth/v1/otp?redirect_to='+encodeURIComponent(location.origin+location.pathname),{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify({email,create_user:true})}); if(!r.ok){ const j=await r.json().catch(()=>({})); throw new Error(j.msg||j.error_description||j.message||('HTTP '+r.status)); } }
-  async function signOut(){ try{ await sb('/auth/v1/logout',{method:'POST'}); }catch(e){} sess=null; saveSess(); user=null; profile=null; remaining=null; const s=SET.get(); if(s.mode==='shared'){ s.mode='own'; SET.set(s); } renderBtn(); closeSheet(); toast('Signed out'); }
-  async function saveProfile(d){ const r=await sb('/rest/v1/profiles',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=representation'},body:JSON.stringify(Object.assign({id:user.id,email:(user.email||'').toLowerCase()},d))}); if(!r.ok){ const j=await r.json().catch(()=>({})); throw new Error(j.message||j.hint||('HTTP '+r.status)); } profile=(await r.json())[0]||profile; }
-  const first=()=>((profile&&profile.name)||(user&&user.user_metadata&&user.user_metadata.full_name)||(user&&user.email)||'').split(/[\s@]/)[0];
-  const capLeft=()=>{ if(remaining) return remaining; if(profile&&CFG.shared){ return {meetings:Math.max(0,CFG.shared.capMeetings-profile.meetings_used),scans:Math.max(0,CFG.shared.capScans-profile.scans_used),seconds:Math.max(0,CFG.shared.capSeconds-profile.seconds_used)}; } return null; };
-  function renderBtn(){ const b=$('#acctBtn'); if(!CFG) return; b.hidden=false; if(!user){ b.textContent='Sign in'; b.classList.remove('on'); return; } const c=capLeft(); b.textContent=(first()||'Account')+(c&&profile&&profile.free_slot?` · ${c.meetings} free`:''); b.classList.add('on'); }
-  const isOwner=()=>!!(user&&owner);
-  const md=k=>(user&&user.user_metadata&&user.user_metadata[k])||'';
-  function openAccount(){ if(!user) return openSignIn(); const p=profile||{}; const c=capLeft(); const sh=CFG.shared||{}; const slots=sh.maxFreeUsers?Math.max(0,sh.maxFreeUsers-(sh.freeSlotsTaken||0)):0;
-    $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose" aria-label="Close">×</button><h2>${esc(p.name||first()||'Your account')}</h2><div class="help">${esc(user.email||'')}</div>
-      <div class="sec"><h3>Free allowance</h3>${p.consent_at?(p.free_slot?`<p style="margin:0 0 6px"><b>${c?c.meetings:'—'}</b> recordings, <b>${c?c.scans:'—'}</b> card/note scans and <b>${c?Math.floor(c.seconds/3600):'—'} h</b> of audio left on the free allowance.</p><p class="help">Processing goes from your phone straight to Google using a short-lived ExpoWalk token — ExpoWalk never receives the audio, photos or minutes. After the allowance, use your own free Gemini key (Meetings → Settings).</p>`:`<p class="help">The free allowance was for the first ${sh.maxFreeUsers||''} sign-ups and is fully taken. Everything else works exactly the same — paste your own free Gemini key in Meetings → Settings.</p>`):`<p class="help">Complete the profile below to activate it${slots?` (${slots} of ${sh.maxFreeUsers} free places left)`:''}.</p>`}</div>
-      <div class="sec"><h3>Profile</h3><div class="grid"><div><span class="lbl">Name</span><input type="text" id="apName" value="${esc(p.name||(user.user_metadata&&user.user_metadata.full_name)||'')}"></div><div><span class="lbl">Company</span><input type="text" id="apCo" value="${esc(p.company||md('ew_company'))}"></div><div><span class="lbl">Designation</span><input type="text" id="apDes" value="${esc(p.designation||md('ew_designation'))}" placeholder="e.g. Plant Head, Purchase Manager"></div><div><span class="lbl">Mobile (with country code)</span><input type="text" id="apPh" value="${esc(p.phone||md('ew_phone'))}" placeholder="+91…"></div><div><span class="lbl">Country</span><input type="text" id="apCn" value="${esc(p.country||md('ew_country'))}"></div></div>
-        <label style="display:flex;gap:10px;align-items:flex-start;margin:8px 0"><input type="checkbox" id="apConsent" ${p.consent_at?'checked':''} style="width:20px;height:20px;flex:none;accent-color:var(--ok)"><span class="help" style="color:var(--ink2)">ExpoWalk (Akhil Mittal, India) may contact me by email or phone about this app and about precision-manufacturing products and services. I can withdraw this any time by emailing info@expowalk.app. This is the only thing ExpoWalk asks in return for the free allowance.</span></label>
-        <div class="actions"><button class="btn primary" id="apSave">Save profile</button><span class="help" id="apMsg"></span></div></div>
-      <div class="sec"><h3>Email</h3><label style="display:flex;gap:10px;align-items:flex-start"><input type="checkbox" id="apMail" ${SET.get().emailAuto?'checked':''} style="width:20px;height:20px;flex:none;accent-color:var(--ok)"><span class="help" style="color:var(--ink2)">Email me the minutes automatically after each recording is processed (to ${esc(user.email||'')}). Relayed through ExpoWalk's mail server at that moment, not stored. Off = use Share / Copy on the phone instead.</span></label></div>
-      <div class="sec"><h3>Your data</h3><p class="help" style="color:var(--ink2)">Recordings, photos, transcripts and minutes never leave this phone except to Google when you press Process. <a href="#" id="apData">Read exactly what is stored where</a>.</p>
-        <div class="actions"><button class="btn sm" id="apOut">Sign out</button>${isOwner()?'<button class="btn sm" id="apAdmin">Admin</button>':''}<button class="btn sm" id="apWipe">Delete everything on this phone</button></div></div>`;
-    $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet;
-    $('#apSave').onclick=async()=>{ const d={name:$('#apName').value.trim(),company:$('#apCo').value.trim(),designation:$('#apDes').value.trim(),phone:$('#apPh').value.trim(),country:$('#apCn').value.trim()}; if(!d.name||!d.company){ $('#apMsg').textContent='Name and company are required.'; return; } if($('#apConsent').checked){ if(!p.consent_at) d.consent_at=new Date().toISOString(); } else d.consent_at=null; $('#apSave').disabled=true; try{ await saveProfile(d); const s=SET.get(); if(profile&&profile.free_slot&&profile.consent_at&&!s.key){ s.mode='shared'; SET.set(s); } if(!me&&d.name){ me=d.name.split(' ')[0]; $('#meName').value=me; try{localStorage.setItem('imts26-me',me);}catch(e){} } toast('Profile saved'); renderBtn(); openAccount(); }catch(e){ $('#apMsg').textContent=e.message; $('#apSave').disabled=false; } };
-    $('#apMail').onchange=e=>{ const s=SET.get(); s.emailAuto=e.target.checked; SET.set(s); };
-    $('#apData').onclick=e=>{ e.preventDefault(); closeSheet(); $('#help').classList.add('open'); setTimeout(()=>{ const d=$('#dataSec'); d&&d.scrollIntoView({behavior:'smooth'}); },100); };
-    $('#apOut').onclick=signOut; const ad=$('#apAdmin'); if(ad) ad.onclick=openAdmin;
-    $('#apWipe').onclick=async()=>{ if(!confirm('Delete ALL recordings, photos, minutes, stars and notes stored on this phone? Your account (name, company…) stays; this cannot be undone.')) return; const ok=await wipeEverything(); if(!ok){ toast('Some data could not be deleted — try again before relying on this phone being clean.',6000); return; } location.reload(); }; }
-  function openSignIn(){ const sh=CFG.shared||{}; const slots=sh.maxFreeUsers?Math.max(0,sh.maxFreeUsers-(sh.freeSlotsTaken||0)):0;
-    $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose" aria-label="Close">×</button><h2>Sign in</h2><p class="help" style="color:var(--ink2)">Optional. Signing in gives you the free ExpoWalk allowance for AI minutes and card reading${sh.enabled&&slots?` — <b>${slots} of ${sh.maxFreeUsers} free places left</b>`:''} — and lets minutes be emailed to you. Everything else in the app works without an account, and your recordings never go to ExpoWalk either way.</p>
-      <div class="actions" style="margin:12px 0"><button class="btn primary" id="siGoogle">Continue with Google</button></div>
-      <span class="lbl">Or get a sign-in link by email</span><div style="display:flex;gap:6px"><input type="email" id="siEmail" placeholder="you@company.com" style="flex:1;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:8px"><button class="btn" id="siSend">Send link</button></div><p class="help" id="siMsg" style="margin-top:8px"></p>
-      <div class="sec"><h3>What we ask</h3><p class="help" style="color:var(--ink2)">Your name, company, designation and phone, and permission to contact you. That's the deal for the free allowance. <a href="#" id="siData">How your data is handled</a>.</p></div>`;
-    $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet; $('#siGoogle').onclick=signInGoogle;
-    $('#siSend').onclick=async()=>{ const em=$('#siEmail').value.trim(); if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ $('#siMsg').textContent='Enter a valid email.'; return; } $('#siSend').disabled=true; try{ await signInEmail(em); markPendingSignIn(); $('#siMsg').textContent='Link sent — open the email on THIS device and tap the link.'; }catch(e){ $('#siMsg').textContent='Could not send: '+e.message; $('#siSend').disabled=false; } };
-    $('#siData').onclick=e=>{ e.preventDefault(); closeSheet(); $('#help').classList.add('open'); setTimeout(()=>{ const d=$('#dataSec'); d&&d.scrollIntoView({behavior:'smooth'}); },100); }; }
-  let adminData=null, adminListenerBound=false;
-  async function openAdmin(){ $('#sheetPanel').innerHTML='<button class="close" id="sheetClose">×</button><h2>Admin</h2><p class="help">Loading…</p>'; $('#sheet').classList.add('open'); $('#sheetClose').onclick=closeSheet;
-    try{ adminData=await api('/api/admin'); }catch(e){ $('#sheetPanel').innerHTML+=`<p style="color:var(--accent)">${esc(e.message)}</p>`; return; }
-    const d=adminData; const s=d.settings; const rows=d.profiles.map(p=>`<tr><td>${esc(p.name)}<br><span class="help">${esc(p.email)}</span></td><td>${esc(p.company)}<br><span class="help">${esc(p.designation)}</span></td><td>${esc(p.phone)}</td><td class="num">${p.meetings_used}/${p.scans_used}</td><td>${p.free_slot?'free':'—'}${p.consent_at?'':' <span style="color:var(--accent)">no consent</span>'}</td><td><button class="btn sm" data-block="${p.id}" data-v="${p.blocked?0:1}">${p.blocked?'Unblock':'Block'}</button></td></tr>`).join('');
-    $('#sheetPanel').innerHTML=`<button class="close" id="sheetClose">×</button><h2>Admin</h2><div class="kpis"><div class="kpi"><b>${d.users}</b><span>sign-ups</span></div><div class="kpi"><b>${d.active}</b><span>used AI</span></div><div class="kpi"><b>${s.total_meetings}</b><span>recordings</span></div><div class="kpi"><b>${s.total_scans}</b><span>scans</span></div><div class="kpi"><b>$${d.estimated_spend_usd}</b><span>est. spend</span></div></div>
-      <div class="bulk"><label class="help"><input type="checkbox" id="adShared" ${s.shared_enabled?'checked':''}> shared allowance on</label><span class="help">free users</span><input class="sel" id="adMax" type="number" value="${s.max_free_users}" style="width:70px"><span class="help">budget $</span><input class="sel" id="adBud" type="number" value="${s.budget_usd}" style="width:80px"><button class="btn sm primary" id="adSave">Save</button><button class="btn sm" id="adCsv">Export CSV</button></div>
-      <div class="ptwrap"><table class="pt"><thead><tr><th>Person</th><th>Company</th><th>Phone</th><th>Rec/scans</th><th>Slot</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
-    $('#sheetClose').onclick=closeSheet;
-    $('#adSave').onclick=async()=>{ try{ await api('/api/admin',{shared_enabled:$('#adShared').checked,max_free_users:+$('#adMax').value,budget_usd:+$('#adBud').value}); toast('Saved'); openAdmin(); }catch(e){ toast(e.message,4000); } };
-    $('#adCsv').onclick=()=>{ const q=v=>'"'+csvSafe(v).replace(/"/g,'""')+'"'; const lines=[['Name','Email','Company','Designation','Phone','Country','Consent','Free slot','Recordings','Scans','Audio s','Blocked','Signed up'].join(',')].concat(adminData.profiles.map(p=>[p.name,p.email,p.company,p.designation,p.phone,p.country,p.consent_at||'',p.free_slot,p.meetings_used,p.scans_used,p.seconds_used,p.blocked,p.created_at].map(q).join(','))); dlText('expowalk-signups.csv','﻿'+lines.join('\r\n'),'text/csv'); };
-    // Bound exactly once (EW-29): #sheetPanel is a persistent container whose innerHTML we replace on
-    // every open — a listener added here on every openAdmin() call would stack up, firing the block/unblock
-    // handler once per past admin-panel open. adminData is read fresh from the closure at click time.
-    if(!adminListenerBound){ adminListenerBound=true; $('#sheetPanel').addEventListener('click',async e=>{ const b=e.target.closest('[data-block]'); if(!b) return; try{ await api('/api/admin',{block:{id:b.dataset.block,blocked:b.dataset.v==='1'}}); openAdmin(); }catch(err){ toast(err.message,4000); } }); } }
-  // ---- AI via ExpoWalk allowance: token from our server, data straight to Google ----
-  const upper=o=>{ if(Array.isArray(o)) return o.map(upper); if(o&&typeof o==='object'){ const r={}; for(const k in o){ r[k]=k==='type'&&typeof o[k]==='string'?o[k].toUpperCase():upper(o[k]); } return r; } return o; };
-  const shared={ maxInline:19e6,
-    ready(){ if(!user) return 'Sign in (top right) for the free ExpoWalk allowance, or paste your own Gemini key in Settings'; if(!profile||!profile.consent_at) return 'Complete your profile first (top right → your name)'; if(!profile.free_slot) return 'The free allowance is fully taken — paste your own free Gemini key in Settings'; const c=capLeft(); if(c&&c.meetings<=0&&c.scans<=0) return 'Your free allowance is used up — paste your own free Gemini key in Settings'; return null; },
-    async generate(parts,schema,opts){ const item=opts.item||('x'+Date.now()); const j=await api('/api/token',{kind:opts.kind||'note',item,seconds:opts.seconds||0}); remaining=j.remaining||remaining; renderBtn();
-      // A replay of an already-confirmed reservation (e.g. double-tap, or a retry after this tab crashed
-      // right after Gemini answered) has no fresh token to use — refuse rather than silently double-charging
-      // the free allowance for the same item (EW-19).
-      if(j.done) throw new Error('This item appears to already be processed by the free allowance. Check Meetings before retrying — this avoids using your free allowance twice for the same recording/scan.');
-      const url=`${j.endpoint}/v1/projects/${j.project}/locations/${j.location}/publishers/google/models/${j.model}:generateContent`; let lastErr=null,result=null;
-      for(let attempt=0;attempt<3;attempt++){ const r=await fetchRetry(url,{method:'POST',headers:{Authorization:'Bearer '+j.access_token,'Content-Type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts}],generationConfig:{responseMimeType:'application/json',responseSchema:upper(schema),temperature:opts.temp!=null?opts.temp:0.1}})});
-        const o=await parseGen(r); if(o.retry){ lastErr=new Error('Google is busy — retrying'); await new Promise(rs=>setTimeout(rs,8000*(attempt+1))); continue; } if(o.bad){ lastErr=new Error('Model returned invalid JSON'); continue; } result=o.json; break; }
-      // Tell the server whether this reservation turned into a real, successful Gemini call (only now does
-      // the free allowance actually get charged — see confirm_quota in schema.sql), and best-effort revoke
-      // the short-lived token now that we are done with it. Never let a confirm failure hide the real result
-      // or error from the user (EW-02/EW-19/EW-20).
-      try{ await api('/api/confirm',{item,success:!!result,seconds:opts.seconds||0,token:j.access_token}); }catch(e){ /* best-effort only */ }
-      if(result) return result;
-      throw lastErr||new Error('Failed'); },
-    async onDone(x){ if(!SET.get().emailAuto||!user||!CFG.email) return; try{ await api('/api/email',{subject:`IMTS minutes · ${x.exhName} · booth ${x.booth}`,text:minutesText(x)}); toast('Minutes emailed to '+user.email,3000); }catch(e){ toast('Email failed: '+e.message,4000); } },
-    renderSettings(){ const box=$('#aiModeBox'); if(!box||!CFG) return; const s=SET.get(); const mode=s.mode||(user&&profile&&profile.free_slot&&profile.consent_at?'shared':'own'); const mn=$('#aiModeNote'); if(mn) mn.textContent=mode==='shared'?'using the ExpoWalk free allowance':'using your own Gemini key'; const c=capLeft();
-      box.innerHTML=`<span class="lbl">AI processing</span><label style="display:block;margin:4px 0"><input type="radio" name="aiMode" value="shared" ${mode==='shared'?'checked':''}> ExpoWalk free allowance${user?(profile&&profile.free_slot&&profile.consent_at?` — ${c?c.meetings:'…'} recordings, ${c?c.scans:'…'} scans left`:' — complete your profile (top right)'):' — sign in (top right)'}</label><label style="display:block;margin:4px 0 10px"><input type="radio" name="aiMode" value="own" ${mode==='own'?'checked':''}> My own Gemini key (below — free from Google, subject to Google's own free-tier limits)</label><p class="help" style="margin:0 0 10px">Either way the audio and photos go from this phone straight to Google. ExpoWalk's server only hands out a 1-hour permission token and counts how many you used.</p>`;
-      box.querySelectorAll('input[name=aiMode]').forEach(r=>r.onchange=e=>{ const st=SET.get(); st.mode=e.target.value; SET.set(st); if(st.mode==='shared'&&!user){ openSignIn(); } }); } };
-  async function init(){ let r; try{ r=await fetch('/api/config',{cache:'no-store'}); if(!r.ok) return; CFG=await r.json(); }catch(e){ return; } if(!CFG||!CFG.supabaseUrl) return;
-    loadSess(); handleHash(); await refreshUser(); AI.shared=shared; const s=SET.get(); if(!s.mode){ s.mode=(user&&profile&&profile.free_slot&&profile.consent_at)?'shared':(s.key?'own':'shared'); SET.set(s); }
-    const md=(user&&user.user_metadata)||{};
-    if(openAfterLogin&&user&&!profile&&md.ew_consent&&md.full_name&&md.ew_company){ try{ await saveProfile({name:md.full_name,company:md.ew_company,designation:md.ew_designation||'',phone:md.ew_phone||'',country:md.ew_country||'',consent_at:new Date().toISOString()}); }catch(e){} }
-    if(user&&profile&&profile.free_slot&&profile.consent_at&&!s.key&&s.mode!=='shared'){ s.mode='shared'; SET.set(s); }
-    renderBtn(); $('#acctBtn').onclick=()=>user?openAccount():openSignIn(); if(cur==='meet') renderMeet(); if(openAfterLogin){ openAfterLogin=false; if(!profile||!profile.consent_at) openAccount(); else toast((profile.free_slot?'Signed in — free AI allowance active for ':'Signed in as ')+(user.email||''),3500); } if(location.hash==='#admin'&&isOwner()) openAdmin(); }
-  init();
-})();
 
 // ================= INIT =================
 renderList(); loadMeetings().then(()=>{ if(cur==='meet') renderMeet(); });
 })();
 
 </script>
-<script>if("serviceWorker" in navigator && location.protocol==="https:"||location.hostname==="localhost"){ addEventListener("load", ()=>navigator.serviceWorker.register("/sw.js").catch(()=>{})); }</script>

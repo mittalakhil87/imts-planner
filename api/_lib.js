@@ -36,8 +36,10 @@ export async function sbService(path, init = {}) {
 export const rpc = (fn, args) => sbService('rpc/' + fn, { method: 'POST', body: JSON.stringify(args) });
 
 // ---- Google Cloud: short-lived access token from a service-account key (JWT bearer flow) ----
+// This broad, "cloud-platform"-scoped token is used SERVER-SIDE ONLY to call the IAM Credentials API
+// below. It never leaves this server — see gcpClientToken() for what actually gets handed to a browser.
 let cachedToken = null; // {access_token, exp}
-export async function gcpAccessToken() {
+async function gcpAccessToken() {
   if (cachedToken && cachedToken.exp - Date.now() > 8 * 60 * 1000) return cachedToken;
   const raw = env('GCP_SA_KEY'); const key = JSON.parse(raw.trim().startsWith('{') ? raw : Buffer.from(raw, 'base64').toString('utf8'));
   const now = Math.floor(Date.now() / 1000);
@@ -46,8 +48,33 @@ export async function gcpAccessToken() {
   const sig = crypto.sign('RSA-SHA256', Buffer.from(unsigned), key.private_key).toString('base64url');
   const r = await fetch('https://oauth2.googleapis.com/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=' + unsigned + '.' + sig });
   const j = await r.json(); if (!r.ok || !j.access_token) throw new Error('Google token error: ' + (j.error_description || j.error || r.status));
-  cachedToken = { access_token: j.access_token, exp: Date.now() + (j.expires_in || 3600) * 1000, project: key.project_id };
+  cachedToken = { access_token: j.access_token, exp: Date.now() + (j.expires_in || 3600) * 1000, project: key.project_id, client_email: key.client_email };
   return cachedToken;
+}
+
+// ---- Short-lived, per-operation client token (EW-02) ----
+// The browser must never see the broad, hour-long, cloud-platform-scoped token above: it would remain a
+// valid Vertex AI credential for its whole natural lifetime regardless of what the app's own budget/block
+// checks later decide. Instead, every /api/token call impersonates the SAME service account through the
+// IAM Credentials API to mint a fresh token good for a few minutes only — long enough to make one Gemini
+// call, short enough that a blocked/expired session can't be replayed for long.
+// One-time setup this requires (documented in README.md): grant the service account the
+// "Service Account Token Creator" role (roles/iam.serviceAccountTokenCreator) ON ITSELF, e.g.
+//   gcloud iam service-accounts add-iam-policy-binding <SA_EMAIL> --member="serviceAccount:<SA_EMAIL>" --role="roles/iam.serviceAccountTokenCreator"
+export async function gcpClientToken(lifetimeSeconds = 300) {
+  const base = await gcpAccessToken();
+  const saEmail = process.env.GCP_SA_EMAIL || base.client_email;
+  if (!saEmail) throw new Error('Set GCP_SA_EMAIL (the service account\'s own email) so client tokens can be downscoped to a short lifetime.');
+  const r = await fetch(`https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${encodeURIComponent(saEmail)}:generateAccessToken`, {
+    method: 'POST', headers: { Authorization: 'Bearer ' + base.access_token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ scope: ['https://www.googleapis.com/auth/cloud-platform'], lifetime: Math.max(60, Math.min(3600, lifetimeSeconds)) + 's' })
+  });
+  const j = await r.json();
+  if (!r.ok || !j.accessToken) {
+    const msg = (j.error && j.error.message) || r.status;
+    throw new Error('Could not mint a short-lived client token (checked GCP_SA_EMAIL has roles/iam.serviceAccountTokenCreator on itself): ' + msg);
+  }
+  return { access_token: j.accessToken, exp: new Date(j.expireTime).getTime(), project: base.project };
 }
 
 export const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

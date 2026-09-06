@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ExpoWalk — plan the show, record the booth, get the minutes</title>
+<meta name="description" content="Free trade-show planner for visitors: pick booths from the full exhibitor list, see them on the hall map, record booth conversations offline, scan visiting cards, and get AI minutes — all on your phone. Now for IMTS 2026, Chicago.">
+<meta property="og:title" content="ExpoWalk — plan the show, record the booth, get the minutes">
+<meta property="og:description" content="Free planner for IMTS 2026 visitors: 1,752 exhibitors, hall maps, offline booth recording, card scanning and AI minutes. Your data stays on your phone.">
+<meta property="og:url" content="https://expowalk.app/">
+<meta name="theme-color" content="#1B2026">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F2F3F1;--panel:#FFFFFF;--panel2:#E9EBE7;--line:#D3D7D0;--ink:#1B2026;--ink2:#525963;--ink3:#7B838D;--accent:#D9481C;--ok:#1E7F4F;--s5:#D9481C;--s4:#E8892B;--s3:#D4A72C;--s2:#2E9E8F;--s1:#4E7FC9;--east:#4E6E9E;--north:#5E8A4B;--south:#B47A2A;--west:#8A5B9C}
+@media (prefers-color-scheme:dark){:root{--bg:#15181C;--panel:#1E2227;--panel2:#262B31;--line:#343A42;--ink:#ECEEF0;--ink2:#B4BAC2;--ink3:#8A929C}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--s1)}
+h1,h2,h3,.disp{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;font-weight:700;letter-spacing:.01em;line-height:1.05;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:18px;height:58px}
+.brand{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:24px;text-decoration:none;color:var(--ink);letter-spacing:.02em}
+.brand b{color:var(--accent)}
+nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+nav a{color:var(--ink2);text-decoration:none;font-size:14px;padding:8px 10px;border-radius:8px}
+nav a:hover{background:var(--panel2);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-weight:600;text-decoration:none;cursor:pointer;line-height:1.1}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(.94)}
+.btn.sm{padding:9px 13px;font-size:14px}
+nav .btn{padding:9px 13px;font-size:14px}
+.hero{padding:56px 0 36px;display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(40px,6.2vw,68px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{font-size:19px;color:var(--ink2);margin:18px 0 26px;max-width:560px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta .help{flex-basis:100%}
+.help{font-size:14px;color:var(--ink3)}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 14px 40px -24px rgba(0,0,0,.5)}
+.map svg{display:block;width:100%;height:auto}
+.strip{display:flex;flex-wrap:wrap;gap:8px 22px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;color:var(--ink2)}
+.strip b{color:var(--ink)}
+section{padding:52px 0}
+section h2{font-size:clamp(28px,4vw,40px);margin-bottom:8px}
+section .sub{color:var(--ink2);margin:0 0 26px;max-width:640px}
+.event{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.event .date{font-family:"Barlow Condensed",sans-serif;font-weight:700;line-height:1;text-align:center;padding:10px 14px;border-radius:12px;background:var(--panel2);min-width:86px}
+.event .date .d{font-size:34px}.event .date .m{font-size:15px;letter-spacing:.06em;color:var(--ink2)}
+.event h3{font-size:26px}
+.event .meta{color:var(--ink2);font-size:15px;margin-top:4px}
+.halls{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.halls span{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;color:#fff}
+.soon{margin-top:14px;font-size:14px;color:var(--ink3)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px}
+.step .n{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:15px;letter-spacing:.08em;color:var(--accent)}
+.step h3{font-size:22px;margin:6px 0 8px}
+.step p{margin:0;color:var(--ink2);font-size:15px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.feat h3{font-size:20px;margin-bottom:6px}
+.feat p{margin:0;color:var(--ink2);font-size:15px}
+.priv{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:start}
+.priv ul{margin:12px 0 0;padding-left:20px;color:var(--ink2)}
+.priv li{margin:6px 0}
+.priv li b{color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{color:var(--ink3);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.signup{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label.f{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+label.f input{display:block;width:100%;margin-top:5px;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+label.f input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.full{grid-column:1/-1}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:14px 0 16px;font-size:14px;color:var(--ink2)}
+.consent input{width:20px;height:20px;flex:none;accent-color:var(--ok);margin-top:2px}
+.or{display:flex;align-items:center;gap:12px;color:var(--ink3);font-size:13px;margin:16px 0}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+.done{display:none;background:var(--panel2);border-radius:12px;padding:16px;margin-top:14px}
+.done.on{display:block}
+.err{color:var(--accent);font-size:14px;margin-top:8px;min-height:1.2em}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink3);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+footer a{color:var(--ink2);text-decoration:none}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:34px}.steps,.feat{grid-template-columns:1fr 1fr}.priv,.signup{grid-template-columns:1fr}.event{grid-template-columns:auto 1fr}.event .go{grid-column:1/-1}nav a.hide{display:none}}
+@media (max-width:540px){.steps,.feat,.grid{grid-template-columns:1fr}header .wrap{gap:8px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="brand" href="/">Expo<b>Walk</b></a>
+  <nav>
+    <a class="hide" href="#how">How it works</a>
+    <a class="hide" href="#privacy">Privacy</a>
+    <a class="hide" href="#free">Free AI allowance</a>
+    <a class="btn primary" href="/imts2026">Open IMTS 2026 planner</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Walk the show with a plan.<br>Leave with the <em>minutes</em>.</h1>
+      <p class="lead">ExpoWalk is a free planner for trade-show visitors. Shortlist booths from the full exhibitor list, see them on the hall map, record each booth conversation, scan the visiting card — and get transcripts, minutes and follow-ups the same evening. Everything stays on your phone.</p>
+      <div class="cta">
+        <a class="btn primary" href="/imts2026">Open the IMTS 2026 planner</a>
+        <a class="btn" href="#free">Get the free AI allowance</a>
+        <span class="help">No install, no app store. Works in Chrome and Safari on any phone or laptop; the show floor part works offline.</span>
+      </div>
+    </div>
+    <div class="map" aria-hidden="true">
+      <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="420" height="300" rx="10" fill="var(--panel2)"/>
+        <g stroke="var(--line)" stroke-width="1" fill="var(--panel)">
+          <rect x="16" y="18" width="60" height="44"/><rect x="82" y="18" width="60" height="44"/><rect x="148" y="18" width="88" height="44"/><rect x="242" y="18" width="60" height="44"/><rect x="308" y="18" width="96" height="44"/>
+          <rect x="16" y="88" width="88" height="60"/><rect x="110" y="88" width="60" height="60"/><rect x="176" y="88" width="60" height="60"/><rect x="242" y="88" width="162" height="60"/>
+          <rect x="16" y="174" width="60" height="44"/><rect x="82" y="174" width="88" height="44"/><rect x="176" y="174" width="126" height="44"/><rect x="308" y="174" width="96" height="44"/>
+          <rect x="16" y="244" width="120" height="40"/><rect x="142" y="244" width="94" height="40"/><rect x="242" y="244" width="60" height="40"/><rect x="308" y="244" width="96" height="40"/>
+        </g>
+        <g stroke="var(--line)" stroke-width="1">
+          <rect x="148" y="18" width="88" height="44" fill="var(--s5)" fill-opacity=".85"/>
+          <rect x="242" y="88" width="162" height="60" fill="var(--s4)" fill-opacity=".85"/>
+          <rect x="82" y="174" width="88" height="44" fill="var(--s3)" fill-opacity=".85"/>
+          <rect x="308" y="244" width="96" height="40" fill="var(--s2)" fill-opacity=".85"/>
+        </g>
+        <g fill="#fff" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="11">
+          <text x="192" y="44" text-anchor="middle">338966 ★★★★★</text>
+          <text x="323" y="122" text-anchor="middle">432264 ★★★★</text>
+          <text x="126" y="200" text-anchor="middle">237633 ★★★</text>
+          <text x="356" y="268" text-anchor="middle">134350 ★★</text>
+        </g>
+        <path d="M60 262 L60 200 L126 200 L126 150 L200 150 L200 122 L323 122 L323 62 L192 62" fill="none" stroke="var(--s1)" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="60" cy="262" r="7" fill="var(--s1)"/><circle cx="60" cy="262" r="12" fill="var(--s1)" fill-opacity=".25"/>
+        <g fill="var(--ink2)" font-family="IBM Plex Sans,sans-serif" font-size="10"><text x="16" y="12">SOUTH BUILDING · LEVEL 3</text><text x="404" y="12" text-anchor="end">Day 2 walk · 4 stops · 0.6 km</text></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="strip">
+    <span><b>1,752</b> exhibitors · <b>1,784</b> booths</span>
+    <span><b>5</b> halls mapped, aisle-by-aisle</span>
+    <span>Offline recording · card &amp; note scanning</span>
+    <span>AI transcript, minutes, next actions</span>
+    <span>Open source · no trackers</span>
+  </div>
+
+  <section id="events">
+    <h2>Shows</h2>
+    <p class="sub">ExpoWalk is built one show at a time, with the full exhibitor list and floor plan loaded before you arrive.</p>
+    <div class="event">
+      <div class="date"><div class="m">SEP</div><div class="d">14–19</div><div class="m">2026</div></div>
+      <div>
+        <h3>IMTS 2026 — International Manufacturing Technology Show</h3>
+        <div class="meta">McCormick Place, Chicago · 1,752 exhibitors across East, North, South and West buildings</div>
+        <div class="halls"><span style="background:var(--east)">East L3 · 529 booths</span><span style="background:var(--north)">North L3 · 465</span><span style="background:var(--north)">North L1 · 69</span><span style="background:var(--south)">South L3 · 311</span><span style="background:var(--west)">West L3 · 410</span></div>
+      </div>
+      <a class="btn primary go" href="/imts2026">Open planner</a>
+    </div>
+    <p class="soon">Next show you'd like covered? Write to <a href="mailto:info@expowalk.app">info@expowalk.app</a>. Exhibitors can also ask about offering ExpoWalk to their own visitors.</p>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">Four steps. The first two happen on a laptop before you fly; the last two on your phone.</p>
+    <div class="steps">
+      <div class="step"><div class="n">01 · BEFORE THE SHOW</div><h3>Shortlist</h3><p>Search all 1,752 exhibitors by name, product category, country or hall. Mark each one 1–5 stars, add a note on what to ask, and share the list with your team or dealers.</p></div>
+      <div class="step"><div class="n">02 · PLAN</div><h3>Plan each day</h3><p>Assign booths to days, and the planner orders them hall by hall into a walk list with a route. Print an A4 pack of the maps with your booths highlighted as a paper fallback.</p></div>
+      <div class="step"><div class="n">03 · AT THE SHOW</div><h3>Walk, record, scan</h3><p>The hall map shows where you are and the next booth. At each stand, record the conversation (with the exhibitor's consent), photograph the visiting card and your paper notes. All saved on the phone — no network needed.</p></div>
+      <div class="step"><div class="n">04 · SAME EVENING</div><h3>Get the minutes</h3><p>Back at the hotel, press Process: the phone sends each recording straight to Google's Gemini and gets back a transcript, minutes, next actions and the card details — grouped per exhibitor, ready to share or email.</p></div>
+    </div>
+  </section>
+
+  <section id="what">
+    <h2>What you get</h2>
+    <div class="feat">
+      <div><h3>Full exhibitor directory</h3><p>Every listed exhibitor with booth, hall, pavilion, categories, country and website, filterable in a second — no more paging through the official app.</p></div>
+      <div><h3>Hall maps that know where you are</h3><p>Booth outlines for all five halls, GPS position, aisle-aware routing between your stops, toilets and exits marked.</p></div>
+      <div><h3>Stars, notes and day plans</h3><p>1–5 star priority, private notes, a day planner and a walk list ordered by hall and aisle.</p></div>
+      <div><h3>Offline booth recording</h3><p>One tap to record, saved to the phone only. Nothing is uploaded until you decide to process it.</p></div>
+      <div><h3>Cards and paper notes</h3><p>Photograph visiting cards and handwritten notes per exhibitor; AI reads them into contact records and text. Export as vCard or CSV.</p></div>
+      <div><h3>Minutes you can send</h3><p>Transcript, minutes and next actions per meeting, viewable in the app, shareable by WhatsApp, or emailed to yourself.</p></div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <h2>Your conversations never reach us</h2>
+    <p class="sub">ExpoWalk was built by a trade-show visitor who did not want his supplier conversations on someone else's server. So it has none.</p>
+    <div class="priv">
+      <div>
+        <ul>
+          <li><b>Recordings, photos, transcripts and minutes live only on your device.</b> The app has no upload path for them.</li>
+          <li><b>Processing goes from your phone directly to Google's Gemini API</b> (paid tier, not used for training). ExpoWalk's server only hands your phone a one-hour permission token and counts how many you used — it never sees the content.</li>
+          <li><b>The only things we store</b> are the sign-in details you choose to give us (name, company, email, phone) and usage counters — and only if you sign in.</li>
+          <li><b>The code is open source</b>, so anyone can verify this: <a href="https://github.com/mittalakhil87/imts-planner">github.com/mittalakhil87/imts-planner</a>.</li>
+        </ul>
+        <p style="margin:16px 0 0"><a class="btn sm" href="/privacy">Read the full data-handling page</a></p>
+      </div>
+      <table>
+        <tr><th>Data</th><th>Where it lives</th></tr>
+        <tr><td>Stars, notes, day plans</td><td>Your device</td></tr>
+        <tr><td>Recordings, card &amp; note photos</td><td>Your device</td></tr>
+        <tr><td>Transcripts, minutes, contacts</td><td>Your device</td></tr>
+        <tr><td>Audio/photos while processing</td><td>Your device → Google Gemini, directly</td></tr>
+        <tr><td>Name, company, email, usage count</td><td>ExpoWalk (only if you sign in)</td></tr>
+        <tr><td>Emailed minutes</td><td>Relayed to your address, not stored</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="free">
+    <h2>Free AI allowance for the first 100 IMTS visitors</h2>
+    <p class="sub">Sign in and ExpoWalk pays for the AI: <b>25 recordings, 300 card/note scans and 8 hours of audio</b> per person, no card needed. Beyond that (or if you prefer), paste your own free Gemini key in the app and ExpoWalk's server is not involved at all. In return we ask only that we may contact you about the app and about precision-manufacturing products.</p>
+    <div class="signup">
+      <form id="f" novalidate>
+        <div class="grid">
+          <label class="f">Name<input id="name" autocomplete="name" required></label>
+          <label class="f">Company<input id="company" autocomplete="organization" required></label>
+          <label class="f">Designation<input id="designation" autocomplete="organization-title" placeholder="e.g. Plant Head, Purchase Manager"></label>
+          <label class="f">Mobile (with country code)<input id="phone" autocomplete="tel" inputmode="tel" placeholder="+91…"></label>
+          <label class="f">Country<input id="country" autocomplete="country-name"></label>
+          <label class="f">Work email<input id="email" type="email" autocomplete="email" inputmode="email" required></label>
+        </div>
+        <label class="consent"><input type="checkbox" id="consent"><span>ExpoWalk (Akhil Mittal, India) may contact me by email or phone about this app and about precision-manufacturing products and services. I can withdraw this any time by emailing info@expowalk.app. This is the only thing ExpoWalk asks in return for the free allowance.</span></label>
+        <button class="btn primary" type="submit" id="go">Email me my sign-in link</button>
+        <div class="err" id="err"></div>
+        <div class="done" id="done"><b>Check your inbox.</b> We've sent a sign-in link to <span id="sentTo"></span>. Open it <b>on the phone you'll carry at the show</b> — it signs you in there, activates the allowance and opens the planner. The link expires in an hour; if it doesn't arrive, check spam or write to info@expowalk.app.</div>
+        <div class="or">or</div>
+        <button class="btn" type="button" id="google" style="width:100%;justify-content:center">Continue with Google</button>
+        <p class="help" style="margin:12px 0 0">Google sign-in shares only your name and email with ExpoWalk; you complete the short profile inside the app. <span id="slots"></span></p>
+      </form>
+      <div>
+        <h3 style="font-size:22px;margin-bottom:8px">Rather not sign in?</h3>
+        <p style="color:var(--ink2);margin:0 0 14px">Everything except the paid-for AI works without an account: directory, maps, stars, day plans, recording and scanning. For the AI, get a free Gemini API key from Google (takes two minutes) and paste it under Meetings → Settings in the app — then no ExpoWalk server is involved in anything you do.</p>
+        <a class="btn" href="/imts2026">Open the planner without signing in</a>
+        <h3 style="font-size:22px;margin:26px 0 8px">Recording other people</h3>
+        <p style="color:var(--ink2);margin:0">Illinois, like many places, requires everyone in a private conversation to agree to being recorded. The app reminds you before each recording; ask the person at the booth first — most say yes when they hear you'll get accurate minutes of what they promised.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <span>ExpoWalk · run by Akhil Mittal, Ambala, India</span>
+  <a href="mailto:info@expowalk.app">info@expowalk.app</a>
+  <a href="/privacy">Privacy &amp; data handling</a>
+  <a href="/terms">Terms</a>
+  <a href="https://github.com/mittalakhil87/imts-planner">Source code</a>
+</div></footer>
+
+<script>
+(function(){
+  var CFG=null, APP='/imts2026';
+  var $=function(s){return document.querySelector(s)};
+  fetch('/api/config',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(c){ CFG=c; if(c&&c.shared&&c.shared.maxFreeUsers){ var left=Math.max(0,c.shared.maxFreeUsers-(c.shared.freeSlotsTaken||0)); $('#slots').textContent=left?(left+' of '+c.shared.maxFreeUsers+' free places left.'):'The free places are all taken — the planner still works with your own Gemini key.'; } }).catch(function(){});
+  $('#f').addEventListener('submit',function(e){
+    e.preventDefault(); var err=$('#err'); err.textContent='';
+    var d={name:$('#name').value.trim(),company:$('#company').value.trim(),designation:$('#designation').value.trim(),phone:$('#phone').value.trim(),country:$('#country').value.trim()};
+    var email=$('#email').value.trim().toLowerCase();
+    if(!d.name||!d.company){ err.textContent='Name and company are required.'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Please enter a valid email address.'; return; }
+    if(!$('#consent').checked){ err.textContent='Please tick the consent box — it is the only thing we ask for the free allowance.'; return; }
+    if(!CFG||!CFG.supabaseUrl){ err.textContent='Sign-in is not available right now. Open the planner and use your own Gemini key, or try again later.'; return; }
+    var b=$('#go'); b.disabled=true; b.textContent='Sending…';
+    fetch(CFG.supabaseUrl+'/auth/v1/otp',{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,create_user:true,data:{full_name:d.name,ew_company:d.company,ew_designation:d.designation,ew_phone:d.phone,ew_country:d.country,ew_consent:true},options:{email_redirect_to:location.origin+APP}})})
+    .then(function(r){ return r.ok?null:r.json().catch(function(){return {}}).then(function(j){ throw new Error(j.msg||j.error_description||j.message||('HTTP '+r.status)); }); })
+    .then(function(){ $('#sentTo').textContent=email; $('#done').classList.add('on'); b.textContent='Link sent'; })
+    .catch(function(x){ err.textContent='Could not send the link: '+x.message; b.disabled=false; b.textContent='Email me my sign-in link'; });
+  });
+  $('#google').addEventListener('click',function(){
+    if(!CFG||!CFG.supabaseUrl){ $('#err').textContent='Sign-in is not available right now.'; return; }
+    location.href=CFG.supabaseUrl+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(location.origin+APP);
+  });
+})();
+</script>
+</body>
+</html>
