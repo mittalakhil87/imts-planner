@@ -8,6 +8,11 @@
 <meta property="og:title" content="ExpoWalk — plan the show, record the booth, leave with the minutes">
 <meta property="og:description" content="Free planner for IMTS 2026 visitors: 1,752 exhibitors, real hall maps, offline booth recording, card scanning and AI minutes. Your data stays on your phone.">
 <meta property="og:url" content="https://expowalk.app/">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ExpoWalk">
 <meta name="theme-color" content="#0E1114">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -320,6 +325,9 @@ footer .brand{font-size:22px;margin-right:auto}
         <div class="k" style="margin-top:34px">Recording other people</div>
         <h3>Ask first. It works.</h3>
         <p>Illinois, like many places, requires everyone in a private conversation to agree to being recorded. The app reminds you before each recording. Most exhibitors say yes when they hear you'll get accurate minutes of what they promised.</p>
+        <div class="k" style="margin-top:34px">Put it on your home screen</div>
+        <h3>Works like an app. No store.</h3>
+        <p><b>Android (Chrome):</b> open <b>expowalk.app/imts2026</b> → ⋮ menu → <b>Add to Home screen</b> (or "Install app"). <b>iPhone (Safari):</b> open the same link → Share button → <b>Add to Home Screen</b>. Then always open it from the icon — recordings and notes are stored inside that app.</p>
         <div class="k" style="margin-top:34px">Any phone, any country</div>
         <p>Runs in the browser you already have — Chrome on Android, Safari on iPhone, anything on a laptop. No app store, no account needed to start, and the exhibitor directory covers companies from more than 30 countries.</p>
       </div>
@@ -357,8 +365,8 @@ footer .brand{font-size:22px;margin-right:auto}
     if(!$('#consent').checked){ err.textContent='Please tick the consent box — it is the only thing we ask for the free allowance.'; return; }
     if(!CFG||!CFG.supabaseUrl){ err.textContent='Sign-in is not available right now. Open the planner and use your own Gemini key, or try again later.'; return; }
     var b=$('#go'); b.disabled=true; b.textContent='Sending…';
-    fetch(CFG.supabaseUrl+'/auth/v1/otp',{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,create_user:true,data:{full_name:d.name,ew_company:d.company,ew_designation:d.designation,ew_phone:d.phone,ew_country:d.country,ew_consent:true},options:{email_redirect_to:location.origin+APP}})})
+    fetch(CFG.supabaseUrl+'/auth/v1/otp?redirect_to='+encodeURIComponent(location.origin+APP),{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,create_user:true,data:{full_name:d.name,ew_company:d.company,ew_designation:d.designation,ew_phone:d.phone,ew_country:d.country,ew_consent:true}})})
     .then(function(r){ return r.ok?null:r.json().catch(function(){return {}}).then(function(j){ throw new Error(j.msg||j.error_description||j.message||('HTTP '+r.status)); }); })
     .then(function(){ $('#sentTo').textContent=email; $('#done').classList.add('on'); b.textContent='Link sent'; })
     .catch(function(x){ err.textContent='Could not send the link: '+x.message; b.disabled=false; b.textContent='Email me my sign-in link'; });
